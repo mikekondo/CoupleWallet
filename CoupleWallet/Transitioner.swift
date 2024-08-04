@@ -1,6 +1,6 @@
 import UIKit
 
-public protocol Transitioner {
+@MainActor public protocol Transitioner {
     func push(viewController: UIViewController, animated: Bool)
     func push(viewController: UIViewController, stacks: [UIViewController], animated: Bool)
     func popViewControllerSelf(animated: Bool)

@@ -1,6 +1,6 @@
 import SwiftUI
 
-class AppCoordinator {
+@MainActor class AppCoordinator {
     let window: UIWindow
     var firstCoordinator: FirstCoordinator?
     let navigationController: UINavigationController = UINavigationController()
