@@ -6,24 +6,20 @@ protocol Page1ViewModel: ObservableObject {
     func didTapAddButton()
 }
 
+protocol Page1TransitionDelegate: AnyObject {
+    func transitionToAdd()
+}
+
 final class Page1ViewModelImpl: Page1ViewModel {
     @Published var shouldShowPayView: Bool = true
-    let transitioner: Transitioner
-    var addPayCoordinator: AddPayCoordinator?
-
-    init(transitioner: Transitioner) {        
-        self.transitioner = transitioner
-    }
+    weak var transitionDelegate: Page1TransitionDelegate?
 
     func didTapCardView() {
         shouldShowPayView.toggle()
     }
 
     func didTapAddButton() {
-        Task { @MainActor in
-            addPayCoordinator = .init(transitioner: transitioner)
-            addPayCoordinator?.start()
-        }
+        transitionDelegate?.transitionToAdd()        
     }
 }
 
