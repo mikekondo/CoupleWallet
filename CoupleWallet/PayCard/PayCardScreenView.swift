@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Page1ScreenView<VM: Page1ViewModel>: View {
+struct PayCardScreenView<VM: PayCardViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
         cardView
@@ -20,7 +20,7 @@ struct Page1ScreenView<VM: Page1ViewModel>: View {
     }
 }
 
-extension Page1ScreenView {
+extension PayCardScreenView {
     private var cardView: some View {
         VStack(spacing: 0) {
             if vm.shouldShowPayView {

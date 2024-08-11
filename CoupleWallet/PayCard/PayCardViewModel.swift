@@ -1,18 +1,18 @@
 import Foundation
 
-protocol Page1ViewModel: ObservableObject {
+protocol PayCardViewModel: ObservableObject {
     var shouldShowPayView: Bool { get set }
     func didTapCardView()
     func didTapAddButton()
 }
 
-protocol Page1TransitionDelegate: AnyObject {
+protocol PayCardTransitionDelegate: AnyObject {
     func transitionToAdd()
 }
 
-final class Page1ViewModelImpl: Page1ViewModel {
+final class PayCardViewModelImpl: PayCardViewModel {
     @Published var shouldShowPayView: Bool = true
-    weak var transitionDelegate: Page1TransitionDelegate?
+    weak var transitionDelegate: PayCardTransitionDelegate?
 
     func didTapCardView() {
         shouldShowPayView.toggle()

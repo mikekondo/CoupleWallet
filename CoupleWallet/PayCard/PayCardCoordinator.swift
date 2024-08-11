@@ -1,7 +1,7 @@
 import Foundation
 
 @MainActor
-final class Page1Coordinator {
+final class PayCardCoordinator {
     let transitioner: Transitioner
     var addPayCoordinator: AddPayCoordinator?
 
@@ -10,7 +10,7 @@ final class Page1Coordinator {
     }
 }
 
-extension Page1Coordinator: Page1TransitionDelegate {
+extension PayCardCoordinator: PayCardTransitionDelegate {
     func transitionToAdd() {
         addPayCoordinator = .init(transitioner: transitioner)
         addPayCoordinator?.start()

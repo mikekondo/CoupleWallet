@@ -9,7 +9,7 @@ import SwiftUI
 
     func start() {
         Task { @MainActor in
-            let vc = UIHostingController(rootView: AddPayScreenView())
+            let vc = UIHostingController(rootView: AddPayScreenView(vm: AddPayViewModelImpl()))
             transitioner.present(viewController: vc, animated: true, completion: nil)
         }
     }
