@@ -1,11 +1,12 @@
 import SwiftUI
 
-@MainActor struct TabScreenView<VM: TabViewModel>: View {
+@MainActor struct TabScreenView<VM: TabViewModel, Page1VM: Page1ViewModel>: View {
     @StateObject var vm: VM
+    @ObservedObject var page1Vm: Page1VM
 
     var body: some View {
         TabView(selection: $vm.selection) {
-            Page1ScreenView(vm: Page1ViewModelImpl())
+            Page1ScreenView(vm: page1Vm)
                 .tabItem { Label("立替え", systemImage: "1.circle") }
                 .tag(1)
             Page2ScreenView()
@@ -17,8 +18,4 @@ import SwiftUI
         }
         .navigationBarBackButtonHidden()
     }
-}
-
-#Preview {
-    TabScreenView(vm: TabViewModelImpl())
 }

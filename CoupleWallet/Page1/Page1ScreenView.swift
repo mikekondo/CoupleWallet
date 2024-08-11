@@ -7,7 +7,7 @@ struct Page1ScreenView<VM: Page1ViewModel>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom) {
                 Button {
-                    // TODO: action
+                    vm.didTapAddButton()
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -51,6 +51,7 @@ extension Page1ScreenView {
             Text("Tap")
                 .font(.subheadline)
                 .foregroundStyle(Color.black)
+                .offset(x: 10, y: 10)
         }
         .padding(24)
         .overlay {
@@ -72,6 +73,7 @@ extension Page1ScreenView {
             Text("Tap")
                 .font(.subheadline)
                 .foregroundStyle(Color.black)
+                .offset(x: 10, y: 10)
         }
         .padding(24)
         .overlay {
@@ -79,8 +81,4 @@ extension Page1ScreenView {
                 .stroke(Color.black, lineWidth: 4)
         }
     }
-}
-
-#Preview {
-    Page1ScreenView(vm: Page1ViewModelImpl())
 }

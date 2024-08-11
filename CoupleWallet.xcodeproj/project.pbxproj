@@ -41,6 +41,8 @@
 		95A891812C5F5A0700959F79 /* Page1ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891802C5F5A0700959F79 /* Page1ViewModel.swift */; };
 		95A891832C5F5CDF00959F79 /* AnyTransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891822C5F5CDF00959F79 /* AnyTransition+.swift */; };
 		95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891852C5F5FB300959F79 /* TabCoordinator.swift */; };
+		95A891892C66D99E00959F79 /* AddPayScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891882C66D99E00959F79 /* AddPayScreenView.swift */; };
+		95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		95A891802C5F5A0700959F79 /* Page1ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1ViewModel.swift; sourceTree = "<group>"; };
 		95A891822C5F5CDF00959F79 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		95A891852C5F5FB300959F79 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		95A891882C66D99E00959F79 /* AddPayScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayScreenView.swift; sourceTree = "<group>"; };
+		95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 		95A890C02C5DA06D00959F79 /* CoupleWallet */ = {
 			isa = PBXGroup;
 			children = (
+				95A891872C66D98400959F79 /* AddPay */,
 				95A8917B2C5F569D00959F79 /* Page3 */,
 				95A8917A2C5F569800959F79 /* Page2 */,
 				95A891772C5F55B900959F79 /* Page1 */,
@@ -235,6 +240,15 @@
 				95A891822C5F5CDF00959F79 /* AnyTransition+.swift */,
 			);
 			path = SwiftUIExtension;
+			sourceTree = "<group>";
+		};
+		95A891872C66D98400959F79 /* AddPay */ = {
+			isa = PBXGroup;
+			children = (
+				95A891882C66D99E00959F79 /* AddPayScreenView.swift */,
+				95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */,
+			);
+			path = AddPay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,8 +413,10 @@
 				95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */,
 				95A891742C5F549800959F79 /* TabScreenView.swift in Sources */,
 				95A8917D2C5F56AA00959F79 /* Page2ScreenView.swift in Sources */,
+				95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */,
 				95A890F42C5DA26200959F79 /* Transitioner.swift in Sources */,
 				95A890C42C5DA06D00959F79 /* SceneDelegate.swift in Sources */,
+				95A891892C66D99E00959F79 /* AddPayScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

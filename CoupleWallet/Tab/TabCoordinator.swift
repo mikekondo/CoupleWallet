@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 @MainActor final class TabCoordinator {
     let transitioner: Transitioner
@@ -11,7 +12,8 @@ import SwiftUI
     func start() {
         Task { @MainActor in
             let vm = TabViewModelImpl()
-            let vc = UIHostingController(rootView: TabScreenView(vm: vm))
+            let page1Vm = Page1ViewModelImpl(transitioner: transitioner)
+            let vc = UIHostingController(rootView: TabScreenView(vm: vm, page1Vm: page1Vm))
             transitioner.push(viewController: vc, animated: true)
         }
     }
