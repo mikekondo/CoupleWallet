@@ -1,10 +1,12 @@
 import Foundation
 
 protocol PayListViewModel: ObservableObject {
-    var payListResponseType: PayListResponseType { get set }
-    var payViewDataList: [PayViewData] { get }
+    // internal
     func fetchPayList() async
     func didTapDeleteButton(id: String) async
+    // ui logic
+    var payListResponseType: PayListResponseType { get set }
+    var payViewDataList: [PayViewData] { get }
 }
 
 enum PayListResponseType {
@@ -25,15 +27,11 @@ final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
     let firebase = FirebaseManager.shared
 
-    func fetchPayList() async {
-        do {
-            let payList = try await firebase.fetchPayList()
-            payListResponseType = .success(payList)
-        } catch {
-            payListResponseType = .error
-        }        
-    }
+}
 
+// MARK: Tap logic
+
+extension PayListViewModelImpl {
     func didTapDeleteButton(id: String) async {
         do {
             try await firebase.deletePay(id: id)
@@ -42,12 +40,29 @@ final class PayListViewModelImpl: PayListViewModel {
             print(error.localizedDescription)
         }
     }
+}
 
+// MARK: Internal logic
+
+extension PayListViewModelImpl {
+    func fetchPayList() async {
+        do {
+            let payList = try await firebase.fetchPayList()
+            payListResponseType = .success(payList)
+        } catch {
+            payListResponseType = .error
+        }
+    }
+}
+
+// MARK: UI logic
+
+extension PayListViewModelImpl {
     var payViewDataList: [PayViewData] {
         if case .success(let payList) = payListResponseType {
             return payList.map { payData in
                 getPayViewData(payData: payData)
-            }          
+            }
         } else {
             return []
         }
