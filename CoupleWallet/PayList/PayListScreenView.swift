@@ -1,35 +1,49 @@
 import SwiftUI
 
-struct PayListScreenView: View {
+struct PayListScreenView<VM: PayListViewModel>: View {
+    @StateObject var vm: VM
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 8) {
-                ForEach(payDatas) { payData in
+                ForEach(vm.payViewDataList) { payViewData in
                     HStack(spacing: 0) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(payData.title)
+                            Text(payViewData.title)
                                 .font(.callout)
                                 .foregroundStyle(Color.black)
-                            Text(payData.name + "が立替え")
+                            Text(payViewData.byName)
                                 .font(.callout)
                                 .foregroundStyle(Color.gray)
-                            Text(payData.date.formatted(.dateTime))
+                            Text(payViewData.dateText)
                                 .font(.caption2)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        Text("\(payData.price)円")
-                            .font(.title3)
-                            .foregroundStyle(Color.black)
+                        HStack(spacing: 16) {
+                            Text(payViewData.priceText)
+                                .font(.title3)
+                                .foregroundStyle(Color.black)
+                            Button {
+                                // TODO: 編集
+                            } label: {
+                                Image(systemName: "ellipsis")
+                                    .foregroundStyle(Color.gray)
+                            }
+                        }
                     }
                     Divider()
                 }
                 .padding(.horizontal, 16)
+            }
+            .onAppear {
+                Task { @MainActor in
+                    await vm.fetchPayList()
+                }
             }
         }
     }
 }
 
 #Preview {
-    PayListScreenView()
+    PayListScreenView(vm: PayListViewModelImpl())
 }
 

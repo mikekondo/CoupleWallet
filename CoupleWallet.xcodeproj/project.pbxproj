@@ -11,8 +11,9 @@
 		9527C8832C6851E6008DE420 /* PayListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C8822C6851E6008DE420 /* PayListViewModel.swift */; };
 		9527C8862C68522E008DE420 /* PayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C8852C68522E008DE420 /* PayData.swift */; };
 		9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C8872C686C56008DE420 /* AddPayViewModel.swift */; };
-		9527C88B2C68767D008DE420 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88A2C68767D008DE420 /* FirestoreManager.swift */; };
+		9527C88B2C68767D008DE420 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88A2C68767D008DE420 /* FirebaseManager.swift */; };
 		9527C88E2C6877DC008DE420 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88D2C6877DC008DE420 /* String+.swift */; };
+		959B1B1B2C69995700942913 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1A2C69995700942913 /* Int+.swift */; };
 		95A890C22C5DA06D00959F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A890C12C5DA06D00959F79 /* AppDelegate.swift */; };
 		95A890C42C5DA06D00959F79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A890C32C5DA06D00959F79 /* SceneDelegate.swift */; };
 		95A890CB2C5DA06E00959F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95A890CA2C5DA06E00959F79 /* Assets.xcassets */; };
@@ -73,8 +74,9 @@
 		9527C8822C6851E6008DE420 /* PayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayListViewModel.swift; sourceTree = "<group>"; };
 		9527C8852C68522E008DE420 /* PayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayData.swift; sourceTree = "<group>"; };
 		9527C8872C686C56008DE420 /* AddPayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayViewModel.swift; sourceTree = "<group>"; };
-		9527C88A2C68767D008DE420 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		9527C88A2C68767D008DE420 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		9527C88D2C6877DC008DE420 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		959B1B1A2C69995700942913 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		95A890BE2C5DA06D00959F79 /* CoupleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoupleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A890C12C5DA06D00959F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95A890C32C5DA06D00959F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,7 +155,7 @@
 		9527C8892C687667008DE420 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				9527C88A2C68767D008DE420 /* FirestoreManager.swift */,
+				9527C88A2C68767D008DE420 /* FirebaseManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -199,6 +201,7 @@
 				95A890F72C5DA31900959F79 /* SignIn */,
 				95A891842C5F5E2300959F79 /* SwiftUIExtension */,
 				9527C88D2C6877DC008DE420 /* String+.swift */,
+				959B1B1A2C69995700942913 /* Int+.swift */,
 			);
 			path = CoupleWallet;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				95A891792C5F565300959F79 /* PayCardScreenView.swift in Sources */,
 				95A890C22C5DA06D00959F79 /* AppDelegate.swift in Sources */,
 				9527C8862C68522E008DE420 /* PayData.swift in Sources */,
+				959B1B1B2C69995700942913 /* Int+.swift in Sources */,
 				95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */,
 				95A891742C5F549800959F79 /* TabScreenView.swift in Sources */,
 				95A8917D2C5F56AA00959F79 /* PayListScreenView.swift in Sources */,
@@ -456,7 +460,7 @@
 				95A890C42C5DA06D00959F79 /* SceneDelegate.swift in Sources */,
 				9527C88E2C6877DC008DE420 /* String+.swift in Sources */,
 				95A891892C66D99E00959F79 /* AddPayScreenView.swift in Sources */,
-				9527C88B2C68767D008DE420 /* FirestoreManager.swift in Sources */,
+				9527C88B2C68767D008DE420 /* FirebaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

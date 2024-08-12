@@ -11,3 +11,9 @@ extension String {
         "users"
     }
 }
+
+extension String {
+    func toInt() -> Int {
+        Int(self)!
+    }
+}

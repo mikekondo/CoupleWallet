@@ -13,13 +13,13 @@ protocol SignInTransitionDelegate: AnyObject {
 class SignInViewModelImpl: SignInViewModel {
     @Published var userName: String = "マイク"
     weak var transitionDelegate: SignInTransitionDelegate?
-    let firestore = FirestoreManager.shared
+    let firebase = FirebaseManager.shared
 
     func registerUserName(userName: String) async {
         do {
             let authResult = try await Auth.auth().signInAnonymously()
             let uid = authResult.user.uid
-            await firestore.saveUser(uid: uid, userName: userName)
+            await firebase.saveUser(uid: uid, userName: userName)
             transitionDelegate?.transitionToTab()
         } catch {
             print(error.localizedDescription)
