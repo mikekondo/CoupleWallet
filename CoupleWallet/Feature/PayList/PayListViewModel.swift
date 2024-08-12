@@ -3,7 +3,10 @@ import Foundation
 protocol PayListViewModel: ObservableObject {
     // internal
     func fetchPayList() async
+
+    // tap logic
     func didTapDeleteButton(id: String) async
+
     // ui logic
     var payListResponseType: PayListResponseType { get set }
     var payViewDataList: [PayViewData] { get }
@@ -29,6 +32,18 @@ final class PayListViewModelImpl: PayListViewModel {
 
 }
 
+// MARK: Internal logic
+
+extension PayListViewModelImpl {
+    func fetchPayList() async {
+        do {
+            let payList = try await firebase.fetchPayList()
+            payListResponseType = .success(payList)
+        } catch {
+            payListResponseType = .error
+        }
+    }
+}
 // MARK: Tap logic
 
 extension PayListViewModelImpl {
@@ -42,18 +57,6 @@ extension PayListViewModelImpl {
     }
 }
 
-// MARK: Internal logic
-
-extension PayListViewModelImpl {
-    func fetchPayList() async {
-        do {
-            let payList = try await firebase.fetchPayList()
-            payListResponseType = .success(payList)
-        } catch {
-            payListResponseType = .error
-        }
-    }
-}
 
 // MARK: UI logic
 
