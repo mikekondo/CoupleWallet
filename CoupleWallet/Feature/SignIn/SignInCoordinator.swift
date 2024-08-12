@@ -2,7 +2,7 @@ import SwiftUI
 
 @MainActor final class SignInCoordinator {
     let transitioner: Transitioner
-    var tabCoordinator: TabCoordinator?
+    var userSettingCoordinator: UserSettingCoordinator?
 
     init(transitioner: Transitioner) {
         self.transitioner = transitioner
@@ -16,9 +16,9 @@ import SwiftUI
     }
 }
 
-extension SignInCoordinator: SignInTransitionDelegate {
-    @MainActor func transitionToTab() {
-        tabCoordinator = .init(transitioner: transitioner)
-        tabCoordinator?.start()
+extension SignInCoordinator: SignInTransitionDelegate {    
+    @MainActor func transitionToUserSetting(uid: String) {
+        userSettingCoordinator = .init(transitioner: transitioner, uid: uid)
+        userSettingCoordinator?.start()
     }
 }

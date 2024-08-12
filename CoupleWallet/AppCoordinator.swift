@@ -15,11 +15,12 @@ import FirebaseAuth
         self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
 
-        if let user = Auth.auth().currentUser {
-            transitionToTabView()
-        } else {
-            transitionToSignIn()
-        }
+//        if let user = Auth.auth().currentUser {
+//            transitionToTabView()
+//        } else {
+//            transitionToSignIn()
+//        }
+        transitionToSignIn()
     }
 
     func transitionToSignIn() {

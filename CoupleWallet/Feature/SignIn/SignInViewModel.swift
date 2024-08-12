@@ -7,7 +7,7 @@ protocol SignInViewModel: ObservableObject {
 }
 
 protocol SignInTransitionDelegate: AnyObject {
-    func transitionToTab()
+    func transitionToUserSetting(uid: String)
 }
 
 class SignInViewModelImpl: SignInViewModel {
@@ -20,7 +20,7 @@ class SignInViewModelImpl: SignInViewModel {
             let authResult = try await Auth.auth().signInAnonymously()
             let uid = authResult.user.uid
             await firebase.saveUser(uid: uid, userName: userName)
-            transitionDelegate?.transitionToTab()
+            transitionDelegate?.transitionToUserSetting(uid: uid)
         } catch {
             print(error.localizedDescription)
         }      

@@ -14,6 +14,11 @@
 		9527C88B2C68767D008DE420 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88A2C68767D008DE420 /* FirebaseManager.swift */; };
 		9527C88E2C6877DC008DE420 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88D2C6877DC008DE420 /* String+.swift */; };
 		959B1B1B2C69995700942913 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1A2C69995700942913 /* Int+.swift */; };
+		959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1D2C69D44700942913 /* DataStorable.swift */; };
+		959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1F2C69D4D000942913 /* UserDefauls+.swift */; };
+		959B1B242C69D65A00942913 /* UserSettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B232C69D65A00942913 /* UserSettingScreenView.swift */; };
+		959B1B262C69D66400942913 /* UserSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B252C69D66400942913 /* UserSettingViewModel.swift */; };
+		959B1B282C69D66F00942913 /* UserSettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B272C69D66F00942913 /* UserSettingCoordinator.swift */; };
 		95A890C22C5DA06D00959F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A890C12C5DA06D00959F79 /* AppDelegate.swift */; };
 		95A890C42C5DA06D00959F79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A890C32C5DA06D00959F79 /* SceneDelegate.swift */; };
 		95A890CB2C5DA06E00959F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95A890CA2C5DA06E00959F79 /* Assets.xcassets */; };
@@ -77,6 +82,11 @@
 		9527C88A2C68767D008DE420 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		9527C88D2C6877DC008DE420 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		959B1B1A2C69995700942913 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		959B1B1D2C69D44700942913 /* DataStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorable.swift; sourceTree = "<group>"; };
+		959B1B1F2C69D4D000942913 /* UserDefauls+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefauls+.swift"; sourceTree = "<group>"; };
+		959B1B232C69D65A00942913 /* UserSettingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingScreenView.swift; sourceTree = "<group>"; };
+		959B1B252C69D66400942913 /* UserSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingViewModel.swift; sourceTree = "<group>"; };
+		959B1B272C69D66F00942913 /* UserSettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingCoordinator.swift; sourceTree = "<group>"; };
 		95A890BE2C5DA06D00959F79 /* CoupleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoupleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A890C12C5DA06D00959F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95A890C32C5DA06D00959F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +170,41 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		959B1B1C2C69D42700942913 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				959B1B1A2C69995700942913 /* Int+.swift */,
+				9527C88D2C6877DC008DE420 /* String+.swift */,
+				959B1B1D2C69D44700942913 /* DataStorable.swift */,
+				959B1B1F2C69D4D000942913 /* UserDefauls+.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		959B1B212C69D5B300942913 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				959B1B222C69D60600942913 /* UserSetting */,
+				95A8917A2C5F569800959F79 /* PayList */,
+				95A891772C5F55B900959F79 /* PayCard */,
+				95A891722C5F548800959F79 /* Tab */,
+				95A890F72C5DA31900959F79 /* SignIn */,
+				95A8917B2C5F569D00959F79 /* Setting */,
+				95A891872C66D98400959F79 /* AddPay */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		959B1B222C69D60600942913 /* UserSetting */ = {
+			isa = PBXGroup;
+			children = (
+				959B1B232C69D65A00942913 /* UserSettingScreenView.swift */,
+				959B1B252C69D66400942913 /* UserSettingViewModel.swift */,
+				959B1B272C69D66F00942913 /* UserSettingCoordinator.swift */,
+			);
+			path = UserSetting;
+			sourceTree = "<group>";
+		};
 		95A890B52C5DA06D00959F79 = {
 			isa = PBXGroup;
 			children = (
@@ -183,13 +228,10 @@
 		95A890C02C5DA06D00959F79 /* CoupleWallet */ = {
 			isa = PBXGroup;
 			children = (
+				959B1B212C69D5B300942913 /* Feature */,
+				959B1B1C2C69D42700942913 /* Utils */,
 				9527C8892C687667008DE420 /* Manager */,
 				9527C8842C685225008DE420 /* Domain */,
-				95A891872C66D98400959F79 /* AddPay */,
-				95A8917B2C5F569D00959F79 /* Setting */,
-				95A8917A2C5F569800959F79 /* PayList */,
-				95A891772C5F55B900959F79 /* PayCard */,
-				95A891722C5F548800959F79 /* Tab */,
 				95A890C12C5DA06D00959F79 /* AppDelegate.swift */,
 				95A890C32C5DA06D00959F79 /* SceneDelegate.swift */,
 				95A890CA2C5DA06E00959F79 /* Assets.xcassets */,
@@ -198,10 +240,7 @@
 				95A890CF2C5DA06E00959F79 /* Info.plist */,
 				95A891052C5DA8D600959F79 /* GoogleService-Info.plist */,
 				95A890F32C5DA26200959F79 /* Transitioner.swift */,
-				95A890F72C5DA31900959F79 /* SignIn */,
 				95A891842C5F5E2300959F79 /* SwiftUIExtension */,
-				9527C88D2C6877DC008DE420 /* String+.swift */,
-				959B1B1A2C69995700942913 /* Int+.swift */,
 			);
 			path = CoupleWallet;
 			sourceTree = "<group>";
@@ -443,6 +482,7 @@
 				95A891832C5F5CDF00959F79 /* AnyTransition+.swift in Sources */,
 				95A890F62C5DA2E600959F79 /* SignInScreenView.swift in Sources */,
 				95A8917F2C5F56B400959F79 /* SettingScreenView.swift in Sources */,
+				959B1B262C69D66400942913 /* UserSettingViewModel.swift in Sources */,
 				95A891082C5DAB0300959F79 /* SignInViewModel.swift in Sources */,
 				95A891762C5F54EC00959F79 /* TabViewModel.swift in Sources */,
 				95A891792C5F565300959F79 /* PayCardScreenView.swift in Sources */,
@@ -452,8 +492,12 @@
 				95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */,
 				95A891742C5F549800959F79 /* TabScreenView.swift in Sources */,
 				95A8917D2C5F56AA00959F79 /* PayListScreenView.swift in Sources */,
+				959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */,
+				959B1B282C69D66F00942913 /* UserSettingCoordinator.swift in Sources */,
 				9527C8812C68451F008DE420 /* PayCardCoordinator.swift in Sources */,
+				959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */,
 				95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */,
+				959B1B242C69D65A00942913 /* UserSettingScreenView.swift in Sources */,
 				9527C8832C6851E6008DE420 /* PayListViewModel.swift in Sources */,
 				9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */,
 				95A890F42C5DA26200959F79 /* Transitioner.swift in Sources */,
