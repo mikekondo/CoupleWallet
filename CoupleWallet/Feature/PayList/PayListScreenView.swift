@@ -22,12 +22,19 @@ struct PayListScreenView<VM: PayListViewModel>: View {
                             Text(payViewData.priceText)
                                 .font(.title3)
                                 .foregroundStyle(Color.black)
-                            Button {
-                                // TODO: 編集
+                            Menu {
+                                Button {
+                                    Task { @MainActor in
+                                        await vm.didTapDeleteButton(id: payViewData.id)
+                                    }
+                                } label: {
+                                    Text("削除")
+                                }
                             } label: {
                                 Image(systemName: "ellipsis")
                                     .foregroundStyle(Color.gray)
                             }
+
                         }
                     }
                     Divider()

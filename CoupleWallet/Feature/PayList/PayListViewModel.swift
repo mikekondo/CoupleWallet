@@ -4,6 +4,7 @@ protocol PayListViewModel: ObservableObject {
     var payListResponseType: PayListResponseType { get set }
     var payViewDataList: [PayViewData] { get }
     func fetchPayList() async
+    func didTapDeleteButton(id: String) async
 }
 
 enum PayListResponseType {
@@ -13,13 +14,11 @@ enum PayListResponseType {
 }
 
 struct PayViewData: Identifiable {
+    let id: String
     let title: String
     let byName: String
     let dateText: String
     let priceText: String
-    var id: String {
-        UUID().uuidString
-    }
 }
 
 final class PayListViewModelImpl: PayListViewModel {
@@ -35,6 +34,15 @@ final class PayListViewModelImpl: PayListViewModel {
         }        
     }
 
+    func didTapDeleteButton(id: String) async {
+        do {
+            try await firebase.deletePay(id: id)
+            await fetchPayList()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     var payViewDataList: [PayViewData] {
         if case .success(let payList) = payListResponseType {
             return payList.map { payData in
@@ -47,6 +55,7 @@ final class PayListViewModelImpl: PayListViewModel {
 
     func getPayViewData(payData: PayData) -> PayViewData{
         .init(
+            id: payData.id,
             title: payData.title,
             byName: payData.name + "が立替え",
             dateText: payData.date.formatted(),

@@ -12,19 +12,15 @@ final class FirebaseManager {
 // MARK: db logic
 
 extension FirebaseManager {
-    func savePay(payData: PayData) async {
+    func savePay(payData: PayData) async throws {
         let data: [String: Any] = [
+            "id": payData.id,
             "title": payData.title,
             "name": payData.name,
             "price": payData.price,
             "createdAt": Date()
         ]
-
-        do {
-            try await db.collection(.users).document(dataStore.shareCode).collection(.pay).addDocument(data: data)
-        } catch {
-            print(error.localizedDescription)
-        }
+        try await db.collection(.users).document(dataStore.shareCode).collection(.pay).addDocument(data: data)
     }
 
     func fetchPayList() async throws -> [PayData] {
@@ -32,12 +28,21 @@ extension FirebaseManager {
         var payDataList: [PayData] = []
 
         querySnapshot.documents.forEach { document in
-            guard let name = document.get("name") as? String,
+            guard let id = document.get("id") as? String,
+                  let name = document.get("name") as? String,
                   let price = document.get("price") as? Int,
                   let title = document.get("title") as? String,
                   let date = document.get("createdAt") as? Timestamp else { return }
-            payDataList.append(.init(title: title, name: name, price: price, date: date.dateValue()))
+            payDataList.append(.init(id: id, title: title, name: name, price: price, date: date.dateValue()))
         }
         return payDataList
+    }
+
+    func deletePay(id: String) async throws {
+        let querySnapshot = try await db.collection("users").document(dataStore.shareCode).collection("pay").whereField("id", isEqualTo: id).getDocuments()
+
+        for document in querySnapshot.documents {
+            try await document.reference.delete()
+        }
     }
 }

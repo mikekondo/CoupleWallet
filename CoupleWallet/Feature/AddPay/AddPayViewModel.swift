@@ -19,12 +19,17 @@ final class AddPayViewModelImpl: AddPayViewModel {
 
     func didTapAdd() async {
         let payData: PayData = .init(
+            id: UUID().uuidString,
             title: payTitle,
             name: "マイク",
             price: Int(payPrice) ?? 0,
             date: Date()
         )
-        await firebase.savePay(payData: payData)
-        transitionDelegate?.dismiss()
+        do {
+            try await firebase.savePay(payData: payData)
+            transitionDelegate?.dismiss()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
