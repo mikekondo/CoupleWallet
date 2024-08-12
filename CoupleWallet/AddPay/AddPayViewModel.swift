@@ -7,10 +7,15 @@ protocol AddPayViewModel: ObservableObject {
     func didTapAdd() async
 }
 
+protocol AddPayTransitionDelegate: AnyObject {
+    func dismiss()
+}
+
 final class AddPayViewModelImpl: AddPayViewModel {
     @Published var payTitle: String = ""
     @Published var payPrice: String = ""
     let fireStore = FirestoreManager.shared
+    weak var transitionDelegate: AddPayTransitionDelegate?
 
     func didTapAdd() async {
         let payData: PayData = .init(
@@ -20,5 +25,6 @@ final class AddPayViewModelImpl: AddPayViewModel {
             date: Date()
         )
         await fireStore.savePay(payData: payData)
+        transitionDelegate?.dismiss()
     }
 }

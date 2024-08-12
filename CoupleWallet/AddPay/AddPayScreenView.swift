@@ -15,10 +15,10 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
                     Text("追加する")
                         .font(.title)
                         .foregroundStyle(Color.white)
+                        .frame(height: 44)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black, in: RoundedRectangle(cornerRadius: 8))
                 }
-                .frame(height: 44)
-                .frame(maxWidth: .infinity)
-                .background(Color.black, in: RoundedRectangle(cornerRadius: 8))
                 .padding(16)
             }
     }

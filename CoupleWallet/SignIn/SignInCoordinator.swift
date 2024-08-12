@@ -1,6 +1,6 @@
 import SwiftUI
 
-@MainActor final class FirstCoordinator {
+@MainActor final class SignInCoordinator {
     let transitioner: Transitioner
     var tabCoordinator: TabCoordinator?
 
@@ -9,14 +9,14 @@ import SwiftUI
     }
 
     func start() {
-        let vm = FirstViewModelImpl()
+        let vm = SignInViewModelImpl()
         vm.transitionDelegate = self
-        let vc = UIHostingController(rootView: FirstScreenView(vm: vm))
+        let vc = UIHostingController(rootView: SignInScreenView(vm: vm))
         transitioner.push(viewController: vc, animated: true)
     }
 }
 
-extension FirstCoordinator: FirstTransitionDelegate {
+extension SignInCoordinator: SignInTransitionDelegate {
     @MainActor func transitionToTab() {
         tabCoordinator = .init(transitioner: transitioner)
         tabCoordinator?.start()

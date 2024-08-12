@@ -9,8 +9,18 @@ import SwiftUI
 
     func start() {
         Task { @MainActor in
-            let vc = UIHostingController(rootView: AddPayScreenView(vm: AddPayViewModelImpl()))
+            let vm = AddPayViewModelImpl()
+            vm.transitionDelegate = self
+            let vc = UIHostingController(rootView: AddPayScreenView(vm: vm))            
             transitioner.present(viewController: vc, animated: true, completion: nil)
+        }
+    }
+}
+
+extension AddPayCoordinator: AddPayTransitionDelegate {
+    func dismiss() {
+        Task { @MainActor in
+            transitioner.dismissSelf(animated: true, completion: nil)
         }
     }
 }

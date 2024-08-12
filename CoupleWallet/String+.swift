@@ -6,4 +6,8 @@ extension String {
     static var pay: String {
         "pay"
     }
+
+    static var users: String {
+        "users"
+    }
 }
