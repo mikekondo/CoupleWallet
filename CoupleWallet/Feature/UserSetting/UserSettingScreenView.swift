@@ -15,6 +15,19 @@ struct UserSettingScreenView<VM: UserSettingViewModel>: View {
                 Text("パートーナーと連携")
             }
         }
+        .alert("パートナーが発行した連携コードを入力", isPresented: $vm.shouldShowShareCodeAlert) {
+            TextField("連携コード", text: $vm.shareCode)
+            Button {
+                vm.didTapAlertCancelButton()
+            } label: {
+                Text("キャンセル")
+            }
+            Button {
+                vm.didTapAlertOKButton()
+            } label: {
+                Text("OK")
+            }
+        }
     }
 }
 

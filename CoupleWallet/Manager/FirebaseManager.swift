@@ -9,23 +9,6 @@ final class FirebaseManager {
     private init() {}
 }
 
-// MARK: auth
-
-extension FirebaseManager {
-    func saveUser(uid: String, userName: String) async {
-        let data: [String: Any] = [
-            "name": userName,
-            "createdAt": Date()
-        ]
-
-        do {
-            try await db.collection(.users).document(dataStore.shareCode).setData(data)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-}
-
 // MARK: db logic
 
 extension FirebaseManager {

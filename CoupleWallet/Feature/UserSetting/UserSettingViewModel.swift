@@ -3,8 +3,12 @@ import CryptoKit
 import FirebaseAuth
 
 protocol UserSettingViewModel: ObservableObject {
+    var shouldShowShareCodeAlert: Bool { get set }
+    var shareCode: String { get set }
     func didTapCreateWalletButton()
     func didTapLinkParterButton()
+    func didTapAlertOKButton()
+    func didTapAlertCancelButton()
 }
 
 protocol UserSettingTransitionDelegate: AnyObject {
@@ -12,6 +16,8 @@ protocol UserSettingTransitionDelegate: AnyObject {
 }
 
 final class UserSettingViewModelImpl: UserSettingViewModel {
+    @Published var shouldShowShareCodeAlert: Bool = false
+    @Published var shareCode: String = ""
     weak var transitionDelegate: UserSettingTransitionDelegate?
     var dataStore: DataStorable
     let uid: String
@@ -30,8 +36,19 @@ final class UserSettingViewModelImpl: UserSettingViewModel {
     }
 
     func didTapLinkParterButton() {
-
+        shouldShowShareCodeAlert = true
     }
+
+    func didTapAlertOKButton() {
+        shouldShowShareCodeAlert = false
+        dataStore.shareCode = shareCode
+        transitionDelegate?.transitionToTab()
+    }
+
+    func didTapAlertCancelButton() {
+        shouldShowShareCodeAlert = false
+    }
+
 
     func generateShareCodeFromUID() -> String {
         let hash = SHA256.hash(data: Data(self.uid.utf8))
