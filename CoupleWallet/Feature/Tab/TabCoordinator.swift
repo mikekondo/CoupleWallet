@@ -4,6 +4,7 @@ import UIKit
 @MainActor final class TabCoordinator {
     let transitioner: Transitioner
     var payCardCoordinator: PayCardCoordinator?
+    var payListCoordinator: PayListCoordinator?
 
     init(transitioner: Transitioner) {
         self.transitioner = transitioner
@@ -20,7 +21,9 @@ import UIKit
             payCardVM.transitionDelegate = payCardCoordinator
 
             /// PayList Setting
+            payListCoordinator = .init(transitioner: transitioner)
             let payListVM = PayListViewModelImpl()
+            payListVM.transitionDelegate = payListCoordinator
 
             let vc = UIHostingController(
                 rootView: TabScreenView(

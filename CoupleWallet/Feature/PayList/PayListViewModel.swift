@@ -7,6 +7,7 @@ protocol PayListViewModel: ObservableObject {
 
     // tap logic
     func didTapDeleteButton(id: String) async
+    func didTapPayCell(id: String)
 
     // ui logic
     var payListResponseType: PayListResponseType { get set }
@@ -18,6 +19,10 @@ enum PayListResponseType {
     case success([PayData])
     case error
     case noData
+}
+
+protocol PayListTransitionDelegate: AnyObject {
+    func transitionToEditPay(payData: PayData)
 }
 
 struct PayViewData: Identifiable {
@@ -32,6 +37,7 @@ final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false
     let firebase = FirebaseManager.shared
+    weak var transitionDelegate: PayListTransitionDelegate?
 }
 
 // MARK: Internal logic
@@ -65,6 +71,13 @@ extension PayListViewModelImpl {
             await fetchPayList()
         } catch {
             print(error.localizedDescription)
+        }
+    }
+
+    func didTapPayCell(id: String) {
+        if case .success(let payList) = payListResponseType {
+            guard let payData = payList.first(where: { $0.id == id }) else { return }
+            transitionDelegate?.transitionToEditPay(payData: payData)
         }
     }
 }
