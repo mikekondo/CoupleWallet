@@ -2,7 +2,8 @@ import Foundation
 
 protocol PayListViewModel: ObservableObject {
     // internal
-    func fetchPayList() async
+    func onViewDidLoad() async
+    func pullToReflesh() async
 
     // tap logic
     func didTapDeleteButton(id: String) async
@@ -36,7 +37,15 @@ final class PayListViewModelImpl: PayListViewModel {
 // MARK: Internal logic
 
 extension PayListViewModelImpl {
-    func fetchPayList() async {
+    func onViewDidLoad() async {
+        await fetchPayList()
+    }
+
+    func pullToReflesh() async {
+        await fetchPayList()
+    }
+    
+    private func fetchPayList() async {
         shouldShowLoading = true
         defer { shouldShowLoading = false }
         do {

@@ -42,9 +42,14 @@ struct PayListScreenView<VM: PayListViewModel>: View {
                 .padding(.horizontal, 16)
             }
         }
+        .refreshable {
+            Task { @MainActor in
+                await vm.pullToReflesh()
+            }
+        }
         .onViewDidLoad() {
             Task { @MainActor in
-                await vm.fetchPayList()
+                await vm.onViewDidLoad()
             }
         }
         .loading(isPresented: $vm.shouldShowLoading)

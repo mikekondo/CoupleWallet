@@ -20,11 +20,22 @@ extension FirebaseManager {
             "price": payData.price,
             "createdAt": Date()
         ]
-        try await db.collection(.users).document(dataStore.shareCode).collection(.pay).addDocument(data: data)
+        try await db.collection(.users).document(dataStore.shareCode).collection(.pay).document(payData.id).setData(data)
+    }
+
+    func updatePay(payData: PayData) async throws {
+        let data: [String: Any] = [
+            "id": payData.id,
+            "title": payData.title,
+            "name": payData.name,
+            "price": payData.price,
+            "createdAt": Date()
+        ]
+        try await db.collection(.users).document(dataStore.shareCode).collection(.pay).document(payData.id).updateData(data)
     }
 
     func fetchPayList() async throws -> [PayData] {
-        let querySnapshot = try await db.collection(.users).document(dataStore.shareCode).collection(.pay).getDocuments()
+        let querySnapshot = try await db.collection(.users).document(dataStore.shareCode).collection(.pay).order(by: "createdAt", descending: true).getDocuments()
         var payDataList: [PayData] = []
 
         querySnapshot.documents.forEach { document in
@@ -39,10 +50,6 @@ extension FirebaseManager {
     }
 
     func deletePay(id: String) async throws {
-        let querySnapshot = try await db.collection("users").document(dataStore.shareCode).collection("pay").whereField("id", isEqualTo: id).getDocuments()
-
-        for document in querySnapshot.documents {
-            try await document.reference.delete()
-        }
+        try await db.collection("users").document(dataStore.shareCode).collection("pay").document(id).delete()
     }
 }
