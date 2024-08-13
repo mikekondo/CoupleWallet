@@ -6,6 +6,7 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
         addView
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .loading(isPresented: $vm.shouldShowLoading)
             .safeAreaInset(edge: .bottom) {
                 Button {
                     Task { @MainActor in

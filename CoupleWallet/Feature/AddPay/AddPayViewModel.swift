@@ -3,6 +3,7 @@ import Foundation
 protocol AddPayViewModel: ObservableObject {
     var payTitle: String { get set }
     var payPrice: String { get set }
+    var shouldShowLoading: Bool { get set }
 
     func didTapAdd() async
 }
@@ -14,10 +15,14 @@ protocol AddPayTransitionDelegate: AnyObject {
 final class AddPayViewModelImpl: AddPayViewModel {
     @Published var payTitle: String = ""
     @Published var payPrice: String = ""
+    @Published var shouldShowLoading: Bool = false
+
     let firebase = FirebaseManager.shared
     weak var transitionDelegate: AddPayTransitionDelegate?
 
     func didTapAdd() async {
+        shouldShowLoading = true
+        defer { shouldShowLoading = false }
         let payData: PayData = .init(
             id: UUID().uuidString,
             title: payTitle,

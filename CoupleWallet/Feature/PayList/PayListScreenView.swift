@@ -41,12 +41,13 @@ struct PayListScreenView<VM: PayListViewModel>: View {
                 }
                 .padding(.horizontal, 16)
             }
-            .onAppear {
-                Task { @MainActor in
-                    await vm.fetchPayList()
-                }
+        }
+        .onViewDidLoad() {
+            Task { @MainActor in
+                await vm.fetchPayList()
             }
         }
+        .loading(isPresented: $vm.shouldShowLoading)
     }
 }
 

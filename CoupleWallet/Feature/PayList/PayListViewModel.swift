@@ -10,6 +10,7 @@ protocol PayListViewModel: ObservableObject {
     // ui logic
     var payListResponseType: PayListResponseType { get set }
     var payViewDataList: [PayViewData] { get }
+    var shouldShowLoading: Bool { get set }
 }
 
 enum PayListResponseType {
@@ -28,14 +29,16 @@ struct PayViewData: Identifiable {
 
 final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
+    @Published var shouldShowLoading: Bool = false
     let firebase = FirebaseManager.shared
-
 }
 
 // MARK: Internal logic
 
 extension PayListViewModelImpl {
     func fetchPayList() async {
+        shouldShowLoading = true
+        defer { shouldShowLoading = false }
         do {
             let payList = try await firebase.fetchPayList()
             payListResponseType = .success(payList)
