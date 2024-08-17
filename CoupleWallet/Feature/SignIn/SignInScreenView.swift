@@ -15,5 +15,6 @@ struct SignInScreenView<VM: SignInViewModel>: View {
             }
         }
         .padding(.horizontal, 16)
+        .alert(alertType: $vm.alertType)
     }
 }

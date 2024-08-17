@@ -1,9 +1,17 @@
 import SwiftUI
 
-struct SettingScreenView: View {
+struct SettingScreenView<VM: SettingViewModel>: View {
+    @StateObject var vm: VM
+
     var body: some View {
         VStack(spacing: 8) {
-            Text("Page3ScreenView")
+            Button {
+                Task {
+                    await vm.didTapDeleteAccount()
+                }
+            } label: {
+                Text("アカウント削除")
+            }
         }
     }
 }

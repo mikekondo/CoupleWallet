@@ -5,6 +5,7 @@ import UIKit
     let transitioner: Transitioner
     var payCardCoordinator: PayCardCoordinator?
     var payListCoordinator: PayListCoordinator?
+    var settingCoordinator: SettingCoordinator?
 
     init(transitioner: Transitioner) {
         self.transitioner = transitioner
@@ -24,11 +25,16 @@ import UIKit
             let payListVM = PayListViewModelImpl()
             payListVM.transitionDelegate = payListCoordinator
 
+            /// Setting
+            settingCoordinator = .init(transitioner: transitioner)
+            let settingVM = SettingViewModelImpl()
+
             let vc = UIHostingController(
                 rootView: TabScreenView(
                     vm: vm,
                     payCardVM: payCardVM,
-                    payListVM: payListVM
+                    payListVM: payListVM,
+                    settingVM: settingVM
                 )
             )
             vc.navigationItem.hidesBackButton = true

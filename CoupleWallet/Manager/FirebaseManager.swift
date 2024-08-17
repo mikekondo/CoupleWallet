@@ -53,3 +53,12 @@ extension FirebaseManager {
         try await db.collection("users").document(dataStore.shareCode).collection("pay").document(id).delete()
     }
 }
+
+// MARK: account logic
+
+extension FirebaseManager {
+    func deleteAccount() async throws {
+        try await Auth.auth().currentUser?.delete()
+        try Auth.auth().signOut()
+    }
+}

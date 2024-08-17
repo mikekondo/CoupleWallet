@@ -17,10 +17,10 @@ extension UserDefaults: DataStorable {
 
     public var userName: String {
         get {
-            string(forKey: Key.shareCode.rawValue) ?? ""
+            string(forKey: Key.userName.rawValue) ?? ""
         }
         set {
-            self.set(newValue, forKey: Key.shareCode.rawValue)
+            self.set(newValue, forKey: Key.userName.rawValue)
         }
     }
 }

@@ -3,11 +3,13 @@ import SwiftUI
 @MainActor struct TabScreenView<
     VM: TabViewModel,
     PayCardVM: PayCardViewModel,
-    PayListVM: PayListViewModel
+    PayListVM: PayListViewModel,
+    SettingVM: SettingViewModel
 >: View {
     @StateObject var vm: VM
     @ObservedObject var payCardVM: PayCardVM
     @ObservedObject var payListVM: PayListVM
+    @ObservedObject var settingVM: SettingVM
 
     var body: some View {
         TabView(selection: $vm.selection) {
@@ -17,7 +19,7 @@ import SwiftUI
             PayListScreenView(vm: payListVM)
                 .tabItem { Label("立替リスト", systemImage: "2.circle") }
                 .tag(2)
-            SettingScreenView()
+            SettingScreenView(vm: settingVM)
                 .tabItem { Label("設定", systemImage: "3.circle") }
                 .tag(3)
         }

@@ -21,7 +21,7 @@ class SignInViewModelImpl: SignInViewModel {
     func registerUserName(userName: String) async {
         do {
             if userName.isEmpty {
-                alertType = .init(message: "名前を入力してください")
+                alertType = .init(title: "名前を入力してください" , message: "名前が空だと登録できません")
                 return
             }
 
