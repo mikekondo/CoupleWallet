@@ -24,9 +24,9 @@ final class EditPayCoordinator {
 }
 
 extension EditPayCoordinator: EditPayTransitionDelegate {
-    func dismiss(completion: @escaping () -> Void) {
+    func dismiss() {
         Task { @MainActor in
-            transitioner.dismissSelf(animated: true, completion: completion)
+            transitioner.dismissSelf(animated: true, completion: nil)
         }
     }
 }

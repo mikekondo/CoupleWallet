@@ -7,7 +7,7 @@ import Foundation
 }
 
 protocol EditPayTransitionDelegate: AnyObject {
-    func dismiss(completion: @escaping () -> Void)
+    func dismiss()
 }
 
 final class EditPayViewModelImpl: EditPayViewModel {
@@ -41,12 +41,11 @@ extension EditPayViewModelImpl {
             date: payData.date
         )
         do {
-            try await firebaseManager.updatePay(payData: payData)            
-            transitionDelegate?.dismiss { [weak self] in
-                Task { @MainActor in
-                    await self?.editHandler()
-                }
+            try await firebaseManager.updatePay(payData: payData)
+            Task { @MainActor in
+                await editHandler()
             }
+            transitionDelegate?.dismiss()
         } catch {
             print(error.localizedDescription)
         }
