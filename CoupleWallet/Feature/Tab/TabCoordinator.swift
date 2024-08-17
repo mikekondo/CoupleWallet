@@ -10,17 +10,16 @@ import UIKit
         self.transitioner = transitioner
     }
 
-    // TODO: なんか一旦MainActorにしないと怒られるためMainActorを付与
     func start() {
         Task { @MainActor in
             let vm = TabViewModelImpl()
 
-            /// PayCard Setting
+            /// PayCard
             payCardCoordinator = .init(transitioner: transitioner)
             let payCardVM = PayCardViewModelImpl()
             payCardVM.transitionDelegate = payCardCoordinator
 
-            /// PayList Setting
+            /// PayList
             payListCoordinator = .init(transitioner: transitioner)
             let payListVM = PayListViewModelImpl()
             payListVM.transitionDelegate = payListCoordinator
@@ -32,6 +31,7 @@ import UIKit
                     payListVM: payListVM
                 )
             )
+            vc.navigationItem.hidesBackButton = true
             transitioner.push(viewController: vc, animated: true)
         }
     }

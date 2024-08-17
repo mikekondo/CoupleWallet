@@ -1,6 +1,6 @@
 import Foundation
 
-protocol PayListViewModel: ObservableObject {
+@MainActor protocol PayListViewModel: ObservableObject {
     // internal
     func onViewDidLoad() async
     func pullToReflesh() async
@@ -22,7 +22,7 @@ enum PayListResponseType {
 }
 
 protocol PayListTransitionDelegate: AnyObject {
-    func transitionToEditPay(payData: PayData)
+    func transitionToEditPay(payData: PayData, editHandler: @escaping () async -> Void)
 }
 
 struct PayViewData: Identifiable {
@@ -77,7 +77,9 @@ extension PayListViewModelImpl {
     func didTapPayCell(id: String) {
         if case .success(let payList) = payListResponseType {
             guard let payData = payList.first(where: { $0.id == id }) else { return }
-            transitionDelegate?.transitionToEditPay(payData: payData)
+            transitionDelegate?.transitionToEditPay(payData: payData)  { [weak self] in
+                await self?.fetchPayList()
+            }
         }
     }
 }

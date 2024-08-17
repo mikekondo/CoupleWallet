@@ -1,6 +1,6 @@
 import Foundation
 
-protocol PayCardViewModel: ObservableObject {
+@MainActor protocol PayCardViewModel: ObservableObject {
     var shouldShowPayView: Bool { get set }
     func didTapCardView()
     func didTapAddButton()

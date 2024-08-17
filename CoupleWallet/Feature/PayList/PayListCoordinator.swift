@@ -10,9 +10,9 @@ final class PayListCoordinator {
     }
 }
 
-extension PayListCoordinator: PayListTransitionDelegate {
-    func transitionToEditPay(payData: PayData) {
-        editPayCoordinator = .init(transitioner: transitioner, payData: payData)
+extension PayListCoordinator: PayListTransitionDelegate {    
+    func transitionToEditPay(payData: PayData, editHandler: @escaping () async -> Void) {
+        editPayCoordinator = .init(transitioner: transitioner, payData: payData, editHandler: editHandler)
         editPayCoordinator?.start()
     }
 }

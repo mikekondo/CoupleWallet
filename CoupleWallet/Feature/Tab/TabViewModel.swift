@@ -1,6 +1,6 @@
 import Foundation
 
-protocol TabViewModel: ObservableObject {
+@MainActor protocol TabViewModel: ObservableObject {
     var selection: Int { get set }
 }
 

@@ -1,7 +1,7 @@
 import FirebaseCore
 import FirebaseAuth
 
-protocol SignInViewModel: ObservableObject {
+@MainActor protocol SignInViewModel: ObservableObject {
     var userName: String { get set }
     func registerUserName(userName: String) async
 }

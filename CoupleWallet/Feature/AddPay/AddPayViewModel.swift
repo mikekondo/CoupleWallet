@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AddPayViewModel: ObservableObject {
+@MainActor protocol AddPayViewModel: ObservableObject {
     var payTitle: String { get set }
     var payPrice: String { get set }
     var shouldShowLoading: Bool { get set }

@@ -1,13 +1,54 @@
 import Foundation
 
-protocol EditPayViewModel: ObservableObject {
+@MainActor protocol EditPayViewModel: ObservableObject {
+    var payTitle: String { get set }
+    var payPrice: String { get set }
+    func didTapEditButton() async
+}
 
+protocol EditPayTransitionDelegate: AnyObject {
+    func dismiss(completion: @escaping () -> Void)
 }
 
 final class EditPayViewModelImpl: EditPayViewModel {
-    let payData: PayData
+    @Published var payTitle: String
+    @Published var payPrice: String
 
-    init(payData: PayData) {
+    private let payData: PayData
+    private let editHandler: () async -> Void
+
+    let firebaseManager = FirebaseManager.shared
+    weak var transitionDelegate: EditPayTransitionDelegate?
+
+    init(payData: PayData, editHandler: @escaping () async -> Void) {
         self.payData = payData
+        self.editHandler = editHandler
+        payTitle = payData.title
+        payPrice = String(payData.price)
+    }
+
+}
+
+// MARK: Tap logic
+
+extension EditPayViewModelImpl {
+    func didTapEditButton() async {
+        let payData: PayData = .init(
+            id: payData.id,
+            title: payTitle,
+            name: payData.name,
+            price: Int(payPrice) ?? 0,
+            date: payData.date
+        )
+        do {
+            try await firebaseManager.updatePay(payData: payData)            
+            transitionDelegate?.dismiss { [weak self] in
+                Task { @MainActor in
+                    await self?.editHandler()
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
