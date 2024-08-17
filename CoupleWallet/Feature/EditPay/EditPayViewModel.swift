@@ -36,7 +36,7 @@ extension EditPayViewModelImpl {
         let payData: PayData = .init(
             id: payData.id,
             title: payTitle,
-            name: payData.name,
+            byName: payData.byName,
             price: Int(payPrice) ?? 0,
             date: payData.date
         )

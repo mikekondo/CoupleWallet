@@ -18,6 +18,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
     @Published var shouldShowLoading: Bool = false
 
     let firebase = FirebaseManager.shared
+    let dataStore: DataStorable = UserDefaults.standard
     weak var transitionDelegate: AddPayTransitionDelegate?
 
     func didTapAdd() async {
@@ -26,7 +27,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
         let payData: PayData = .init(
             id: UUID().uuidString,
             title: payTitle,
-            name: "マイク",
+            byName: dataStore.userName,
             price: Int(payPrice) ?? 0,
             date: Date()
         )

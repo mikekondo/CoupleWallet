@@ -102,7 +102,7 @@ extension PayListViewModelImpl {
         .init(
             id: payData.id,
             title: payData.title,
-            byName: payData.name + "が立替え",
+            byName: payData.byName + "が立替え",
             dateText: payData.date.formatted(),
             priceText: String(payData.price) + "円"
         )

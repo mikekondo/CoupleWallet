@@ -16,7 +16,7 @@ extension FirebaseManager {
         let data: [String: Any] = [
             "id": payData.id,
             "title": payData.title,
-            "name": payData.name,
+            "byName": payData.byName,
             "price": payData.price,
             "createdAt": Date()
         ]
@@ -27,7 +27,7 @@ extension FirebaseManager {
         let data: [String: Any] = [
             "id": payData.id,
             "title": payData.title,
-            "name": payData.name,
+            "byName": payData.byName,
             "price": payData.price,
             "createdAt": Date()
         ]
@@ -40,11 +40,11 @@ extension FirebaseManager {
 
         querySnapshot.documents.forEach { document in
             guard let id = document.get("id") as? String,
-                  let name = document.get("name") as? String,
+                  let byName = document.get("byName") as? String,
                   let price = document.get("price") as? Int,
                   let title = document.get("title") as? String,
                   let date = document.get("createdAt") as? Timestamp else { return }
-            payDataList.append(.init(id: id, title: title, name: name, price: price, date: date.dateValue()))
+            payDataList.append(.init(id: id, title: title, byName: byName, price: price, date: date.dateValue()))
         }
         return payDataList
     }
