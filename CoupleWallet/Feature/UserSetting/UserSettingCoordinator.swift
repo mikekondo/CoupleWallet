@@ -5,19 +5,14 @@ import SwiftUI
 final class UserSettingCoordinator {
     var tabCoordinator: TabCoordinator?
     let transitioner: Transitioner
-    let uid: String
 
-    init(
-        transitioner: Transitioner,
-        uid: String
-    ) {
+    init(transitioner: Transitioner) {
         self.transitioner = transitioner
-        self.uid = uid
     }
 
     func start() {
         Task { @MainActor in
-            let vm = UserSettingViewModelImpl(dataStore: UserDefaults.standard, uid: uid)
+            let vm = UserSettingViewModelImpl()
             vm.transitionDelegate = self
             let view = UserSettingScreenView(vm: vm)
             transitioner.push(viewController: UIHostingController(rootView: view), animated: true)

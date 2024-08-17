@@ -9,9 +9,18 @@ final class FirebaseManager {
     private init() {}
 }
 
-// MARK: db logic
+// MARK: CRUD logic
 
 extension FirebaseManager {
+    func saveUser(shareCode: String) async throws {
+        let data: [String: Any] = [
+            "isParterLink": false
+        ]
+        try await db
+            .collection(.users)
+            .document(shareCode)
+            .setData(data)
+    }
     func savePay(payData: PayData) async throws {
         let data: [String: Any] = [
             "id": payData.id,
@@ -20,7 +29,12 @@ extension FirebaseManager {
             "price": payData.price,
             "createdAt": Date()
         ]
-        try await db.collection(.users).document(dataStore.shareCode).collection(.pay).document(payData.id).setData(data)
+        try await db
+            .collection(.users)
+            .document(dataStore.shareCode)
+            .collection(.pay)
+            .document(payData.id)
+            .setData(data)
     }
 
     func updatePay(payData: PayData) async throws {
@@ -31,11 +45,20 @@ extension FirebaseManager {
             "price": payData.price,
             "createdAt": Date()
         ]
-        try await db.collection(.users).document(dataStore.shareCode).collection(.pay).document(payData.id).updateData(data)
+        try await db
+            .collection(.users)
+            .document(dataStore.shareCode)
+            .collection(.pay)
+            .document(payData.id)
+            .updateData(data)
     }
 
     func fetchPayList() async throws -> [PayData] {
-        let querySnapshot = try await db.collection(.users).document(dataStore.shareCode).collection(.pay).order(by: "createdAt", descending: true).getDocuments()
+        let querySnapshot = try await db.collection(.users)
+            .document(dataStore.shareCode)
+            .collection(.pay)
+            .order(by: "createdAt", descending: true).getDocuments()
+
         var payDataList: [PayData] = []
 
         querySnapshot.documents.forEach { document in
@@ -50,15 +73,56 @@ extension FirebaseManager {
     }
 
     func deletePay(id: String) async throws {
-        try await db.collection("users").document(dataStore.shareCode).collection("pay").document(id).delete()
+        try await db
+            .collection("users")
+            .document(dataStore.shareCode)
+            .collection("pay")
+            .document(id)
+            .delete()
     }
 }
 
-// MARK: account logic
+// MARK: partner link logic
 
 extension FirebaseManager {
+    func linkPartner(shareCode: String) async throws {
+        let documentRef = db.collection("users").document(shareCode)
+        let documentSnapshot = try await documentRef.getDocument(source: .server)
+
+        /// 共通コードがDB上に存在しない時エラーを返す
+        guard documentSnapshot.exists else {
+            throw LinkPartnerError.noData("共通コード \(shareCode) が存在しないか間違っています")
+        }
+
+        let data: [String: Any] = [
+            "isParterLink": true
+        ]
+        try await documentRef.updateData(data)
+    }
+
+}
+
+enum LinkPartnerError: Error {
+    case noData(String)
+}
+
+// MARK: Account logic
+
+extension FirebaseManager {
+    func signIn() async throws {
+        _ = try await Auth.auth().signInAnonymously()
+    }
+
+    func getAuthUid() -> String? {
+        Auth.auth().currentUser?.uid
+    }
+
     func deleteAccount() async throws {
         try await Auth.auth().currentUser?.delete()
         try Auth.auth().signOut()
     }
+}
+
+enum SignInError: Error {
+    case noData
 }

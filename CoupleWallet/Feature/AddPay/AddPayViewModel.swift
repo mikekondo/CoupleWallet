@@ -5,7 +5,7 @@ import Foundation
     var payPrice: String { get set }
     var shouldShowLoading: Bool { get set }
 
-    func didTapAdd() async
+    func didTapAdd() async    
 }
 
 protocol AddPayTransitionDelegate: AnyObject {

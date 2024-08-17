@@ -1,11 +1,13 @@
 import SwiftUI
 
-struct UserSettingScreenView<VM: UserSettingViewModel>: View {
+@MainActor struct UserSettingScreenView<VM: UserSettingViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
         VStack(spacing: 8) {
             Button {
-                vm.didTapCreateWalletButton()
+                Task {
+                    await vm.didTapCreateWalletButton()
+                }
             } label: {
                 Text("新しく財布を作る")
             }
@@ -23,14 +25,14 @@ struct UserSettingScreenView<VM: UserSettingViewModel>: View {
                 Text("キャンセル")
             }
             Button {
-                vm.didTapAlertOKButton()
+                Task {
+                    await vm.didTapAlertOKButton()
+                }
             } label: {
                 Text("OK")
             }
         }
+        .alert(alertType: $vm.alertType)
+        .loading(isPresented: $vm.shouldShowLoading)
     }
-}
-
-#Preview {
-    UserSettingScreenView(vm: UserSettingViewModelImpl(dataStore: UserDefaults.standard, uid: "test-uid"))
 }

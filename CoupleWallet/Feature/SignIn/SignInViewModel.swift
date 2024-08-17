@@ -3,12 +3,12 @@ import FirebaseAuth
 
 @MainActor protocol SignInViewModel: ObservableObject {
     var userName: String { get set }
-    func registerUserName(userName: String) async
+    func registerUserName(userName: String)
     var alertType: AlertType? { get set }
 }
 
 protocol SignInTransitionDelegate: AnyObject {
-    func transitionToUserSetting(uid: String)
+    func transitionToUserSetting()
 }
 
 class SignInViewModelImpl: SignInViewModel {
@@ -18,20 +18,12 @@ class SignInViewModelImpl: SignInViewModel {
     weak var transitionDelegate: SignInTransitionDelegate?
     let firebase = FirebaseManager.shared
 
-    func registerUserName(userName: String) async {
-        do {
-            if userName.isEmpty {
-                alertType = .init(title: "名前を入力してください" , message: "名前が空だと登録できません")
-                return
-            }
-
-            let authResult = try await Auth.auth().signInAnonymously()
-            let uid = authResult.user.uid
-            dataStore.userName = userName
-
-            transitionDelegate?.transitionToUserSetting(uid: uid)
-        } catch {
-            print(error.localizedDescription)
+    func registerUserName(userName: String) {
+        if userName.isEmpty {
+            alertType = .init(title: "名前を入力してください" , message: "名前が空だと登録できません")
+            return
         }
+        dataStore.userName = userName
+        transitionDelegate?.transitionToUserSetting()
     }
 }

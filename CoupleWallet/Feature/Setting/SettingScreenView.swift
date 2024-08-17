@@ -12,6 +12,13 @@ struct SettingScreenView<VM: SettingViewModel>: View {
             } label: {
                 Text("アカウント削除")
             }
+            // TODO: 共有済みの場合は非表示にする
+            Button {
+                vm.didTapDisplayShareCode()
+            } label: {
+                Text("共有コード表示")
+            }
         }
+        .alert(alertType: $vm.alertType)
     }
 }

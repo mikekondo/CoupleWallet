@@ -17,8 +17,8 @@ import SwiftUI
 }
 
 extension SignInCoordinator: SignInTransitionDelegate {    
-    @MainActor func transitionToUserSetting(uid: String) {
-        userSettingCoordinator = .init(transitioner: transitioner, uid: uid)
+    @MainActor func transitionToUserSetting() {
+        userSettingCoordinator = .init(transitioner: transitioner)
         userSettingCoordinator?.start()
     }
 }
