@@ -7,7 +7,7 @@ struct SignInScreenView<VM: SignInViewModel>: View {
             TextField("名前を入力してください", text: $vm.userName)
                 .textFieldStyle(.roundedBorder)
             Button {
-                Task { @MainActor in
+                Task { 
                     await vm.registerUserName(userName: vm.userName)
                 }
             } label: {
