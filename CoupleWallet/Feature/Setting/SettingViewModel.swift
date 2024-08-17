@@ -25,6 +25,7 @@ final class SettingViewModelImpl: SettingViewModel {
     }
 
     private var displayShareCodeMessageText: String {
-        "共有コードは " + dataStore.shareCode + "です"
+        guard let shareCode = dataStore.shareCode else { return "" }
+        return "共有コードは " + shareCode + "です"
     }
 }

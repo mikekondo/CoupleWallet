@@ -22,6 +22,7 @@ extension FirebaseManager {
             .setData(data)
     }
     func savePay(payData: PayData) async throws {
+        guard let shareCode = dataStore.shareCode else { return }
         let data: [String: Any] = [
             "id": payData.id,
             "title": payData.title,
@@ -31,13 +32,14 @@ extension FirebaseManager {
         ]
         try await db
             .collection(.users)
-            .document(dataStore.shareCode)
+            .document(shareCode)
             .collection(.pay)
             .document(payData.id)
             .setData(data)
     }
 
     func updatePay(payData: PayData) async throws {
+        guard let shareCode = dataStore.shareCode else { return }
         let data: [String: Any] = [
             "id": payData.id,
             "title": payData.title,
@@ -47,15 +49,16 @@ extension FirebaseManager {
         ]
         try await db
             .collection(.users)
-            .document(dataStore.shareCode)
+            .document(shareCode)
             .collection(.pay)
             .document(payData.id)
             .updateData(data)
     }
 
     func fetchPayList() async throws -> [PayData] {
+        guard let shareCode = dataStore.shareCode else { return [] }
         let querySnapshot = try await db.collection(.users)
-            .document(dataStore.shareCode)
+            .document(shareCode)
             .collection(.pay)
             .order(by: "createdAt", descending: true).getDocuments()
 
@@ -73,9 +76,10 @@ extension FirebaseManager {
     }
 
     func deletePay(id: String) async throws {
+        guard let shareCode = dataStore.shareCode else { return }
         try await db
             .collection("users")
-            .document(dataStore.shareCode)
+            .document(shareCode)
             .collection("pay")
             .document(id)
             .delete()

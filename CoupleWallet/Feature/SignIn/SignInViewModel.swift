@@ -12,7 +12,7 @@ protocol SignInTransitionDelegate: AnyObject {
 }
 
 class SignInViewModelImpl: SignInViewModel {
-    @Published var userName: String = "マイク"
+    @Published var userName: String = ""
     @Published var alertType: AlertType?
     var dataStore: DataStorable = UserDefaults.standard
     weak var transitionDelegate: SignInTransitionDelegate?

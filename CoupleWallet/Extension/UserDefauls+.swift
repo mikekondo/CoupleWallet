@@ -6,9 +6,9 @@ extension UserDefaults: DataStorable {
         case userName
     }
 
-    public var shareCode: String {
+    public var shareCode: String? {
         get {
-            string(forKey: Key.shareCode.rawValue) ?? ""
+            string(forKey: Key.shareCode.rawValue)
         }
         set {
             self.set(newValue, forKey: Key.shareCode.rawValue)
