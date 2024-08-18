@@ -4,6 +4,7 @@ extension UserDefaults: DataStorable {
     public enum Key: String, CaseIterable {
         case shareCode
         case userName
+        case partnerName
     }
 
     public var shareCode: String? {
@@ -21,6 +22,15 @@ extension UserDefaults: DataStorable {
         }
         set {
             self.set(newValue, forKey: Key.userName.rawValue)
+        }
+    }
+
+    public var partnerName: String {
+        get {
+            string(forKey: Key.partnerName.rawValue) ?? ""
+        }
+        set {
+            self.set(newValue, forKey: Key.partnerName.rawValue)
         }
     }
 }

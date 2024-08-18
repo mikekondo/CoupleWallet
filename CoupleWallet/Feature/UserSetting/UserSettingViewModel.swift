@@ -39,10 +39,16 @@ extension UserSettingViewModelImpl {
     func didTapCreateWalletButton() async {
         shouldShowLoading = true
         do {
+            // 匿名ログイン
             try await firebaseManager.signIn()
             guard let uid = firebaseManager.getAuthUid() else { return }
+
+            // 共通コード発行
             let shareCode = generateShareCodeFromUID(uid: uid)
-            try await firebaseManager.saveUser(shareCode: shareCode)
+
+            // 財布作成
+            try await firebaseManager.saveWallet(shareCode: shareCode)
+
             dataStore.shareCode = shareCode
             transitionDelegate?.transitionToTab()
         } catch {
@@ -75,6 +81,8 @@ extension UserSettingViewModelImpl {
             try await firebaseManager.signIn()
             try await firebaseManager.linkPartner(shareCode: shareCode)
             dataStore.shareCode = shareCode
+            // 連携に成功したら自分の名前をpartnerConnectorとして自分の名前を登録
+
             transitionDelegate?.transitionToTab()
         } catch let error as LinkPartnerError {
             if case .noData(let message) = error {

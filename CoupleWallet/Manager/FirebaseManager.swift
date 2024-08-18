@@ -4,7 +4,7 @@ import FirebaseAuth
 
 final class FirebaseManager {
     static let shared = FirebaseManager()
-    let dataStore: DataStorable = UserDefaults.standard
+    var dataStore: DataStorable = UserDefaults.standard
     private let db = Firestore.firestore()
     private init() {}
 }
@@ -12,15 +12,26 @@ final class FirebaseManager {
 // MARK: CRUD logic
 
 extension FirebaseManager {
-    func saveUser(shareCode: String) async throws {
-        let data: [String: Any] = [
-            "isPartnerLink": false
-        ]
-        try await db
+    func saveWallet(shareCode: String) async throws {
+        let walletRef = db
             .collection(.users)
             .document(shareCode)
-            .setData(data)
+
+        let data: [String: Any] = [
+            "isPartnerLink": false,
+            "walletOwner": dataStore.userName
+        ]
+
+        try await walletRef
+            .setData(data, merge: true) // 既存のデータはなさそうだけど、一応mergeフラグをtrueにする
+
+        // パートナー連携されたら、パートナー名をアプリ保存する
+        walletRef.addSnapshotListener { [weak self] walletSnapshot, error in
+            guard let partnerConnector = walletSnapshot?["partnerConnector"] as? String else { return }
+            self?.dataStore.partnerName = partnerConnector
+        }
     }
+
     func savePay(payData: PayData) async throws {
         guard let shareCode = dataStore.shareCode else { return }
         let data: [String: Any] = [
@@ -57,14 +68,17 @@ extension FirebaseManager {
 
     func fetchPayList() async throws -> [PayData] {
         guard let shareCode = dataStore.shareCode else { return [] }
-        let querySnapshot = try await db.collection(.users)
+        let payDocuments = try await db
+            .collection(.users)
             .document(shareCode)
             .collection(.pay)
-            .order(by: "createdAt", descending: true).getDocuments()
+            .order(by: "createdAt", descending: true)
+            .getDocuments()
+            .documents
 
         var payDataList: [PayData] = []
 
-        querySnapshot.documents.forEach { document in
+        payDocuments.forEach { document in
             guard let id = document.get("id") as? String,
                   let byName = document.get("byName") as? String,
                   let price = document.get("price") as? Int,
@@ -78,11 +92,52 @@ extension FirebaseManager {
     func deletePay(id: String) async throws {
         guard let shareCode = dataStore.shareCode else { return }
         try await db
-            .collection("users")
+            .collection(.users)
             .document(shareCode)
-            .collection("pay")
+            .collection(.pay)
             .document(id)
             .delete()
+    }
+}
+
+// MARK: pay balance logic
+
+extension FirebaseManager {
+    // 立替計算のロジック
+    func calculatePayBalance() async throws -> PayBalanceType? {
+        guard let shareCode = dataStore.shareCode else { return nil }
+
+        let payDocuments = try await db
+            .collection(.users)
+            .document(shareCode)
+            .collection(.pay)
+            .getDocuments()
+            .documents
+
+        var myTotalPayPrice: Int = 0
+        var partnerTotalPayPrice: Int = 0
+
+        payDocuments.forEach { document in
+            guard let price = document.get("price") as? Int,
+                  let byName = document.get("byName") as? String else { return }
+            if byName == dataStore.userName {
+                myTotalPayPrice += price
+            } else if byName == dataStore.partnerName {
+                partnerTotalPayPrice += price
+            }
+        }
+
+        var difference: Int = 0
+
+        if myTotalPayPrice > partnerTotalPayPrice {
+            difference = myTotalPayPrice - partnerTotalPayPrice
+            return .overPayment(payerName: dataStore.partnerName, receiverName: dataStore.userName, difference: difference)
+        } else if myTotalPayPrice < partnerTotalPayPrice {
+            difference = partnerTotalPayPrice - myTotalPayPrice
+            return .overPayment(payerName: dataStore.userName, receiverName: dataStore.partnerName, difference: difference)
+        } else {
+            return .equal
+        }
     }
 }
 
@@ -90,25 +145,35 @@ extension FirebaseManager {
 
 extension FirebaseManager {
     func linkPartner(shareCode: String) async throws {
-        let documentRef = db.collection("users").document(shareCode)
-        let documentSnapshot = try await documentRef.getDocument(source: .server)
+        let walletRef = db
+            .collection("users")
+            .document(shareCode)
 
-        /// 共通コードがDB上に存在しない時エラーを返す
-        guard documentSnapshot.exists else {
+        let walletSnapshot = try await walletRef
+            .getDocument(source: .server)
+
+        /// 財布DBが存在しない時エラーを返す
+        guard walletSnapshot.exists,
+        let walletOwner = walletSnapshot.get("walletOwner") as? String else {
             throw LinkPartnerError.noData("共通コード \(shareCode) が存在しないか間違っています")
         }
 
-        let updateData: [String: Any] = [
+        dataStore.partnerName = walletOwner
+        // TODO: dataStore.userNameが順番かかわらずmaikuになってる
+        let data: [String: Any] = [
+            "partnerConnector": dataStore.userName,
             "isPartnerLink": true
         ]
-        try await documentRef.updateData(updateData)
-    }
 
+        try await walletRef
+            .setData(data, merge: true)
+    }
 }
 
 enum LinkPartnerError: Error {
     case noData(String)
     case alreadyLinked(String)
+    case notCreateWallet(String)
 }
 
 // MARK: Account logic
@@ -123,8 +188,14 @@ extension FirebaseManager {
     }
 
     func deleteAccount() async throws {
+        // アカウント削除
         try await Auth.auth().currentUser?.delete()
+        // サインアウト
         try Auth.auth().signOut()
+        // アプリ内保存全削除
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        }
     }
 }
 

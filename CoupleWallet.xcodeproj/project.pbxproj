@@ -64,6 +64,7 @@
 		95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891852C5F5FB300959F79 /* TabCoordinator.swift */; };
 		95A891892C66D99E00959F79 /* AddPayScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891882C66D99E00959F79 /* AddPayScreenView.swift */; };
 		95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */; };
+		95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7062C7185EA0051E00B /* PayBalanceData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		95A891852C5F5FB300959F79 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		95A891882C66D99E00959F79 /* AddPayScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayScreenView.swift; sourceTree = "<group>"; };
 		95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayCoordinator.swift; sourceTree = "<group>"; };
+		95F6D7062C7185EA0051E00B /* PayBalanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				959B1B292C6B11D200942913 /* Utils */,
 				9527C8852C68522E008DE420 /* PayData.swift */,
+				95F6D7062C7185EA0051E00B /* PayBalanceData.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				95A8917D2C5F56AA00959F79 /* PayListScreenView.swift in Sources */,
 				959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */,
 				959B1B282C69D66F00942913 /* UserSettingCoordinator.swift in Sources */,
+				95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */,
 				9527C8812C68451F008DE420 /* PayCardCoordinator.swift in Sources */,
 				959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */,
 				95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */,
