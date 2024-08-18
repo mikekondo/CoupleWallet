@@ -5,6 +5,7 @@ extension UserDefaults: DataStorable {
         case shareCode
         case userName
         case partnerName
+        case isPartnerLink
     }
 
     public var shareCode: String? {
@@ -31,6 +32,15 @@ extension UserDefaults: DataStorable {
         }
         set {
             self.set(newValue, forKey: Key.partnerName.rawValue)
+        }
+    }
+
+    public var isPartnerLink: Bool {
+        get {
+            return self.bool(forKey: Key.isPartnerLink.rawValue)
+        }
+        set {
+            self.set(newValue, forKey: Key.isPartnerLink.rawValue)
         }
     }
 }

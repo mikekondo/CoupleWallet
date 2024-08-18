@@ -29,6 +29,7 @@ extension FirebaseManager {
         walletRef.addSnapshotListener { [weak self] walletSnapshot, error in
             guard let partnerConnector = walletSnapshot?["partnerConnector"] as? String else { return }
             self?.dataStore.partnerName = partnerConnector
+            self?.dataStore.isPartnerLink = true
         }
     }
 
@@ -157,8 +158,8 @@ extension FirebaseManager {
         let walletOwner = walletSnapshot.get("walletOwner") as? String else {
             throw LinkPartnerError.noData("共通コード \(shareCode) が存在しないか間違っています")
         }
-
         dataStore.partnerName = walletOwner
+
         // TODO: dataStore.userNameが順番かかわらずmaikuになってる
         let data: [String: Any] = [
             "partnerConnector": dataStore.userName,
@@ -167,6 +168,7 @@ extension FirebaseManager {
 
         try await walletRef
             .setData(data, merge: true)
+        dataStore.isPartnerLink = true
     }
 }
 
