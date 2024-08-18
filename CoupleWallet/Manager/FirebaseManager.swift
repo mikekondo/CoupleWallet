@@ -105,8 +105,8 @@ extension FirebaseManager {
 
 extension FirebaseManager {
     // 立替計算のロジック
-    func calculatePayBalance() async throws -> PayBalanceType? {
-        guard let shareCode = dataStore.shareCode else { return nil }
+    func getPayBalanceType() async throws -> PayBalanceType {
+        guard let shareCode = dataStore.shareCode else { return .noData }
 
         let payDocuments = try await db
             .collection(.users)
@@ -160,14 +160,13 @@ extension FirebaseManager {
         }
         dataStore.partnerName = walletOwner
 
-        // TODO: dataStore.userNameが順番かかわらずmaikuになってる
         let data: [String: Any] = [
             "partnerConnector": dataStore.userName,
             "isPartnerLink": true
         ]
-
         try await walletRef
             .setData(data, merge: true)
+
         dataStore.isPartnerLink = true
     }
 }

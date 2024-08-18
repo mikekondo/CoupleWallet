@@ -52,6 +52,7 @@ extension UserSettingViewModelImpl {
             dataStore.shareCode = shareCode
             transitionDelegate?.transitionToTab()
         } catch {
+            // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
         shouldShowLoading = false
@@ -89,7 +90,7 @@ extension UserSettingViewModelImpl {
                 alertType = .init(title: "エラー", message: message)
             }
         } catch {
-            // Firebaseのエラーまたは他のエラーの場合の処理
+            // Firebaseのエラーまたは他のエラーの場合の処理            
             alertType = .init(title: "エラー", message: "予期しないエラーが発生しました: \(error.localizedDescription)")
         }
         shouldShowLoading = false

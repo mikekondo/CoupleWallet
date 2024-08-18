@@ -70,6 +70,7 @@ extension PayListViewModelImpl {
             try await firebase.deletePay(id: id)
             await fetchPayList()
         } catch {
+            // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
     }

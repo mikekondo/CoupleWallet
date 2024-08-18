@@ -16,6 +16,7 @@ final class SettingViewModelImpl: SettingViewModel {
         do {
             try await firebaseManager.deleteAccount()
         } catch {
+            // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
     }

@@ -35,6 +35,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
             try await firebase.savePay(payData: payData)
             transitionDelegate?.dismiss()
         } catch {
+            // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
     }

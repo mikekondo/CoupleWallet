@@ -6,4 +6,5 @@ import Foundation
 enum PayBalanceType {
     case overPayment(payerName: String, receiverName: String, difference: Int)
     case equal
+    case noData
 }
