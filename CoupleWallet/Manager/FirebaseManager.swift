@@ -14,7 +14,7 @@ final class FirebaseManager {
 extension FirebaseManager {
     func saveUser(shareCode: String) async throws {
         let data: [String: Any] = [
-            "isParterLink": false
+            "isPartnerLink": false
         ]
         try await db
             .collection(.users)
@@ -98,16 +98,17 @@ extension FirebaseManager {
             throw LinkPartnerError.noData("共通コード \(shareCode) が存在しないか間違っています")
         }
 
-        let data: [String: Any] = [
-            "isParterLink": true
+        let updateData: [String: Any] = [
+            "isPartnerLink": true
         ]
-        try await documentRef.updateData(data)
+        try await documentRef.updateData(updateData)
     }
 
 }
 
 enum LinkPartnerError: Error {
     case noData(String)
+    case alreadyLinked(String)
 }
 
 // MARK: Account logic
