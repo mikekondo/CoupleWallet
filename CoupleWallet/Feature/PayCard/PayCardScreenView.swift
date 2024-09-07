@@ -40,20 +40,22 @@ extension PayCardScreenView {
                     Text(viewData.nameText)
                         .font(.title2.bold())
                         .foregroundColor(.black)
-                    Text(viewData.priceText)
-                        .font(.largeTitle.bold())
-                        .foregroundStyle(Color.black.gradient)
-                }
-                Button {
-                    Task { @MainActor in
-                        await vm.didTapUpdatePayBalanceButton()
+                    HStack(spacing: 16) {
+                        Text(viewData.priceText)
+                            .font(.largeTitle.bold())
+                            .foregroundStyle(Color.black.gradient)
+                        Button {
+                            Task { @MainActor in
+                                await vm.didTapUpdatePayBalanceButton()
+                            }
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .font(.title3.bold())
+                                .foregroundStyle(Color.gray)
+                        }
                     }
-                } label: {
-                    Image(systemName: "arrow.clockwise")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .font(.title3.bold())
-                        .foregroundStyle(Color.gray)
                 }
             }
             .padding(24)
@@ -80,20 +82,22 @@ extension PayCardScreenView {
                 Text("8月の合計金額")
                     .font(.title2.bold())
                     .foregroundColor(.black)
-                Text("1,000円")
-                    .font(.largeTitle.bold())
-                    .foregroundColor(.black)
-            }
-            Button {
-                Task { @MainActor in
-                    await vm.didTapUpdatePayBalanceButton()
+                HStack(spacing: 16) {
+                    Text("1,000円")
+                        .font(.largeTitle.bold())
+                        .foregroundColor(.black)
+                    Button {
+                        Task { @MainActor in
+                            await vm.didTapUpdatePayBalanceButton()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .font(.title3.bold())
+                            .foregroundStyle(Color.gray)
+                    }
                 }
-            } label: {
-                Image(systemName: "arrow.clockwise")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .font(.title3.bold())
-                    .foregroundStyle(Color.gray)
             }
         }
         .padding(24)

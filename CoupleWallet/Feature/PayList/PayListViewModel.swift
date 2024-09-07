@@ -105,7 +105,7 @@ extension PayListViewModelImpl {
             title: payData.title,
             byName: payData.byName + "が立替え",
             dateText: payData.date.formatted(),
-            priceText: String(payData.price) + "円"
+            priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)
         )
     }
 }
