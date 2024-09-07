@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// 立替の計算結果を表示する画面
 @MainActor struct PayCardScreenView<VM: PayCardViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
         cardView
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
             .onViewDidLoad {
                 Task {
                     await vm.viewDidLoad()
@@ -29,7 +29,8 @@ extension PayCardScreenView {
                     .transition(.flip)
             }
         }
-        .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 8)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.8)) {
                 vm.didTapCardView()
@@ -42,47 +43,30 @@ extension PayCardScreenView {
         if let viewData = vm.payBalanceCardViewData {
             VStack(alignment: .leading, spacing: 8) {
                 Text(viewData.nameText)
-                    .font(.title)
-                    .foregroundStyle(Color.black.gradient)
+                    .font(.title2.bold())
+                    .foregroundColor(.black)
                 Text(viewData.priceText)
-                    .font(.title)
-                    .foregroundStyle(Color.black)
-            }
-            .overlay(alignment: .bottomTrailing) {
-                Text("Tap")
-                    .font(.subheadline)
+                    .font(.largeTitle.bold())
                     .foregroundStyle(Color.black.gradient)
-                    .padding(8)
             }
             .padding(24)
-            .overlay {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: 4)
-                    .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 6)
-            }
+            .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
+            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 8)
         }
     }
 
     private var totalView: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("8月の合計金額")
-                .font(.title)
-                .foregroundStyle(Color.black)
+                .font(.title2.bold())
+                .foregroundColor(.black)
             Text("1,000円")
-                .font(.title)
-                .foregroundStyle(Color.black)
-        }
-        .overlay(alignment: .bottomTrailing) {
-            Text("Tap")
-                .font(.subheadline)
-                .foregroundStyle(Color.black)
-                .offset(x: 10, y: 10)
+                .font(.largeTitle.bold())
+                .foregroundColor(.black)
         }
         .padding(24)
-        .overlay {
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.black, lineWidth: 4)
-        }
+        .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
+        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 8)
     }
 
     private var addView: some View {
@@ -95,8 +79,4 @@ extension PayCardScreenView {
         }
         .foregroundStyle(Color.black.gradient)
     }
-}
-
-#Preview {
-    PayCardScreenView(vm: PayCardViewModelImpl())
 }
