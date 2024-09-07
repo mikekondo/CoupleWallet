@@ -18,7 +18,7 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
                         .foregroundStyle(Color.white)
                         .frame(height: 44)
                         .frame(maxWidth: .infinity)
-                        .background(Color.black, in: RoundedRectangle(cornerRadius: 8))
+                        .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 8))
                 }
                 .padding(16)
             }

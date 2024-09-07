@@ -1,13 +1,13 @@
 import Foundation
 
 @MainActor protocol TabViewModel: ObservableObject {
-    var selection: Int { get set }
+    var selection: TabType { get set }
+    var isTabBarHidden: Bool { get set }
 }
 
 final class TabViewModelImpl: TabViewModel {
-    @Published var selection: Int = 0
-
-    
+    @Published var selection: TabType = .home
+    @Published var isTabBarHidden: Bool = false
 }
 
 

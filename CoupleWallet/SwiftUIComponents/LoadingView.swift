@@ -23,9 +23,7 @@ struct LoadingModifier: ViewModifier {
         content
             .overlay(
                 ZStack {
-                    if isPresented {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
+                    if isPresented {                       
                         LoadingView()
                     }
                 }

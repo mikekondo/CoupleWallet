@@ -11,17 +11,9 @@ import SwiftUI
                     await vm.viewDidLoad()
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                Button {
-                    vm.didTapAddButton()
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .foregroundStyle(Color.black)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(24)
-                }
+            .overlay(alignment: .bottomTrailing) {
+                addView
+                    .padding(24)
             }
     }
 }
@@ -37,6 +29,7 @@ extension PayCardScreenView {
                     .transition(.flip)
             }
         }
+        .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 8)
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.8)) {
                 vm.didTapCardView()
@@ -50,30 +43,22 @@ extension PayCardScreenView {
             VStack(alignment: .leading, spacing: 8) {
                 Text(viewData.nameText)
                     .font(.title)
+                    .foregroundStyle(Color.black.gradient)
+                Text(viewData.priceText)
+                    .font(.title)
                     .foregroundStyle(Color.black)
-                HStack(spacing: 8) {
-                    Text(viewData.priceText)
-                        .font(.headline)
-                        .foregroundStyle(Color.black)
-                    Image(systemName: "arrow.counterclockwise")
-                        .frame(width: 50, height: 50)
-                        .onTapGesture {
-                            Task {
-                                await vm.didTapUpdatePayBalanceButton()
-                            }
-                        }
-                }
             }
             .overlay(alignment: .bottomTrailing) {
                 Text("Tap")
                     .font(.subheadline)
-                    .foregroundStyle(Color.black)
-                    .offset(x: 10, y: 10)
+                    .foregroundStyle(Color.black.gradient)
+                    .padding(8)
             }
             .padding(24)
             .overlay {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.black, lineWidth: 4)
+                    .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 6)
             }
         }
     }
@@ -84,7 +69,7 @@ extension PayCardScreenView {
                 .font(.title)
                 .foregroundStyle(Color.black)
             Text("1,000円")
-                .font(.headline)
+                .font(.title)
                 .foregroundStyle(Color.black)
         }
         .overlay(alignment: .bottomTrailing) {
@@ -99,4 +84,19 @@ extension PayCardScreenView {
                 .stroke(Color.black, lineWidth: 4)
         }
     }
+
+    private var addView: some View {
+        Button {
+            vm.didTapAddButton()
+        } label: {
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 50, height: 50)
+        }
+        .foregroundStyle(Color.black.gradient)
+    }
+}
+
+#Preview {
+    PayCardScreenView(vm: PayCardViewModelImpl())
 }

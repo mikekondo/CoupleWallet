@@ -14,15 +14,19 @@ import SwiftUI
     var body: some View {
         TabView(selection: $vm.selection) {
             PayCardScreenView(vm: payCardVM)
-                .tabItem { Label("立替え", systemImage: "1.circle") }
-                .tag(1)
+                .tag(TabType.home)
+                .toolbar(.hidden, for: .tabBar)
             PayListScreenView(vm: payListVM)
-                .tabItem { Label("立替リスト", systemImage: "2.circle") }
-                .tag(2)
+                .tag(TabType.search)
+                .toolbar(.hidden, for: .tabBar)
             SettingScreenView(vm: settingVM)
-                .tabItem { Label("設定", systemImage: "3.circle") }
-                .tag(3)
+                .tag(TabType.settings)
+                .toolbar(.hidden, for: .tabBar)
         }
         .navigationBarBackButtonHidden()
+        .padding(.bottom, 36) // カスタムタブバーの高さで調整している
+        .overlay(alignment: .bottom) {
+            CustomTabBar(tabType: $vm.selection)
+        }
     }
 }

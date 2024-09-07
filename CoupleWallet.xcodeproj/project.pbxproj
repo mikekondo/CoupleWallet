@@ -64,6 +64,9 @@
 		95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891852C5F5FB300959F79 /* TabCoordinator.swift */; };
 		95A891892C66D99E00959F79 /* AddPayScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A891882C66D99E00959F79 /* AddPayScreenView.swift */; };
 		95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */; };
+		95E0FBF22C8C0B48003EA7BE /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0FBF12C8C0B48003EA7BE /* CustomTabBar.swift */; };
+		95E0FBF52C8C126B003EA7BE /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 95E0FBF42C8C126B003EA7BE /* Algorithms */; };
+		95E0FBF72C8C156E003EA7BE /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0FBF62C8C156E003EA7BE /* TabType.swift */; };
 		95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7062C7185EA0051E00B /* PayBalanceData.swift */; };
 		95F6D7092C71BB950051E00B /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7082C71BB950051E00B /* PriceFormatter.swift */; };
 /* End PBXBuildFile section */
@@ -134,6 +137,8 @@
 		95A891852C5F5FB300959F79 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		95A891882C66D99E00959F79 /* AddPayScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayScreenView.swift; sourceTree = "<group>"; };
 		95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayCoordinator.swift; sourceTree = "<group>"; };
+		95E0FBF12C8C0B48003EA7BE /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		95E0FBF62C8C156E003EA7BE /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
 		95F6D7062C7185EA0051E00B /* PayBalanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceData.swift; sourceTree = "<group>"; };
 		95F6D7082C71BB950051E00B /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +156,7 @@
 				95A8910E2C5DAC6100959F79 /* FirebaseCrashlytics in Frameworks */,
 				95A891102C5DAC6100959F79 /* FirebaseDatabase in Frameworks */,
 				95A8910C2C5DAC6100959F79 /* FirebaseAuthCombine-Community in Frameworks */,
+				95E0FBF52C8C126B003EA7BE /* Algorithms in Frameworks */,
 				95A890FE2C5DA80C00959F79 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				95A891182C5DAC6100959F79 /* FirebaseFunctions in Frameworks */,
 				95A891162C5DAC6100959F79 /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -235,6 +241,7 @@
 			children = (
 				959B1B1D2C69D44700942913 /* DataStorable.swift */,
 				95F6D7082C71BB950051E00B /* PriceFormatter.swift */,
+				95E0FBF62C8C156E003EA7BE /* TabType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 				959B1B2A2C6B11F400942913 /* LoadingView.swift */,
 				959B1B372C70733900942913 /* AlertView.swift */,
 				959B1B392C7073BF00942913 /* AlertType.swift */,
+				95E0FBF12C8C0B48003EA7BE /* CustomTabBar.swift */,
 			);
 			path = SwiftUIComponents;
 			sourceTree = "<group>";
@@ -414,6 +422,7 @@
 				95A891132C5DAC6100959F79 /* FirebaseFirestore */,
 				95A891152C5DAC6100959F79 /* FirebaseFirestoreCombine-Community */,
 				95A891172C5DAC6100959F79 /* FirebaseFunctions */,
+				95E0FBF42C8C126B003EA7BE /* Algorithms */,
 			);
 			productName = CoupleWallet;
 			productReference = 95A890BE2C5DA06D00959F79 /* CoupleWallet.app */;
@@ -489,6 +498,7 @@
 			mainGroup = 95A890B52C5DA06D00959F79;
 			packageReferences = (
 				95A890FA2C5DA80C00959F79 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				95E0FBF32C8C126B003EA7BE /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 95A890BF2C5DA06D00959F79 /* Products */;
 			projectDirPath = "";
@@ -573,6 +583,8 @@
 				95A891892C66D99E00959F79 /* AddPayScreenView.swift in Sources */,
 				959B1B2B2C6B11F400942913 /* LoadingView.swift in Sources */,
 				9527C88B2C68767D008DE420 /* FirebaseManager.swift in Sources */,
+				95E0FBF22C8C0B48003EA7BE /* CustomTabBar.swift in Sources */,
+				95E0FBF72C8C156E003EA7BE /* TabType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +931,14 @@
 				minimumVersion = 11.0.0;
 			};
 		};
+		95E0FBF32C8C126B003EA7BE /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -986,6 +1006,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 95A890FA2C5DA80C00959F79 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFunctions;
+		};
+		95E0FBF42C8C126B003EA7BE /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 95E0FBF32C8C126B003EA7BE /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
