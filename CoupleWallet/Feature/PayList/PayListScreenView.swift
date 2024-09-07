@@ -59,6 +59,8 @@ extension PayListScreenView {
                         }
                     } label: {
                         Label("削除", systemImage: "trash")
+                            .font(.title3.bold())
+                            .foregroundStyle(Color.red)
                     }
                 } label: {
                     Image(systemName: "ellipsis")

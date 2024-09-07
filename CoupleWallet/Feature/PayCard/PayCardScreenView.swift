@@ -44,6 +44,7 @@ extension PayCardScreenView {
                         Text(viewData.priceText)
                             .font(.largeTitle.bold())
                             .foregroundStyle(Color.black.gradient)
+                            .animation(.bouncy)
                         Button {
                             Task { @MainActor in
                                 await vm.didTapUpdatePayBalanceButton()
