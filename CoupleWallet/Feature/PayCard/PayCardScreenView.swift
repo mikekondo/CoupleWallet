@@ -57,7 +57,7 @@ extension PayCardScreenView {
                 }
             }
             .padding(24)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
             .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
             .overlay(alignment: .bottomTrailing) {
@@ -97,7 +97,7 @@ extension PayCardScreenView {
             }
         }
         .padding(24)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
         .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
         .overlay(alignment: .bottomTrailing) {
