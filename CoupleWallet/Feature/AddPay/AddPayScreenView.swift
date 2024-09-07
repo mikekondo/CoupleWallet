@@ -7,6 +7,7 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .loading(isPresented: $vm.shouldShowLoading)
+            .background(Color.white)
             .safeAreaInset(edge: .bottom) {
                 Button {
                     Task { @MainActor in
@@ -14,11 +15,13 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
                     }
                 } label: {
                     Text("追加する")
-                        .font(.title)
-                        .foregroundStyle(Color.white)
-                        .frame(height: 44)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(height: 50)
                         .frame(maxWidth: .infinity)
-                        .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 8))
+                        .background(Color.black.gradient)
+                        .cornerRadius(12)
+                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                 }
                 .padding(16)
             }
@@ -27,34 +30,54 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
 
 extension AddPayScreenView {
     var addView: some View {
-        VStack(spacing: 16) {
-            HStack(spacing: 8) {
+        VStack(spacing: 24) {
+            HStack(spacing: 16) {
                 Button {
                     // TODO: action
                 } label: {
                     Text("マイク")
+                        .font(.body.bold())
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black.gradient)
+                        .cornerRadius(8)
                 }
                 Button {
                     // TODO: action
                 } label: {
                     Text("れいちゃん")
+                        .font(.body.bold())
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black.gradient)
+                        .cornerRadius(8)
                 }
             }
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text("件名")
-                    .font(.title)
-                    .foregroundStyle(Color.black)
+                    .font(.headline)
+                    .foregroundColor(.black)
                 TextField("件名を入力してください", text: $vm.payTitle)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding(12)
+                    .background(Color(white: 0.95))
+                    .cornerRadius(8)
             }
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text("金額")
-                    .font(.title)
-                    .foregroundStyle(Color.black)
+                    .font(.headline)
+                    .foregroundColor(.black)
                 TextField("金額を入力してください", text: $vm.payPrice)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding(12)
+                    .background(Color(white: 0.95))
+                    .cornerRadius(8)
             }
         }
+        .padding(.vertical, 20)
+        .background(Color.white)
     }
 }
 
