@@ -4,6 +4,7 @@ import SwiftUI
     @StateObject var vm: VM
     var body: some View {
         cardView
+            .padding(.horizontal, 36)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)
             .onViewDidLoad {
@@ -28,19 +29,6 @@ extension PayCardScreenView {
                 totalView
                     .transition(.flip)
             }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-        .overlay(alignment: .bottomTrailing) {
-            Text("Tap")
-                .font(.body.bold())
-                .foregroundStyle(Color.black)
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.8)) {
-                        vm.didTapCardView()
-                    }
-                }
-                .padding(16)
         }
     }
 
@@ -68,9 +56,21 @@ extension PayCardScreenView {
                         .foregroundStyle(Color.gray)
                 }
             }
-            .padding(36)
-            .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
+            .padding(24)
+            .frame(maxWidth: .infinity)
+            .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
             .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
+            .overlay(alignment: .bottomTrailing) {
+                Text("Tap")
+                    .font(.body.bold())
+                    .foregroundStyle(Color.black)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.8)) {
+                            vm.didTapCardView()
+                        }
+                    }
+                    .padding(16)
+            }
         }
     }
 
@@ -97,8 +97,20 @@ extension PayCardScreenView {
             }
         }
         .padding(24)
-        .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
-        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 8)
+        .frame(maxWidth: .infinity)
+        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+        .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
+        .overlay(alignment: .bottomTrailing) {
+            Text("Tap")
+                .font(.body.bold())
+                .foregroundStyle(Color.black)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.8)) {
+                        vm.didTapCardView()
+                    }
+                }
+                .padding(16)
+        }
     }
 
     private var addView: some View {

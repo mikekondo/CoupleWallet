@@ -87,7 +87,7 @@ extension PayCardViewModelImpl {
     var payBalanceCardViewData: PayBalanceCardViewData? {
         if case .overPayment(let payerName, let receiverName, let difference) = payBalanceType {
             let nameText = payerName + "→" + receiverName
-            let priceText = String(difference) + "円"
+            let priceText = PriceFormatter.string(forPrice: difference, sign: .tail)
             return .init(nameText: nameText, priceText: priceText)
         } else {
             return nil
