@@ -33,7 +33,6 @@ struct PayBalanceCardViewData {
 
 final class PayCardViewModelImpl: PayCardViewModel {
     @Published var shouldShowPayView: Bool = true
-    @Published var updatePayBalanceButtonAnimationFlag: Bool = false
     @Published var payBalanceType: PayBalanceType = .noData
     weak var transitionDelegate: PayCardTransitionDelegate?
     let firebaseManager = FirebaseManager.shared
@@ -67,9 +66,7 @@ extension PayCardViewModelImpl {
     }
 
     func didTapUpdatePayBalanceButton() async {
-        updatePayBalanceButtonAnimationFlag = true
         await fetchPayBalanceType()
-        updatePayBalanceButtonAnimationFlag = false
     }
 }
 

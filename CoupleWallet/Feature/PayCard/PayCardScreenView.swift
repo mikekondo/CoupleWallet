@@ -31,38 +31,70 @@ extension PayCardScreenView {
         }
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-        .onTapGesture {
-            withAnimation(.easeInOut(duration: 0.8)) {
-                vm.didTapCardView()
-            }
+        .overlay(alignment: .bottomTrailing) {
+            Text("Tap")
+                .font(.body.bold())
+                .foregroundStyle(Color.black)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.8)) {
+                        vm.didTapCardView()
+                    }
+                }
+                .padding(16)
         }
     }
 
     @ViewBuilder
     private var payView: some View {
         if let viewData = vm.payBalanceCardViewData {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(viewData.nameText)
-                    .font(.title2.bold())
-                    .foregroundColor(.black)
-                Text(viewData.priceText)
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(Color.black.gradient)
+            HStack(spacing: 24) {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(viewData.nameText)
+                        .font(.title2.bold())
+                        .foregroundColor(.black)
+                    Text(viewData.priceText)
+                        .font(.largeTitle.bold())
+                        .foregroundStyle(Color.black.gradient)
+                }
+                Button {
+                    Task { @MainActor in
+                        await vm.didTapUpdatePayBalanceButton()
+                    }
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .font(.title3.bold())
+                        .foregroundStyle(Color.gray)
+                }
             }
-            .padding(24)
+            .padding(36)
             .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
-            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 8)
+            .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
         }
     }
 
     private var totalView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("8月の合計金額")
-                .font(.title2.bold())
-                .foregroundColor(.black)
-            Text("1,000円")
-                .font(.largeTitle.bold())
-                .foregroundColor(.black)
+        HStack(spacing: 24) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("8月の合計金額")
+                    .font(.title2.bold())
+                    .foregroundColor(.black)
+                Text("1,000円")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.black)
+            }
+            Button {
+                Task { @MainActor in
+                    await vm.didTapUpdatePayBalanceButton()
+                }
+            } label: {
+                Image(systemName: "arrow.clockwise")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .font(.title3.bold())
+                    .foregroundStyle(Color.gray)
+            }
         }
         .padding(24)
         .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
