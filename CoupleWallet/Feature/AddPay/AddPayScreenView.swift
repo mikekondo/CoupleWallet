@@ -33,25 +33,25 @@ extension AddPayScreenView {
         VStack(spacing: 24) {
             HStack(spacing: 16) {
                 Button {
-                    // TODO: action
+                    vm.didTapMyName()
                 } label: {
-                    Text("マイク")
+                    Text(vm.myName)
                         .font(.body.bold())
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.black.gradient)
+                        .background(vm.isPayByMe ? Color.black.gradient : Color.gray.gradient)
                         .cornerRadius(8)
                 }
                 Button {
-                    // TODO: action
+                    vm.didTapPartnerName()
                 } label: {
-                    Text("れいちゃん")
+                    Text(vm.partnerName)
                         .font(.body.bold())
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.black.gradient)
+                        .background(vm.isPayByMe ? Color.gray.gradient : Color.black.gradient)
                         .cornerRadius(8)
                 }
             }
@@ -79,8 +79,4 @@ extension AddPayScreenView {
         .padding(.vertical, 20)
         .background(Color.white)
     }
-}
-
-#Preview {
-    AddPayScreenView(vm: AddPayViewModelImpl())
 }

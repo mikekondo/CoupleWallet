@@ -4,8 +4,13 @@ import Foundation
     var payTitle: String { get set }
     var payPrice: String { get set }
     var shouldShowLoading: Bool { get set }
+    var isPayByMe: Bool { get set }
+    var partnerName: String { get }
+    var myName: String { get }
 
-    func didTapAdd() async    
+    func didTapAdd() async
+    func didTapMyName()
+    func didTapPartnerName()
 }
 
 protocol AddPayTransitionDelegate: AnyObject {
@@ -16,6 +21,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
     @Published var payTitle: String = ""
     @Published var payPrice: String = ""
     @Published var shouldShowLoading: Bool = false
+    @Published var isPayByMe: Bool = true
 
     let firebase = FirebaseManager.shared
     let dataStore: DataStorable = UserDefaults.standard
@@ -24,10 +30,11 @@ final class AddPayViewModelImpl: AddPayViewModel {
     func didTapAdd() async {
         shouldShowLoading = true
         defer { shouldShowLoading = false }
+        let byName = isPayByMe ? myName : partnerName
         let payData: PayData = .init(
             id: UUID().uuidString,
             title: payTitle,
-            byName: dataStore.userName,
+            byName: byName,
             price: Int(payPrice) ?? 0,
             date: Date()
         )
@@ -38,5 +45,21 @@ final class AddPayViewModelImpl: AddPayViewModel {
             // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
+    }    
+
+    var partnerName: String {
+        dataStore.partnerName
+    }
+
+    var myName: String {
+        dataStore.userName
+    }
+
+    func didTapMyName() {
+        isPayByMe = true
+    }
+
+    func didTapPartnerName() {
+        isPayByMe = false
     }
 }
