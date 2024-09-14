@@ -13,6 +13,7 @@
 		9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C8872C686C56008DE420 /* AddPayViewModel.swift */; };
 		9527C88B2C68767D008DE420 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88A2C68767D008DE420 /* FirebaseManager.swift */; };
 		9527C88E2C6877DC008DE420 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88D2C6877DC008DE420 /* String+.swift */; };
+		953CC26E2C958CE60026C5E9 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953CC26D2C958CE60026C5E9 /* CustomError.swift */; };
 		953DBDE22C951936007F8F80 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953DBDE12C951935007F8F80 /* WidgetKit.framework */; };
 		953DBDE42C951936007F8F80 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953DBDE32C951936007F8F80 /* SwiftUI.framework */; };
 		953DBDE72C951936007F8F80 /* PayBalanceWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953DBDE62C951936007F8F80 /* PayBalanceWidgetBundle.swift */; };
@@ -124,6 +125,7 @@
 		9527C8872C686C56008DE420 /* AddPayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayViewModel.swift; sourceTree = "<group>"; };
 		9527C88A2C68767D008DE420 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		9527C88D2C6877DC008DE420 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		953CC26D2C958CE60026C5E9 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		953DBDDF2C951935007F8F80 /* PayBalanceWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PayBalanceWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		953DBDE12C951935007F8F80 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		953DBDE32C951936007F8F80 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -309,6 +311,7 @@
 				959B1B1D2C69D44700942913 /* DataStorable.swift */,
 				95F6D7082C71BB950051E00B /* PriceFormatter.swift */,
 				95E0FBF62C8C156E003EA7BE /* TabType.swift */,
+				953CC26D2C958CE60026C5E9 /* CustomError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				95A891812C5F5A0700959F79 /* PayCardViewModel.swift in Sources */,
 				95A891832C5F5CDF00959F79 /* AnyTransition+.swift in Sources */,
 				95A890F62C5DA2E600959F79 /* SignInScreenView.swift in Sources */,
+				953CC26E2C958CE60026C5E9 /* CustomError.swift in Sources */,
 				95A8917F2C5F56B400959F79 /* SettingScreenView.swift in Sources */,
 				959B1B322C6B1B8600942913 /* EditPayCoordinator.swift in Sources */,
 				959B1B262C69D66400942913 /* UserSettingViewModel.swift in Sources */,

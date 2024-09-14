@@ -7,8 +7,14 @@ import SwiftUI
             cardView
                 .padding(.horizontal, 16)
             ScrollView {
-                payListView
-                    .padding(.horizontal, 16)
+                switch vm.payListViewType {
+                case .content:
+                    payListView
+                case .zeroMatch:
+                    zeroMatchView
+                case .error:
+                    errorView
+                }
             }
             .background(Color.white)
             .onViewDidLoad {
@@ -24,7 +30,7 @@ import SwiftUI
         }
         .overlay(alignment: .bottomTrailing) {
             addView
-                .padding(24)
+                .padding(16)
         }
         .loading(isPresented: $vm.shouldShowLoading)
     }
@@ -149,11 +155,12 @@ extension PayCardScreenView {
                         .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
                         .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
                         .onTapGesture {
-                            vm.didTapPayCell(id: viewData.id)                        
+                            vm.didTapPayCell(id: viewData.id)
                         }
                 }
             }
         }
+        .padding(.horizontal, 16)
     }
 
     private func payCell(viewData: PayViewData) -> some View {
@@ -192,5 +199,41 @@ extension PayCardScreenView {
             }
         }
         .padding()
+    }
+
+    private var zeroMatchView: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "tray.and.arrow.down")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundColor(.black)
+            Text("立替記録がありません")
+                .font(.title3.bold())
+                .foregroundColor(.black)
+        }
+        .background(Color.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    private var errorView: some View {
+        VStack(spacing: 16) {
+            Text("データの読み込み中にエラーが発生しました")
+                .font(.callout.bold())
+                .foregroundColor(.black)
+            Button(action: {
+                Task {
+                    await vm.pullToReflesh()
+                }
+            }) {
+                Text("再試行")
+                    .font(.title3.bold())
+                    .padding()
+                    .background(Color.black)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+        }
+        .background(Color.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

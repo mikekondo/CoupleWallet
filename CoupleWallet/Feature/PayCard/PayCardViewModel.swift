@@ -6,6 +6,7 @@ import SwiftUI
     var shouldShowPayView: Bool { get set }
     var payBalanceCardViewType: PayBalanceCardViewType { get }
     var payBalanceCardViewData: PayBalanceCardViewData? { get }
+    var payListViewType: PayListViewType { get }
     var payViewDataList: [PayViewData] { get }
     var shouldShowLoading: Bool { get set }
 
@@ -30,6 +31,12 @@ enum PayBalanceCardViewType {
     case content
     case equal
     case noData
+}
+
+enum PayListViewType {
+    case zeroMatch
+    case content
+    case error
 }
 
 struct PayBalanceCardViewData {
@@ -75,7 +82,11 @@ extension PayCardViewModelImpl {
     private func fetchPayList() async {
         do {
             let payList = try await firebaseManager.fetchPayList()
-            payListResponseType = .success(payList)
+            if payList.isEmpty {
+                payListResponseType = .noData
+            } else {
+                payListResponseType = .success(payList)
+            }
         } catch {
             payListResponseType = .error
         }
@@ -165,6 +176,17 @@ extension PayCardViewModelImpl {
             dateText: payData.date.formatted(),
             priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)
         )
+    }
+
+    var payListViewType: PayListViewType {
+        switch payListResponseType {
+        case .success:
+            return .content
+        case .error:
+            return .error
+        case .noData:
+            return .zeroMatch
+        }
     }
 }
 
