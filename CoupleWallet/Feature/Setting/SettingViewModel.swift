@@ -4,7 +4,8 @@ import Foundation
     var alertType: AlertType? { get set }
     func didTapDeleteAccount() async
     func didTapDisplayShareCode()
-
+    var myName: String { get }
+    var partnerName: String { get }
 }
 
 final class SettingViewModelImpl: SettingViewModel {
@@ -28,5 +29,13 @@ final class SettingViewModelImpl: SettingViewModel {
     private var displayShareCodeMessageText: String {
         guard let shareCode = dataStore.shareCode else { return "" }
         return "共有コードは " + shareCode + "です"
+    }
+
+    var myName: String {
+        dataStore.userName
+    }
+
+    var partnerName: String {
+        dataStore.partnerName
     }
 }
