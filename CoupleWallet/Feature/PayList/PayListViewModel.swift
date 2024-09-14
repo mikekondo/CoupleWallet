@@ -36,7 +36,7 @@ struct PayViewData: Identifiable {
 final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false
-    let firebase = FirebaseManager.shared
+    let firebaseManager = FirebaseManager.shared
     weak var transitionDelegate: PayListTransitionDelegate?
 }
 
@@ -55,7 +55,7 @@ extension PayListViewModelImpl {
         shouldShowLoading = true
         defer { shouldShowLoading = false }
         do {
-            let payList = try await firebase.fetchPayList()
+            let payList = try await firebaseManager.fetchPayList()
             payListResponseType = .success(payList)
         } catch {
             payListResponseType = .error
@@ -67,7 +67,7 @@ extension PayListViewModelImpl {
 extension PayListViewModelImpl {
     func didTapDeleteButton(id: String) async {
         do {
-            try await firebase.deletePay(id: id)
+            try await firebaseManager.deletePay(id: id)
             await fetchPayList()
         } catch {
             // TODO: エラーハンドリング

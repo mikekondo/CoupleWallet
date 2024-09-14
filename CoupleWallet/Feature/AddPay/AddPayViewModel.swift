@@ -14,7 +14,7 @@ import Foundation
 }
 
 protocol AddPayTransitionDelegate: AnyObject {
-    func dismiss()
+    func dismiss(completion: (() -> Void)?)
 }
 
 final class AddPayViewModelImpl: AddPayViewModel {
@@ -22,10 +22,15 @@ final class AddPayViewModelImpl: AddPayViewModel {
     @Published var payPrice: String = ""
     @Published var shouldShowLoading: Bool = false
     @Published var isPayByMe: Bool = true
+    let addPayHandler: () async -> Void
 
     let firebase = FirebaseManager.shared
     let dataStore: DataStorable = UserDefaults.standard
     weak var transitionDelegate: AddPayTransitionDelegate?
+
+    init(addPayHandler: @escaping () async -> Void) {
+        self.addPayHandler = addPayHandler
+    }
 
     func didTapAdd() async {
         shouldShowLoading = true
@@ -40,7 +45,11 @@ final class AddPayViewModelImpl: AddPayViewModel {
         )
         do {
             try await firebase.savePay(payData: payData)
-            transitionDelegate?.dismiss()
+            transitionDelegate?.dismiss {
+                Task {
+                    await self.addPayHandler()
+                }
+            }
         } catch {
             // TODO: エラーハンドリング
             print(error.localizedDescription)

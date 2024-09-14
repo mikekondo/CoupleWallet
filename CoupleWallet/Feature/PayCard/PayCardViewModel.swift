@@ -6,6 +6,8 @@ import SwiftUI
     var shouldShowPayView: Bool { get set }
     var payBalanceCardViewType: PayBalanceCardViewType { get }
     var payBalanceCardViewData: PayBalanceCardViewData? { get }
+    var payViewDataList: [PayViewData] { get }
+    var shouldShowLoading: Bool { get set }
 
     // tap logic
     func didTapUpdatePayBalanceButton() async
@@ -14,10 +16,11 @@ import SwiftUI
 
     // internal
     func viewDidLoad() async
+    func pullToReflesh() async
 }
 
 protocol PayCardTransitionDelegate: AnyObject {
-    func transitionToAdd()
+    func transitionToAdd(addPayHandler: @escaping () async -> Void)
 }
 
 enum PayBalanceCardViewType {
@@ -34,6 +37,8 @@ struct PayBalanceCardViewData {
 final class PayCardViewModelImpl: PayCardViewModel {
     @Published var shouldShowPayView: Bool = true
     @Published var payBalanceType: PayBalanceType = .noData
+    @Published var payListResponseType: PayListResponseType = .noData
+    @Published var shouldShowLoading: Bool = false
     weak var transitionDelegate: PayCardTransitionDelegate?
     let firebaseManager = FirebaseManager.shared
 }
@@ -42,7 +47,18 @@ final class PayCardViewModelImpl: PayCardViewModel {
 
 extension PayCardViewModelImpl {
     func viewDidLoad() async {
+        await fetch()
+    }
+
+    func pullToReflesh() async {
+        await fetch()
+    }
+
+    private func fetch() async {
+        shouldShowLoading = true
         await fetchPayBalanceType()
+        await fetchPayList()
+        shouldShowLoading = false
     }
 
     private func fetchPayBalanceType() async {
@@ -50,6 +66,15 @@ extension PayCardViewModelImpl {
             payBalanceType = try await firebaseManager.getPayBalanceType()
         } catch {
             // TODO: エラーハンドリング
+        }
+    }
+
+    private func fetchPayList() async {
+        do {
+            let payList = try await firebaseManager.fetchPayList()
+            payListResponseType = .success(payList)
+        } catch {
+            payListResponseType = .error
         }
     }
 }
@@ -62,7 +87,9 @@ extension PayCardViewModelImpl {
     }
 
     func didTapAddButton() {
-        transitionDelegate?.transitionToAdd()
+        transitionDelegate?.transitionToAdd(addPayHandler: {        
+            await self.fetch()
+        })
     }
 
     func didTapUpdatePayBalanceButton() async {
@@ -73,6 +100,7 @@ extension PayCardViewModelImpl {
 // MARK: ui logic
 
 extension PayCardViewModelImpl {
+    // card view
     var payBalanceCardViewType: PayBalanceCardViewType {
         switch payBalanceType {
         case .overPayment:
@@ -92,6 +120,27 @@ extension PayCardViewModelImpl {
         } else {
             return nil
         }
+    }
+
+    // payList view
+    var payViewDataList: [PayViewData] {
+        if case .success(let payList) = payListResponseType {
+            return payList.map { payData in
+                getPayViewData(payData: payData)
+            }
+        } else {
+            return []
+        }
+    }
+
+    func getPayViewData(payData: PayData) -> PayViewData{
+        .init(
+            id: payData.id,
+            title: payData.title,
+            byName: payData.byName + "が立替え",
+            dateText: payData.date.formatted(),
+            priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)
+        )
     }
 }
 

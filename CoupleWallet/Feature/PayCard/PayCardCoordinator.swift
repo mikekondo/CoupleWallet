@@ -11,8 +11,8 @@ final class PayCardCoordinator {
 }
 
 extension PayCardCoordinator: PayCardTransitionDelegate {
-    func transitionToAdd() {
-        addPayCoordinator = .init(transitioner: transitioner)
+    func transitionToAdd(addPayHandler: @escaping () async -> Void) {
+        addPayCoordinator = .init(transitioner: transitioner, addPayHandler: addPayHandler)
         addPayCoordinator?.start()
     }
 }
