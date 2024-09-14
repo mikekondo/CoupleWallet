@@ -145,14 +145,12 @@ extension PayCardScreenView {
                 .padding(.leading, 4)
             LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(vm.payViewDataList) { viewData in
-                    Button {
-                        vm.didTapPayCell(id: viewData.id)
-                    } label: {
-                        payCell(viewData: viewData)
-                    }
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
+                    payCell(viewData: viewData)
+                        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+                        .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .onTapGesture {
+                            vm.didTapPayCell(id: viewData.id)                        
+                        }
                 }
             }
         }
@@ -190,10 +188,7 @@ extension PayCardScreenView {
                 } label: {
                     Image(systemName: "ellipsis")
                         .foregroundStyle(Color.gray)
-                        .padding()
                 }
-                .background(Color.white)
-                .cornerRadius(8)
             }
         }
         .padding()
