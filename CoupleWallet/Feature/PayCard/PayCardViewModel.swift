@@ -9,6 +9,7 @@ import SwiftUI
     var payListViewType: PayListViewType { get }
     var payViewDataList: [PayViewData] { get }
     var shouldShowLoading: Bool { get set }
+    var cardHeaderImageString: String { get }
     var cardHeaderTitleText: String { get }
 
     // tap logic
@@ -166,6 +167,14 @@ extension PayCardViewModelImpl {
             }
         } else {
             return []
+        }
+    }
+
+    var cardHeaderImageString: String {
+        if shouldShowPayView {
+            return "arrow.triangle.2.circlepath"
+        } else {
+            return "arrow.up.circle"
         }
     }
 

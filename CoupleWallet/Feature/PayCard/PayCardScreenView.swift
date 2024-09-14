@@ -39,11 +39,14 @@ import SwiftUI
 extension PayCardScreenView {
     private var cardView: some View {
         VStack(spacing: 8) {
-            Text(vm.cardHeaderTitleText)
-                .font(.title3.bold())
-                .foregroundStyle(Color.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 4)
+            HStack(spacing: 4) {
+                Image(systemName: vm.cardHeaderImageString)
+                Text(vm.cardHeaderTitleText)
+                    .font(.title3.bold())
+                    .foregroundStyle(Color.black)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 4)
+            }
             VStack(spacing: 0) {
                 if vm.shouldShowPayView {
                     payView
@@ -151,11 +154,14 @@ extension PayCardScreenView {
 
     private var payListView: some View {
         VStack(spacing: 8) {
-            Text("立替リスト")
-                .font(.title3.bold())
-                .foregroundStyle(Color.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 4)
+            HStack(spacing: 4) {
+                Image(systemName: "list.dash.header.rectangle")
+                Text("立替リスト")
+                    .font(.title3.bold())
+                    .foregroundStyle(Color.black)
+                    .padding(.leading, 4)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(vm.payViewDataList) { viewData in
                     payCell(viewData: viewData)
