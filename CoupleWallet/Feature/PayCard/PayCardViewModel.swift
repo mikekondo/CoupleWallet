@@ -13,6 +13,8 @@ import SwiftUI
     func didTapUpdatePayBalanceButton() async
     func didTapCardView()
     func didTapAddButton()
+    func didTapPayCell(id: String)
+    func didTapDeleteButton(id: String) async
 
     // internal
     func viewDidLoad() async
@@ -21,6 +23,7 @@ import SwiftUI
 
 protocol PayCardTransitionDelegate: AnyObject {
     func transitionToAdd(addPayHandler: @escaping () async -> Void)
+    func transitionToEditPay(payData: PayData, editHandler: @escaping () async -> Void)
 }
 
 enum PayBalanceCardViewType {
@@ -94,6 +97,27 @@ extension PayCardViewModelImpl {
 
     func didTapUpdatePayBalanceButton() async {
         await fetchPayBalanceType()
+    }
+
+    func didTapPayCell(id: String) {
+        if case .success(let payList) = payListResponseType {
+            guard let payData = payList.first(where: { $0.id == id}) else {
+                return
+            }
+            transitionDelegate?.transitionToEditPay(payData: payData)  { [weak self] in
+                await self?.fetch()
+            }
+        }
+    }
+
+    func didTapDeleteButton(id: String) async {
+        do {
+            try await firebaseManager.deletePay(id: id)
+            await fetchPayList()
+        } catch {
+            // TODO: エラーハンドリング
+            print(error.localizedDescription)
+        }
     }
 }
 

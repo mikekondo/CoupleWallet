@@ -3,7 +3,7 @@ import SwiftUI
 @MainActor struct PayCardScreenView<VM: PayCardViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 28) {
             cardView
                 .padding(.horizontal, 16)
             ScrollView {
@@ -46,27 +46,25 @@ extension PayCardScreenView {
     @ViewBuilder
     private var payView: some View {
         if let viewData = vm.payBalanceCardViewData {
-            HStack(spacing: 24) {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(viewData.nameText)
-                        .font(.title2.bold())
-                        .foregroundColor(.black)
-                    HStack(spacing: 16) {
-                        Text(viewData.priceText)
-                            .font(.largeTitle.bold())
-                            .foregroundStyle(Color.black.gradient)
-                            .animation(.bouncy)
-                        Button {
-                            Task { @MainActor in
-                                await vm.didTapUpdatePayBalanceButton()
-                            }
-                        } label: {
-                            Image(systemName: "arrow.clockwise")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .font(.title3.bold())
-                                .foregroundStyle(Color.gray)
+            VStack(alignment: .leading, spacing: 16) {
+                Text(viewData.nameText)
+                    .font(.title2.bold())
+                    .foregroundColor(.black)
+                HStack(spacing: 16) {
+                    Text(viewData.priceText)
+                        .font(.title.bold())
+                        .foregroundStyle(Color.black.gradient)
+                        .animation(.bouncy)
+                    Button {
+                        Task { @MainActor in
+                            await vm.didTapUpdatePayBalanceButton()
                         }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .font(.title3.bold())
+                            .foregroundStyle(Color.gray)
                     }
                 }
             }
@@ -89,26 +87,24 @@ extension PayCardScreenView {
     }
 
     private var totalView: some View {
-        HStack(spacing: 24) {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("8月の合計金額")
-                    .font(.title2.bold())
+        VStack(alignment: .leading, spacing: 16) {
+            Text("8月の合計金額")
+                .font(.title2.bold())
+                .foregroundColor(.black)
+            HStack(spacing: 16) {
+                Text("1,000円")
+                    .font(.title.bold())
                     .foregroundColor(.black)
-                HStack(spacing: 16) {
-                    Text("1,000円")
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.black)
-                    Button {
-                        Task { @MainActor in
-                            await vm.didTapUpdatePayBalanceButton()
-                        }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .font(.title3.bold())
-                            .foregroundStyle(Color.gray)
+                Button {
+                    Task { @MainActor in
+                        await vm.didTapUpdatePayBalanceButton()
                     }
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .font(.title3.bold())
+                        .foregroundStyle(Color.gray)
                 }
             }
         }
@@ -141,15 +137,16 @@ extension PayCardScreenView {
     }
 
     private var payListView: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             Text("立替リスト")
                 .font(.title3.bold())
                 .foregroundStyle(Color.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 4)
             LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(vm.payViewDataList) { viewData in
                     Button {
-                        // vm.didTapPayCell(id: viewData.id)
+                        vm.didTapPayCell(id: viewData.id)
                     } label: {
                         payCell(viewData: viewData)
                     }
@@ -182,9 +179,9 @@ extension PayCardScreenView {
                     .foregroundStyle(Color.black)
                 Menu {
                     Button {
-                        //                        Task { @MainActor in
-                        //                            await vm.didTapDeleteButton(id: viewData.id)
-                        //                        }
+                        Task {
+                            await vm.didTapDeleteButton(id: viewData.id)
+                        }
                     } label: {
                         Label("削除", systemImage: "trash")
                             .font(.title3.bold())
