@@ -8,9 +8,7 @@ import SwiftUI
     var payBalanceCardViewData: PayBalanceCardViewData? { get }
     var payListViewType: PayListViewType { get }
     var payViewDataList: [PayViewData] { get }
-    var shouldShowLoading: Bool { get set }
-    var cardHeaderImageString: String { get }
-    var cardHeaderTitleText: String { get }
+    var shouldShowLoading: Bool { get set }   
 
     // tap logic
     func didTapUpdatePayBalanceButton() async
@@ -167,22 +165,6 @@ extension PayCardViewModelImpl {
             }
         } else {
             return []
-        }
-    }
-
-    var cardHeaderImageString: String {
-        if shouldShowPayView {
-            return "arrow.triangle.2.circlepath"
-        } else {
-            return "arrow.up.circle"
-        }
-    }
-
-    var cardHeaderTitleText: String {
-        if shouldShowPayView {
-            return "貸し借り"
-        } else {
-            return "支出"
         }
     }
 

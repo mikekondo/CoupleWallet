@@ -38,23 +38,13 @@ import SwiftUI
 
 extension PayCardScreenView {
     private var cardView: some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 4) {
-                Image(systemName: vm.cardHeaderImageString)
-                Text(vm.cardHeaderTitleText)
-                    .font(.title3.bold())
-                    .foregroundStyle(Color.black)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 4)
-            }
-            VStack(spacing: 0) {
-                if vm.shouldShowPayView {
-                    payView
-                        .transition(.reverseFlip)
-                } else {
-                    totalView
-                        .transition(.flip)
-                }
+        VStack(spacing: 0) {
+            if vm.shouldShowPayView {
+                payView
+                    .transition(.reverseFlip)
+            } else {
+                totalView
+                    .transition(.flip)
             }
         }
     }
@@ -62,32 +52,46 @@ extension PayCardScreenView {
     @ViewBuilder
     private var payView: some View {
         if let viewData = vm.payBalanceCardViewData {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(viewData.nameText)
-                    .font(.title2.bold())
-                    .foregroundColor(.black)
-                HStack(spacing: 16) {
-                    Text(viewData.priceText)
-                        .font(.title.bold())
-                        .foregroundStyle(Color.black.gradient)
-                        .animation(.bouncy)
-                    Button {
-                        Task { @MainActor in
-                            await vm.didTapUpdatePayBalanceButton()
+            VStack(alignment: .leading, spacing: 0) {
+                Text("貸し借り")
+                    .font(.headline.bold())
+                    .foregroundColor(.white)
+                    .padding(.leading, 8)
+                    .frame(height: 40)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 8)
+                    .background(Color.black.gradient)
+                    .clipShape(RoundedCorner(radius: 12, corners: [.topLeft, .topRight]))
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(viewData.nameText)
+                        .font(.title2.bold())
+                        .foregroundColor(.black)
+                    HStack(spacing: 16) {
+                        Text(viewData.priceText)
+                            .font(.title.bold())
+                            .foregroundStyle(Color.black.gradient)
+                            .animation(.bouncy)
+                        Button {
+                            Task { @MainActor in
+                                await vm.didTapUpdatePayBalanceButton()
+                            }
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .font(.title3.bold())
+                                .foregroundStyle(Color.gray)
                         }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .font(.title3.bold())
-                            .foregroundStyle(Color.gray)
                     }
                 }
+                .padding(24)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.white.gradient)
+                        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 8)
+                )
             }
-            .padding(24)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
-            .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
             .overlay(alignment: .bottomTrailing) {
                 Text("Tap")
                     .font(.body.bold())
@@ -103,31 +107,45 @@ extension PayCardScreenView {
     }
 
     private var totalView: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("8月の合計金額")
-                .font(.title2.bold())
-                .foregroundColor(.black)
-            HStack(spacing: 16) {
-                Text("1,000円")
-                    .font(.title.bold())
+        VStack(alignment: .leading, spacing: 0) {
+            Text("支出")
+                .font(.headline.bold())
+                .padding(.leading, 8)
+                .foregroundColor(.white)
+                .frame(height: 40)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 8)
+                .background(Color.black.gradient)
+                .clipShape(RoundedCorner(radius: 12, corners: [.topLeft, .topRight]))
+            VStack(alignment: .leading, spacing: 16) {
+                Text("8月の合計金額")
+                    .font(.title2.bold())
                     .foregroundColor(.black)
-                Button {
-                    Task { @MainActor in
-                        await vm.didTapUpdatePayBalanceButton()
+                HStack(spacing: 16) {
+                    Text("1,000円")
+                        .font(.title.bold())
+                        .foregroundColor(.black)
+                    Button {
+                        Task { @MainActor in
+                            await vm.didTapUpdatePayBalanceButton()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .font(.title3.bold())
+                            .foregroundStyle(Color.gray)
                     }
-                } label: {
-                    Image(systemName: "arrow.clockwise")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .font(.title3.bold())
-                        .foregroundStyle(Color.gray)
                 }
             }
+            .padding(24)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.white.gradient)
+                    .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 8)
+            )
         }
-        .padding(24)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
-        .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 8)
         .overlay(alignment: .bottomTrailing) {
             Text("Tap")
                 .font(.body.bold())
@@ -154,18 +172,15 @@ extension PayCardScreenView {
 
     private var payListView: some View {
         VStack(spacing: 8) {
-            HStack(spacing: 4) {
-                Image(systemName: "list.dash.header.rectangle")
-                Text("立替リスト")
-                    .font(.title3.bold())
-                    .foregroundStyle(Color.black)
-                    .padding(.leading, 4)
-            }
+            Text("立替リスト")
+                .font(.title3.bold())
+                .foregroundStyle(Color.black)
+                .padding(.leading, 4)
             .frame(maxWidth: .infinity, alignment: .leading)
             LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(vm.payViewDataList) { viewData in
                     payCell(viewData: viewData)
-                        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+                        .background(Color.white.gradient, in: RoundedRectangle(cornerRadius: 12))
                         .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
                         .onTapGesture {
                             vm.didTapPayCell(id: viewData.id)
@@ -248,5 +263,15 @@ extension PayCardScreenView {
         }
         .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }

@@ -62,11 +62,10 @@ struct SettingScreenView<VM: SettingViewModel>: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.black, lineWidth: 2)
                         )
-                }                
+                }
             }
         }
-        .padding(24)
-        .background(Color(UIColor.systemBackground))
+        .padding(24)        
         .alert(alertType: $vm.alertType)
     }
 }
