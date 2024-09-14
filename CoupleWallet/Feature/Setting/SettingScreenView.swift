@@ -41,7 +41,7 @@ struct SettingScreenView<VM: SettingViewModel>: View {
                         .padding(16)
                         .frame(maxWidth: .infinity)
                         .background(Color.black)
-                        .foregroundColor(.white)
+                        .foregroundStyle(Color.white.gradient)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)

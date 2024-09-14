@@ -55,7 +55,7 @@ extension PayCardScreenView {
             VStack(alignment: .leading, spacing: 0) {
                 Text("貸し借り")
                     .font(.headline.bold())
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .padding(.leading, 8)
                     .frame(height: 40)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -65,7 +65,7 @@ extension PayCardScreenView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(viewData.nameText)
                         .font(.title2.bold())
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                     HStack(spacing: 16) {
                         Text(viewData.priceText)
                             .font(.title.bold())
@@ -111,7 +111,7 @@ extension PayCardScreenView {
             Text("支出")
                 .font(.headline.bold())
                 .padding(.leading, 8)
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 .frame(height: 40)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 8)
@@ -120,11 +120,11 @@ extension PayCardScreenView {
             VStack(alignment: .leading, spacing: 16) {
                 Text("8月の合計金額")
                     .font(.title2.bold())
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
                 HStack(spacing: 16) {
                     Text("1,000円")
                         .font(.title.bold())
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                     Button {
                         Task { @MainActor in
                             await vm.didTapUpdatePayBalanceButton()
@@ -234,10 +234,10 @@ extension PayCardScreenView {
             Image(systemName: "tray.and.arrow.down")
                 .resizable()
                 .frame(width: 60, height: 60)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
             Text("立替記録がありません")
                 .font(.title3.bold())
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
         }
         .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -247,7 +247,7 @@ extension PayCardScreenView {
         VStack(spacing: 16) {
             Text("データの読み込み中にエラーが発生しました")
                 .font(.callout.bold())
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
             Button(action: {
                 Task {
                     await vm.pullToReflesh()
@@ -257,7 +257,7 @@ extension PayCardScreenView {
                     .font(.title3.bold())
                     .padding()
                     .background(Color.black)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .cornerRadius(8)
             }
         }
