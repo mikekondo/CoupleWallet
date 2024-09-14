@@ -13,6 +13,14 @@
 		9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C8872C686C56008DE420 /* AddPayViewModel.swift */; };
 		9527C88B2C68767D008DE420 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88A2C68767D008DE420 /* FirebaseManager.swift */; };
 		9527C88E2C6877DC008DE420 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9527C88D2C6877DC008DE420 /* String+.swift */; };
+		953DBDE22C951936007F8F80 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953DBDE12C951935007F8F80 /* WidgetKit.framework */; };
+		953DBDE42C951936007F8F80 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953DBDE32C951936007F8F80 /* SwiftUI.framework */; };
+		953DBDE72C951936007F8F80 /* PayBalanceWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953DBDE62C951936007F8F80 /* PayBalanceWidgetBundle.swift */; };
+		953DBDE92C951936007F8F80 /* PayBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953DBDE82C951936007F8F80 /* PayBalanceWidget.swift */; };
+		953DBDEB2C951937007F8F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953DBDEA2C951937007F8F80 /* Assets.xcassets */; };
+		953DBDEF2C951937007F8F80 /* PayBalanceWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 953DBDDF2C951935007F8F80 /* PayBalanceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		953DBDF52C951A63007F8F80 /* PayBalanceWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953DBDF42C951A63007F8F80 /* PayBalanceWidgetViewModel.swift */; };
+		953DBDF62C951E95007F8F80 /* PayBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953DBDE82C951936007F8F80 /* PayBalanceWidget.swift */; };
 		959B1B1B2C69995700942913 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1A2C69995700942913 /* Int+.swift */; };
 		959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1D2C69D44700942913 /* DataStorable.swift */; };
 		959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1F2C69D4D000942913 /* UserDefauls+.swift */; };
@@ -72,6 +80,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		953DBDED2C951937007F8F80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95A890B62C5DA06D00959F79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953DBDDE2C951935007F8F80;
+			remoteInfo = PayBalanceWidgetExtension;
+		};
 		95A890D52C5DA06F00959F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 95A890B62C5DA06D00959F79 /* Project object */;
@@ -88,6 +103,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		953DBDF32C951938007F8F80 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				953DBDEF2C951937007F8F80 /* PayBalanceWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9527C8802C68451F008DE420 /* PayCardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCardCoordinator.swift; sourceTree = "<group>"; };
 		9527C8822C6851E6008DE420 /* PayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayListViewModel.swift; sourceTree = "<group>"; };
@@ -95,6 +124,14 @@
 		9527C8872C686C56008DE420 /* AddPayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayViewModel.swift; sourceTree = "<group>"; };
 		9527C88A2C68767D008DE420 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		9527C88D2C6877DC008DE420 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		953DBDDF2C951935007F8F80 /* PayBalanceWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PayBalanceWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		953DBDE12C951935007F8F80 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		953DBDE32C951936007F8F80 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		953DBDE62C951936007F8F80 /* PayBalanceWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceWidgetBundle.swift; sourceTree = "<group>"; };
+		953DBDE82C951936007F8F80 /* PayBalanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceWidget.swift; sourceTree = "<group>"; };
+		953DBDEA2C951937007F8F80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		953DBDEC2C951937007F8F80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953DBDF42C951A63007F8F80 /* PayBalanceWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceWidgetViewModel.swift; sourceTree = "<group>"; };
 		959B1B1A2C69995700942913 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		959B1B1D2C69D44700942913 /* DataStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorable.swift; sourceTree = "<group>"; };
 		959B1B1F2C69D4D000942913 /* UserDefauls+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefauls+.swift"; sourceTree = "<group>"; };
@@ -144,6 +181,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		953DBDDC2C951935007F8F80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953DBDE42C951936007F8F80 /* SwiftUI.framework in Frameworks */,
+				953DBDE22C951936007F8F80 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95A890BB2C5DA06D00959F79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +244,27 @@
 				9527C88A2C68767D008DE420 /* FirebaseManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		953DBDE02C951935007F8F80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				953DBDE12C951935007F8F80 /* WidgetKit.framework */,
+				953DBDE32C951936007F8F80 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		953DBDE52C951936007F8F80 /* PayBalanceWidget */ = {
+			isa = PBXGroup;
+			children = (
+				953DBDE62C951936007F8F80 /* PayBalanceWidgetBundle.swift */,
+				953DBDE82C951936007F8F80 /* PayBalanceWidget.swift */,
+				953DBDF42C951A63007F8F80 /* PayBalanceWidgetViewModel.swift */,
+				953DBDEA2C951937007F8F80 /* Assets.xcassets */,
+				953DBDEC2C951937007F8F80 /* Info.plist */,
+			);
+			path = PayBalanceWidget;
 			sourceTree = "<group>";
 		};
 		959B1B1C2C69D42700942913 /* Extension */ = {
@@ -273,6 +340,8 @@
 				95A890C02C5DA06D00959F79 /* CoupleWallet */,
 				95A890D72C5DA06F00959F79 /* CoupleWalletTests */,
 				95A890E12C5DA06F00959F79 /* CoupleWalletUITests */,
+				953DBDE52C951936007F8F80 /* PayBalanceWidget */,
+				953DBDE02C951935007F8F80 /* Frameworks */,
 				95A890BF2C5DA06D00959F79 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -283,6 +352,7 @@
 				95A890BE2C5DA06D00959F79 /* CoupleWallet.app */,
 				95A890D42C5DA06F00959F79 /* CoupleWalletTests.xctest */,
 				95A890DE2C5DA06F00959F79 /* CoupleWalletUITests.xctest */,
+				953DBDDF2C951935007F8F80 /* PayBalanceWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -395,6 +465,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		953DBDDE2C951935007F8F80 /* PayBalanceWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953DBDF02C951938007F8F80 /* Build configuration list for PBXNativeTarget "PayBalanceWidgetExtension" */;
+			buildPhases = (
+				953DBDDB2C951935007F8F80 /* Sources */,
+				953DBDDC2C951935007F8F80 /* Frameworks */,
+				953DBDDD2C951935007F8F80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PayBalanceWidgetExtension;
+			productName = PayBalanceWidgetExtension;
+			productReference = 953DBDDF2C951935007F8F80 /* PayBalanceWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		95A890BD2C5DA06D00959F79 /* CoupleWallet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95A890E82C5DA06F00959F79 /* Build configuration list for PBXNativeTarget "CoupleWallet" */;
@@ -402,10 +489,12 @@
 				95A890BA2C5DA06D00959F79 /* Sources */,
 				95A890BB2C5DA06D00959F79 /* Frameworks */,
 				95A890BC2C5DA06D00959F79 /* Resources */,
+				953DBDF32C951938007F8F80 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				953DBDEE2C951937007F8F80 /* PBXTargetDependency */,
 			);
 			name = CoupleWallet;
 			packageProductDependencies = (
@@ -474,6 +563,9 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					953DBDDE2C951935007F8F80 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					95A890BD2C5DA06D00959F79 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -507,11 +599,20 @@
 				95A890BD2C5DA06D00959F79 /* CoupleWallet */,
 				95A890D32C5DA06F00959F79 /* CoupleWalletTests */,
 				95A890DD2C5DA06F00959F79 /* CoupleWalletUITests */,
+				953DBDDE2C951935007F8F80 /* PayBalanceWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		953DBDDD2C951935007F8F80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953DBDEB2C951937007F8F80 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95A890BC2C5DA06D00959F79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -539,6 +640,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		953DBDDB2C951935007F8F80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953DBDE72C951936007F8F80 /* PayBalanceWidgetBundle.swift in Sources */,
+				953DBDE92C951936007F8F80 /* PayBalanceWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95A890BA2C5DA06D00959F79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -560,6 +670,7 @@
 				9527C8862C68522E008DE420 /* PayData.swift in Sources */,
 				959B1B302C6B1B7B00942913 /* EditPayViewModel.swift in Sources */,
 				959B1B1B2C69995700942913 /* Int+.swift in Sources */,
+				953DBDF52C951A63007F8F80 /* PayBalanceWidgetViewModel.swift in Sources */,
 				95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */,
 				95A891742C5F549800959F79 /* TabScreenView.swift in Sources */,
 				95A8917D2C5F56AA00959F79 /* PayListScreenView.swift in Sources */,
@@ -567,6 +678,7 @@
 				959B1B282C69D66F00942913 /* UserSettingCoordinator.swift in Sources */,
 				95F6D7092C71BB950051E00B /* PriceFormatter.swift in Sources */,
 				95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */,
+				953DBDF62C951E95007F8F80 /* PayBalanceWidget.swift in Sources */,
 				9527C8812C68451F008DE420 /* PayCardCoordinator.swift in Sources */,
 				959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */,
 				95A8918B2C66D9AA00959F79 /* AddPayCoordinator.swift in Sources */,
@@ -608,6 +720,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		953DBDEE2C951937007F8F80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953DBDDE2C951935007F8F80 /* PayBalanceWidgetExtension */;
+			targetProxy = 953DBDED2C951937007F8F80 /* PBXContainerItemProxy */;
+		};
 		95A890D62C5DA06F00959F79 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 95A890BD2C5DA06D00959F79 /* CoupleWallet */;
@@ -632,6 +749,62 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		953DBDF12C951938007F8F80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7X9S244452;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PayBalanceWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PayBalanceWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mkondo.CoupleWallet.PayBalanceWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		953DBDF22C951938007F8F80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7X9S244452;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PayBalanceWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PayBalanceWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mkondo.CoupleWallet.PayBalanceWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		95A890E62C5DA06F00959F79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -754,6 +927,7 @@
 		95A890E92C5DA06F00959F79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -781,6 +955,7 @@
 		95A890EA2C5DA06F00959F79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -884,6 +1059,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		953DBDF02C951938007F8F80 /* Build configuration list for PBXNativeTarget "PayBalanceWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953DBDF12C951938007F8F80 /* Debug */,
+				953DBDF22C951938007F8F80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		95A890B92C5DA06D00959F79 /* Build configuration list for PBXProject "CoupleWallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
