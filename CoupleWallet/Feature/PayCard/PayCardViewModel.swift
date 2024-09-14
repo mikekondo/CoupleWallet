@@ -9,6 +9,7 @@ import SwiftUI
     var payListViewType: PayListViewType { get }
     var payViewDataList: [PayViewData] { get }
     var shouldShowLoading: Bool { get set }
+    var cardHeaderTitleText: String { get }
 
     // tap logic
     func didTapUpdatePayBalanceButton() async
@@ -165,6 +166,14 @@ extension PayCardViewModelImpl {
             }
         } else {
             return []
+        }
+    }
+
+    var cardHeaderTitleText: String {
+        if shouldShowPayView {
+            return "貸し借り"
+        } else {
+            return "支出"
         }
     }
 

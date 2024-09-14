@@ -38,13 +38,20 @@ import SwiftUI
 
 extension PayCardScreenView {
     private var cardView: some View {
-        VStack(spacing: 0) {
-            if vm.shouldShowPayView {
-                payView
-                    .transition(.reverseFlip)
-            } else {
-                totalView
-                    .transition(.flip)
+        VStack(spacing: 8) {
+            Text(vm.cardHeaderTitleText)
+                .font(.title3.bold())
+                .foregroundStyle(Color.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 4)
+            VStack(spacing: 0) {
+                if vm.shouldShowPayView {
+                    payView
+                        .transition(.reverseFlip)
+                } else {
+                    totalView
+                        .transition(.flip)
+                }
             }
         }
     }
