@@ -70,6 +70,7 @@ extension AddPayScreenView {
                     .font(.headline)
                     .foregroundColor(.black)
                 TextField("金額を入力してください", text: $vm.payPrice)
+                    .keyboardType(.numberPad)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding(12)
                     .background(Color(white: 0.95))
