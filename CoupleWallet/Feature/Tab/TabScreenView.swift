@@ -24,7 +24,7 @@ import SwiftUI
                 .toolbar(.hidden, for: .tabBar)
         }
         .navigationBarBackButtonHidden()
-        .padding(.bottom, 36) // カスタムタブバーの高さで調整している
+        .padding(.bottom, 30) // カスタムタブバーの高さで調整している
         .overlay(alignment: .bottom) {
             CustomTabBar(tabType: $vm.selection)
         }
