@@ -3,11 +3,9 @@ import SwiftUI
 struct LoadingView: View {
     var body: some View {
         ProgressView()
-            .scaleEffect(1.5)
-            .padding(30)
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 10)
+            .scaleEffect(1.5)            
+            .padding(24)
+            .background(Color.white.gradient, in: RoundedRectangle(cornerRadius: 12))
     }
 }
 
@@ -44,6 +42,7 @@ struct ViewDidLoadModifier: ViewModifier {
 }
 
 // MARK: loading
+
 extension View {
     @MainActor func loading(isPresented: Binding<Bool>) -> some View {
         self.modifier(LoadingModifier(isPresented: isPresented))
@@ -51,6 +50,7 @@ extension View {
 }
 
 // MARK: ViewDidLoad
+
 extension View {
     func onViewDidLoad(perform action: (() -> Void)? = nil) -> some View {
         self.modifier(ViewDidLoadModifier(action: action))
