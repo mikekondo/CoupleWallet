@@ -1,6 +1,9 @@
 ### 0921時点デモ
+### 立替カード反転
 
-https://github.com/user-attachments/assets/c0be0cb5-20e9-404a-82bb-07bacc1a62dd
+### 立替追加
+
+### 立替削除
 
 
 
