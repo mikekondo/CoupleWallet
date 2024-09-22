@@ -9,7 +9,7 @@ struct SignInScreenView<VM: SignInViewModel>: View {
             Button {
                 vm.registerUserName(userName: vm.userName)               
             } label: {
-                Text("匿名ログインする")
+                Text("登録する")
             }
         }
         .padding(.horizontal, 16)

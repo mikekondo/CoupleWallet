@@ -132,10 +132,10 @@ extension FirebaseManager {
 
         if myTotalPayPrice > partnerTotalPayPrice {
             difference = myTotalPayPrice - partnerTotalPayPrice
-            return .overPayment(payerName: dataStore.partnerName, receiverName: dataStore.userName, difference: difference)
+            return .overPayment(payerName: dataStore.partnerName ?? "パートナー", receiverName: dataStore.userName, difference: difference)
         } else if myTotalPayPrice < partnerTotalPayPrice {
             difference = partnerTotalPayPrice - myTotalPayPrice
-            return .overPayment(payerName: dataStore.userName, receiverName: dataStore.partnerName, difference: difference)
+            return .overPayment(payerName: dataStore.userName, receiverName: dataStore.partnerName ?? "パートナー", difference: difference)
         } else {
             return .equal
         }

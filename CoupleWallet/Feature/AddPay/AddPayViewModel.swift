@@ -57,7 +57,8 @@ final class AddPayViewModelImpl: AddPayViewModel {
     }    
 
     var partnerName: String {
-        dataStore.partnerName
+        guard let partnerName = dataStore.partnerName else { return "パートナー" }
+        return partnerName
     }
 
     var myName: String {

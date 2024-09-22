@@ -57,7 +57,9 @@ final class PayCardViewModelImpl: PayCardViewModel {
 
 extension PayCardViewModelImpl {
     func viewDidLoad() async {
+        shouldShowLoading = true
         await fetch()
+        shouldShowLoading = false
     }
 
     func pullToReflesh() async {
@@ -65,10 +67,8 @@ extension PayCardViewModelImpl {
     }
 
     private func fetch() async {
-        shouldShowLoading = true
         await fetchPayBalanceType()
         await fetchPayList()
-        shouldShowLoading = false
     }
 
     private func fetchPayBalanceType() async {

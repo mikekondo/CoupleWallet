@@ -26,9 +26,9 @@ extension UserDefaults: DataStorable {
         }
     }
 
-    public var partnerName: String {
+    public var partnerName: String? {
         get {
-            string(forKey: Key.partnerName.rawValue) ?? ""
+            string(forKey: Key.partnerName.rawValue)
         }
         set {
             self.set(newValue, forKey: Key.partnerName.rawValue)

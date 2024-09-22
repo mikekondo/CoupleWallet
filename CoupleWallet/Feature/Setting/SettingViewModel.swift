@@ -14,12 +14,16 @@ final class SettingViewModelImpl: SettingViewModel {
     let dataStore = UserDefaults.standard
 
     func didTapDeleteAccount() async {
-        do {
-            try await firebaseManager.deleteAccount()
-        } catch {
-            // TODO: エラーハンドリング
-            print(error.localizedDescription)
-        }
+        alertType = .init(title: "アカウント削除", message: "アカウントを削除してもよろしいですか？", buttons: [
+            .init(title: "キャンセル"),
+            .init(title: "OK", action: {
+                do {
+                    try await self.firebaseManager.deleteAccount()
+                } catch {
+                    // TODO: エラーハンドリング
+                    print(error.localizedDescription)
+                }
+            })])
     }
 
     func didTapDisplayShareCode() {
@@ -36,6 +40,7 @@ final class SettingViewModelImpl: SettingViewModel {
     }
 
     var partnerName: String {
-        dataStore.partnerName
+        guard let partnerName = dataStore.partnerName else { return "パートナーと未連携です" }
+        return partnerName
     }
 }
