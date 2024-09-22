@@ -8,7 +8,9 @@ import SwiftUI
     var payBalanceCardViewData: PayBalanceCardViewData? { get }
     var payListViewType: PayListViewType { get }
     var payViewDataList: [PayViewData] { get }
-    var shouldShowLoading: Bool { get set }   
+    var shouldShowLoading: Bool { get set }
+    var shouldShowPartnerLinkageView: Bool { get }
+    var alertType: AlertType? { get set }
 
     // tap logic
     func didTapUpdatePayBalanceButton() async
@@ -16,6 +18,7 @@ import SwiftUI
     func didTapAddButton()
     func didTapPayCell(id: String)
     func didTapDeleteButton(id: String) async
+    func didTapPartnerLinkageButton()
 
     // internal
     func viewDidLoad() async
@@ -49,8 +52,10 @@ final class PayCardViewModelImpl: PayCardViewModel {
     @Published var payBalanceType: PayBalanceType = .noData
     @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false
+    @Published var alertType: AlertType?
     weak var transitionDelegate: PayCardTransitionDelegate?
     let firebaseManager = FirebaseManager.shared
+    var dataStore = UserDefaults.standard
 }
 
 // MARK: internal
@@ -124,11 +129,20 @@ extension PayCardViewModelImpl {
     func didTapDeleteButton(id: String) async {
         do {
             try await firebaseManager.deletePay(id: id)
-            await fetchPayList()
+            await fetch()
         } catch {
             // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
+    }
+
+    func didTapPartnerLinkageButton() {
+        alertType = .init(title: "共有コードをパートナーに入力してもらってください", message: displayShareCodeMessageText)
+    }
+
+    private var displayShareCodeMessageText: String {
+        guard let shareCode = dataStore.shareCode else { return "" }
+        return "共有コードは " + shareCode + "です"
     }
 }
 
@@ -187,6 +201,13 @@ extension PayCardViewModelImpl {
         case .noData:
             return .zeroMatch
         }
+    }
+
+    // NOTE: パートナー連携訴求モジュールの表示条件
+    // - 連携済みでないこと
+    // - 財布作成者であること
+    var shouldShowPartnerLinkageView: Bool {
+        !dataStore.isPartnerLink && dataStore.shareCode != nil
     }
 }
 

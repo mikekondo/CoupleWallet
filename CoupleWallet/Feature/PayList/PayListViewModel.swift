@@ -25,7 +25,7 @@ protocol PayListTransitionDelegate: AnyObject {
     func transitionToEditPay(payData: PayData, editHandler: @escaping () async -> Void)
 }
 
-struct PayViewData: Identifiable {
+struct PayViewData: Identifiable, Equatable {
     let id: String
     let title: String
     let byName: String

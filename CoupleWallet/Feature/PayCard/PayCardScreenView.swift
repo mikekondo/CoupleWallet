@@ -6,6 +6,10 @@ import SwiftUI
         VStack(spacing: 28) {
             cardView
                 .padding(.horizontal, 16)
+            if vm.shouldShowPartnerLinkageView {
+                partnerLinkageView
+                    .padding(.horizontal, 16)
+            }
             ScrollView {
                 switch vm.payListViewType {
                 case .content:
@@ -33,10 +37,44 @@ import SwiftUI
                 .padding(16)
         }
         .loading(isPresented: $vm.shouldShowLoading)
+        .alert(alertType: $vm.alertType)
     }
 }
 
 extension PayCardScreenView {
+    // パートナー連携訴求モジュール
+    private var partnerLinkageView: some View {
+        VStack(spacing: 16) {
+            HStack(spacing: 8) {
+                Image(systemName: "person.2.fill")
+                    .foregroundStyle(Color.black.gradient)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("パートナーと連携")
+                        .font(.headline.bold())
+                        .foregroundStyle(.black)
+                    Text("立替をパートナーと管理するために、パートナーと連携しましょう")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                }
+                Button {
+                    vm.didTapPartnerLinkageButton()
+                } label: {
+                    Text("今すぐ連携")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .padding(8)
+                        .background(Color.gray.gradient, in: RoundedRectangle(cornerRadius: 8))
+                }
+            }
+        }
+        .padding(8)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
     private var cardView: some View {
         VStack(spacing: 0) {
             if vm.shouldShowPayView {
@@ -70,7 +108,7 @@ extension PayCardScreenView {
                         Text(viewData.priceText)
                             .font(.title.bold())
                             .foregroundStyle(Color.black.gradient)
-                            .animation(.bouncy)
+                            .animation(.default, value: viewData.priceText)
                         Button {
                             Task { @MainActor in
                                 await vm.didTapUpdatePayBalanceButton()
@@ -180,12 +218,13 @@ extension PayCardScreenView {
             LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(vm.payViewDataList) { viewData in
                     payCell(viewData: viewData)
-                        .background(Color.white.gradient, in: RoundedRectangle(cornerRadius: 12))
+                        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
                         .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
                         .onTapGesture {
                             vm.didTapPayCell(id: viewData.id)
                         }
                 }
+                .animation(.default, value: vm.payViewDataList)
             }
         }
         .padding(.horizontal, 16)
@@ -226,7 +265,8 @@ extension PayCardScreenView {
                 }
             }
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 
     private var zeroMatchView: some View {
