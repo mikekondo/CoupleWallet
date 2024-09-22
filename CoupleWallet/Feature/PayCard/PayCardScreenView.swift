@@ -14,10 +14,8 @@ import SwiftUI
                 switch vm.payListViewType {
                 case .content:
                     payListView
-                case .zeroMatch:
-                    zeroMatchView
-                case .error:
-                    errorView
+                case .zeroMatch, .error:
+                    EmptyView()
                 }
             }
             .background(Color.white)
@@ -32,6 +30,7 @@ import SwiftUI
                 }
             }
         }
+        .background(rootView)
         .overlay(alignment: .bottomTrailing) {
             addView
                 .padding(16)
@@ -42,6 +41,17 @@ import SwiftUI
 }
 
 extension PayCardScreenView {
+    @ViewBuilder
+    private var rootView: some View {
+        switch vm.payListViewType {
+        case .content:
+            EmptyView()
+        case .error:
+            errorView
+        case .zeroMatch:
+            zeroMatchView
+        }
+    }
     // パートナー連携訴求モジュール
     private var partnerLinkageView: some View {
         VStack(spacing: 16) {
@@ -295,10 +305,9 @@ extension PayCardScreenView {
             }) {
                 Text("再試行")
                     .font(.title3.bold())
-                    .padding()
-                    .background(Color.black)
+                    .padding(16)
                     .foregroundStyle(.white)
-                    .cornerRadius(8)
+                    .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 8))
             }
         }
         .background(Color.white)
