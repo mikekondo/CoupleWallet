@@ -34,5 +34,6 @@ import SwiftUI
         }
         .alert(alertType: $vm.alertType)
         .loading(isPresented: $vm.shouldShowLoading)
+        .navigationBarHidden(true)
     }
 }

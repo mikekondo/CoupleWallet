@@ -37,7 +37,7 @@ import SwiftUI
                 .padding(16)
         }
         .loading(isPresented: $vm.shouldShowLoading)
-        .alert(alertType: $vm.alertType)
+        .alert(alertType: $vm.alertType)        
     }
 }
 
