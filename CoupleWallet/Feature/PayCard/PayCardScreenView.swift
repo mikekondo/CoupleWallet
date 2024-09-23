@@ -87,11 +87,6 @@ extension PayCardScreenView {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 2)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.white)
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
-        )
     }
     private var cardView: some View {
         VStack(spacing: 0) {
@@ -145,7 +140,7 @@ extension PayCardScreenView {
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.white.gradient)
-                        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 8)
+                        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 4)
                 )
             }
             .overlay(alignment: .bottomTrailing) {
@@ -199,7 +194,7 @@ extension PayCardScreenView {
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.white.gradient)
-                    .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 8)
+                    .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 4)
             )
         }
         .overlay(alignment: .bottomTrailing) {

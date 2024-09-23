@@ -5,6 +5,7 @@ import Foundation
     var payPrice: String { get set }
     var shouldShowLoading: Bool { get set }
     var isPayByMe: Bool { get set }
+    var alertType: AlertType? { get set }
     var partnerName: String { get }
     var myName: String { get }
 
@@ -21,6 +22,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
     @Published var payTitle: String = ""
     @Published var payPrice: String = ""
     @Published var shouldShowLoading: Bool = false
+    @Published var alertType: AlertType?
     @Published var isPayByMe: Bool = true
     let addPayHandler: () async -> Void
 
@@ -33,6 +35,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
     }
 
     func didTapAdd() async {
+        guard validatePrice() else { return }
         shouldShowLoading = true
         defer { shouldShowLoading = false }
         let byName = isPayByMe ? myName : partnerName
@@ -54,7 +57,17 @@ final class AddPayViewModelImpl: AddPayViewModel {
             // TODO: エラーハンドリング
             print(error.localizedDescription)
         }
-    }    
+    }
+
+    // NOTE: 金額未入力で0円以下の場合はエラー
+    private func validatePrice() -> Bool {
+        if let price = Int(payPrice), price > 0 {
+            return true
+        } else {
+            alertType = .init(message: "金額を0円以上で入力してください")
+            return false
+        }
+    }
 
     var partnerName: String {
         guard let partnerName = dataStore.partnerName else { return "パートナー" }

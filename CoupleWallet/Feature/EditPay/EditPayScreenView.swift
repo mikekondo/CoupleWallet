@@ -8,6 +8,7 @@ struct EditPayScreenView<VM: EditPayViewModel>: View {
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .loading(isPresented: $vm.shouldShowLoading)
+            .alert(alertType: $vm.alertType)
             .safeAreaInset(edge: .bottom) {
                 Button {
                     Task { 

@@ -12,7 +12,7 @@ import SwiftUI
     @ObservedObject var settingVM: SettingVM
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack {
             TabView(selection: $vm.selection) {
                 PayCardScreenView(vm: payCardVM)
                     .tag(TabType.home)
@@ -26,6 +26,6 @@ import SwiftUI
             }
             CustomTabBar(tabType: $vm.selection)
         }
-        .navigationBarBackButtonHidden()      
+        .navigationBarBackButtonHidden()
     }
 }

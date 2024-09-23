@@ -6,6 +6,7 @@ import Foundation
     var payPrice: String { get set }
     var shouldShowLoading: Bool { get set }
     var isPayByMe: Bool { get set }
+    var alertType: AlertType? { get set }
     var partnerName: String { get }
     var myName: String { get }
 
@@ -24,6 +25,7 @@ final class EditPayViewModelImpl: EditPayViewModel {
     @Published var payPrice: String
     @Published var shouldShowLoading: Bool = false
     @Published var isPayByMe: Bool = true
+    @Published var alertType: AlertType?
 
     private let payData: PayData
     private let editHandler: () async -> Void
@@ -49,6 +51,7 @@ final class EditPayViewModelImpl: EditPayViewModel {
 
 extension EditPayViewModelImpl {
     func didTapEditButton() async {
+        guard validatePrice() else { return }
         shouldShowLoading = true
         defer { shouldShowLoading = false }
         let payData: PayData = .init(
@@ -67,6 +70,16 @@ extension EditPayViewModelImpl {
         } catch {
             // TODO: エラーハンドリング
             print(error.localizedDescription)
+        }
+    }
+
+    // NOTE: 金額未入力で0円以下の場合はエラー
+    private func validatePrice() -> Bool {
+        if let price = Int(payPrice), price > 0 {
+            return true
+        } else {
+            alertType = .init(message: "金額を0円以上で入力してください")
+            return false
         }
     }
 }
