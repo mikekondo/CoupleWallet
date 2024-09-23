@@ -7,20 +7,18 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .loading(isPresented: $vm.shouldShowLoading)
-            .background(Color.white)
             .safeAreaInset(edge: .bottom) {
                 Button {
-                    Task { @MainActor in
+                    Task {
                         await vm.didTapAdd()
                     }
                 } label: {
                     Text("追加する")
                         .font(.headline)
                         .foregroundColor(.white)
-                        .frame(height: 50)
+                        .frame(height: 44)
                         .frame(maxWidth: .infinity)
-                        .background(Color.black.gradient)
-                        .cornerRadius(12)
+                        .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 12))
                         .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                 }
                 .padding(16)

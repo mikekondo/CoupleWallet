@@ -234,8 +234,7 @@ extension PayCardScreenView {
                         .onTapGesture {
                             vm.didTapPayCell(id: viewData.id)
                         }
-                }
-                .animation(.default, value: vm.payViewDataList)
+                }               
             }
         }
         .padding(.horizontal, 16)
