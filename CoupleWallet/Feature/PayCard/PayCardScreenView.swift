@@ -58,20 +58,23 @@ extension PayCardScreenView {
         VStack(spacing: 16) {
             HStack(spacing: 8) {
                 Image(systemName: "person.2.fill")
+                    .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(Color.black.gradient)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("パートナーと連携")
                         .font(.headline.bold())
                         .foregroundStyle(.black)
-                    Text("立替をパートナーと管理するために、パートナーと連携しましょう")
+                    Text("立替をパートナーと管理するために、連携しましょう")
                         .font(.subheadline)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.secondary)
+                        .lineSpacing(6)
                 }
+                .frame(maxWidth: .infinity)
                 Button {
                     vm.didTapPartnerLinkageButton()
                 } label: {
                     Text("今すぐ連携")
-                        .font(.headline)
+                        .font(.body.bold())
                         .foregroundStyle(.white)
                         .padding(8)
                         .background(Color.gray.gradient, in: RoundedRectangle(cornerRadius: 8))
@@ -80,6 +83,10 @@ extension PayCardScreenView {
         }
         .padding(8)
         .frame(maxWidth: .infinity)
+        .overlay {
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.gray.opacity(0.3), lineWidth: 2)
+        }
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.white)
@@ -234,7 +241,7 @@ extension PayCardScreenView {
                         .onTapGesture {
                             vm.didTapPayCell(id: viewData.id)
                         }
-                }               
+                }
             }
         }
         .padding(.horizontal, 16)

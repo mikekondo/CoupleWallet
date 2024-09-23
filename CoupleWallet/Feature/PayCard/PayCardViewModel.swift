@@ -183,9 +183,10 @@ extension PayCardViewModelImpl {
     }
 
     func getPayViewData(payData: PayData) -> PayViewData{
-        .init(
+        let title = payData.title == "" ? "未入力" : payData.title
+        return .init(
             id: payData.id,
-            title: payData.title,
+            title: title,
             byName: payData.byName + "が立替え",
             dateText: payData.date.formatted(),
             priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)

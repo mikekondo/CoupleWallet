@@ -73,11 +73,10 @@ extension AddPayScreenView {
                 .font(.title3.bold())
                 .foregroundStyle(Color.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            TextField("件名を入力してください", text: $vm.payTitle)
+            TextField("件名を入力してください（任意）", text: $vm.payTitle)
                 .textFieldStyle(PlainTextFieldStyle())
                 .padding(12)
-                .background(Color(white: 0.95))
-                .cornerRadius(8)
+                .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
@@ -91,8 +90,7 @@ extension AddPayScreenView {
                 .keyboardType(.numberPad)
                 .textFieldStyle(PlainTextFieldStyle())
                 .padding(12)
-                .background(Color(white: 0.95))
-                .cornerRadius(8)
+                .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 }
