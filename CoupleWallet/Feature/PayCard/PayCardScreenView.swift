@@ -33,7 +33,8 @@ import SwiftUI
         .background(rootView)
         .overlay(alignment: .bottomTrailing) {
             addView
-                .padding(16)
+                .padding(.trailing, 16)
+                .padding(.bottom, 8)
         }
         .loading(isPresented: $vm.shouldShowLoading)
         .alert(alertType: $vm.alertType)        

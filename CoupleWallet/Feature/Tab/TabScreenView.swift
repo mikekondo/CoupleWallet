@@ -12,21 +12,20 @@ import SwiftUI
     @ObservedObject var settingVM: SettingVM
 
     var body: some View {
-        TabView(selection: $vm.selection) {
-            PayCardScreenView(vm: payCardVM)
-                .tag(TabType.home)
-                .toolbar(.hidden, for: .tabBar)
-//            PayListScreenView(vm: payListVM)
-//                .tag(TabType.search)
-//                .toolbar(.hidden, for: .tabBar)
-            SettingScreenView(vm: settingVM)
-                .tag(TabType.settings)
-                .toolbar(.hidden, for: .tabBar)
-        }
-        .navigationBarBackButtonHidden()
-        .padding(.bottom, 30) // カスタムタブバーの高さで調整している
-        .overlay(alignment: .bottom) {
+        VStack(spacing: 0) {
+            TabView(selection: $vm.selection) {
+                PayCardScreenView(vm: payCardVM)
+                    .tag(TabType.home)
+                    .toolbar(.hidden, for: .tabBar)
+                //            PayListScreenView(vm: payListVM)
+                //                .tag(TabType.search)
+                //                .toolbar(.hidden, for: .tabBar)
+                SettingScreenView(vm: settingVM)
+                    .tag(TabType.settings)
+                    .toolbar(.hidden, for: .tabBar)
+            }
             CustomTabBar(tabType: $vm.selection)
         }
+        .navigationBarBackButtonHidden()      
     }
 }
