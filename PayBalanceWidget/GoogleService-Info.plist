@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBCoZHYeMUU0AdrMum4Ce7gqH9x-EWOTUY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>935516320672</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mkondo.CoupleWallet</string>
+	<key>PROJECT_ID</key>
+	<string>couplewallet-bf397</string>
+	<key>STORAGE_BUCKET</key>
+	<string>couplewallet-bf397.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:935516320672:ios:651364ab63d78417002ac5</string>
+</dict>
+</plist>

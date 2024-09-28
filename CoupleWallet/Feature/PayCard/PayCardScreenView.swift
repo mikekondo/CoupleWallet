@@ -182,9 +182,7 @@ extension PayCardScreenView {
                         }
                     } label: {
                         Image(systemName: "arrow.clockwise")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .font(.title3.bold())
+                            .font(.body.bold())
                             .foregroundStyle(Color.gray)
                     }
                 }
