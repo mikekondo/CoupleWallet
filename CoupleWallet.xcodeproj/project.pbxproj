@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,11 +18,12 @@
 		954A10E62CA7E2D9005D5E75 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 954A10E52CA7E2D9005D5E75 /* FirebaseAuth */; };
 		954A10E82CA7E2D9005D5E75 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 954A10E72CA7E2D9005D5E75 /* FirebaseDatabase */; };
 		954A10EA2CA7E2D9005D5E75 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 954A10E92CA7E2D9005D5E75 /* FirebaseFirestore */; };
-		954A11082CA7EB50005D5E75 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953DBDE12C951935007F8F80 /* WidgetKit.framework */; };
-		954A11092CA7EB50005D5E75 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953DBDE32C951936007F8F80 /* SwiftUI.framework */; };
-		954A11142CA7EB50005D5E75 /* PayBalanceWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 954A11072CA7EB50005D5E75 /* PayBalanceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		954A111C2CA7EFB2005D5E75 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 954A111B2CA7EFB2005D5E75 /* FirebaseAuth */; };
-		954A111E2CA7EFB2005D5E75 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 954A111D2CA7EFB2005D5E75 /* FirebaseFirestore */; };
+		954A11342CB0E0F4005D5E75 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 954A11332CB0E0F4005D5E75 /* FirebaseAuthCombine-Community */; };
+		954A11362CB0E0F4005D5E75 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 954A11352CB0E0F4005D5E75 /* FirebaseFunctions */; };
+		955139EE2CB0E94F003DB4E3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 955139ED2CB0E94F003DB4E3 /* GoogleMobileAds */; };
+		955139F12CB112C7003DB4E3 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F02CB112C2003DB4E3 /* BannerViewController.swift */; };
+		955139F32CB112E3003DB4E3 /* BannerSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F22CB112DF003DB4E3 /* BannerSwiftUIView.swift */; };
+		955139F52CB11379003DB4E3 /* BannerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F42CB11374003DB4E3 /* BannerContainerView.swift */; };
 		959B1B1B2C69995700942913 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1A2C69995700942913 /* Int+.swift */; };
 		959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1D2C69D44700942913 /* DataStorable.swift */; };
 		959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1F2C69D4D000942913 /* UserDefauls+.swift */; };
@@ -69,13 +70,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		954A11122CA7EB50005D5E75 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95A890B62C5DA06D00959F79 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 954A11062CA7EB50005D5E75;
-			remoteInfo = PayBalanceWidgetExtension;
-		};
 		95A890D52C5DA06F00959F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 95A890B62C5DA06D00959F79 /* Project object */;
@@ -99,7 +93,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				954A11142CA7EB50005D5E75 /* PayBalanceWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,9 +109,9 @@
 		953CC26D2C958CE60026C5E9 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		953DBDE12C951935007F8F80 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		953DBDE32C951936007F8F80 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		954A11072CA7EB50005D5E75 /* PayBalanceWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PayBalanceWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		954A11212CA821DC005D5E75 /* CoupleWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoupleWallet.entitlements; sourceTree = "<group>"; };
-		954A11222CA822EF005D5E75 /* PayBalanceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PayBalanceWidgetExtension.entitlements; sourceTree = "<group>"; };
+		955139F02CB112C2003DB4E3 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		955139F22CB112DF003DB4E3 /* BannerSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSwiftUIView.swift; sourceTree = "<group>"; };
+		955139F42CB11374003DB4E3 /* BannerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerContainerView.swift; sourceTree = "<group>"; };
 		959B1B1A2C69995700942913 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		959B1B1D2C69D44700942913 /* DataStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorable.swift; sourceTree = "<group>"; };
 		959B1B1F2C69D4D000942913 /* UserDefauls+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefauls+.swift"; sourceTree = "<group>"; };
@@ -167,38 +160,16 @@
 		95F6D7082C71BB950051E00B /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		954A11152CA7EB51005D5E75 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 954A11062CA7EB50005D5E75 /* PayBalanceWidgetExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		954A110A2CA7EB50005D5E75 /* PayBalanceWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (954A11152CA7EB51005D5E75 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PayBalanceWidget; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
-		954A11042CA7EB50005D5E75 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				954A11092CA7EB50005D5E75 /* SwiftUI.framework in Frameworks */,
-				954A111E2CA7EFB2005D5E75 /* FirebaseFirestore in Frameworks */,
-				954A111C2CA7EFB2005D5E75 /* FirebaseAuth in Frameworks */,
-				954A11082CA7EB50005D5E75 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		95A890BB2C5DA06D00959F79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				954A10E42CA7E2D9005D5E75 /* FirebaseAnalytics in Frameworks */,
+				954A11362CB0E0F4005D5E75 /* FirebaseFunctions in Frameworks */,
+				954A11342CB0E0F4005D5E75 /* FirebaseAuthCombine-Community in Frameworks */,
 				954A10E62CA7E2D9005D5E75 /* FirebaseAuth in Frameworks */,
+				955139EE2CB0E94F003DB4E3 /* GoogleMobileAds in Frameworks */,
 				954A10E82CA7E2D9005D5E75 /* FirebaseDatabase in Frameworks */,
 				954A10EA2CA7E2D9005D5E75 /* FirebaseFirestore in Frameworks */,
 				95E0FBF52C8C126B003EA7BE /* Algorithms in Frameworks */,
@@ -249,6 +220,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		955139EF2CB112BD003DB4E3 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				955139F42CB11374003DB4E3 /* BannerContainerView.swift */,
+				955139F22CB112DF003DB4E3 /* BannerSwiftUIView.swift */,
+				955139F02CB112C2003DB4E3 /* BannerViewController.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
 		959B1B1C2C69D42700942913 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +244,7 @@
 		959B1B212C69D5B300942913 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				955139EF2CB112BD003DB4E3 /* Banner */,
 				959B1B222C69D60600942913 /* UserSetting */,
 				95A8917A2C5F569800959F79 /* PayList */,
 				95A891772C5F55B900959F79 /* PayCard */,
@@ -320,11 +302,9 @@
 		95A890B52C5DA06D00959F79 = {
 			isa = PBXGroup;
 			children = (
-				954A11222CA822EF005D5E75 /* PayBalanceWidgetExtension.entitlements */,
 				95A890C02C5DA06D00959F79 /* CoupleWallet */,
 				95A890D72C5DA06F00959F79 /* CoupleWalletTests */,
 				95A890E12C5DA06F00959F79 /* CoupleWalletUITests */,
-				954A110A2CA7EB50005D5E75 /* PayBalanceWidget */,
 				953DBDE02C951935007F8F80 /* Frameworks */,
 				95A890BF2C5DA06D00959F79 /* Products */,
 			);
@@ -336,7 +316,6 @@
 				95A890BE2C5DA06D00959F79 /* CoupleWallet.app */,
 				95A890D42C5DA06F00959F79 /* CoupleWalletTests.xctest */,
 				95A890DE2C5DA06F00959F79 /* CoupleWalletUITests.xctest */,
-				954A11072CA7EB50005D5E75 /* PayBalanceWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -344,7 +323,6 @@
 		95A890C02C5DA06D00959F79 /* CoupleWallet */ = {
 			isa = PBXGroup;
 			children = (
-				954A11212CA821DC005D5E75 /* CoupleWallet.entitlements */,
 				959B1B362C70732200942913 /* SwiftUIComponents */,
 				959B1B212C69D5B300942913 /* Feature */,
 				959B1B1C2C69D42700942913 /* Extension */,
@@ -450,30 +428,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		954A11062CA7EB50005D5E75 /* PayBalanceWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 954A11162CA7EB51005D5E75 /* Build configuration list for PBXNativeTarget "PayBalanceWidgetExtension" */;
-			buildPhases = (
-				954A11032CA7EB50005D5E75 /* Sources */,
-				954A11042CA7EB50005D5E75 /* Frameworks */,
-				954A11052CA7EB50005D5E75 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				954A110A2CA7EB50005D5E75 /* PayBalanceWidget */,
-			);
-			name = PayBalanceWidgetExtension;
-			packageProductDependencies = (
-				954A111B2CA7EFB2005D5E75 /* FirebaseAuth */,
-				954A111D2CA7EFB2005D5E75 /* FirebaseFirestore */,
-			);
-			productName = PayBalanceWidgetExtension;
-			productReference = 954A11072CA7EB50005D5E75 /* PayBalanceWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		95A890BD2C5DA06D00959F79 /* CoupleWallet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95A890E82C5DA06F00959F79 /* Build configuration list for PBXNativeTarget "CoupleWallet" */;
@@ -486,7 +440,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				954A11132CA7EB50005D5E75 /* PBXTargetDependency */,
 			);
 			name = CoupleWallet;
 			packageProductDependencies = (
@@ -495,6 +448,9 @@
 				954A10E52CA7E2D9005D5E75 /* FirebaseAuth */,
 				954A10E72CA7E2D9005D5E75 /* FirebaseDatabase */,
 				954A10E92CA7E2D9005D5E75 /* FirebaseFirestore */,
+				954A11332CB0E0F4005D5E75 /* FirebaseAuthCombine-Community */,
+				954A11352CB0E0F4005D5E75 /* FirebaseFunctions */,
+				955139ED2CB0E94F003DB4E3 /* GoogleMobileAds */,
 			);
 			productName = CoupleWallet;
 			productReference = 95A890BE2C5DA06D00959F79 /* CoupleWallet.app */;
@@ -546,9 +502,6 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					954A11062CA7EB50005D5E75 = {
-						CreatedOnToolsVersion = 16.0;
-					};
 					95A890BD2C5DA06D00959F79 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -574,6 +527,7 @@
 			packageReferences = (
 				95E0FBF32C8C126B003EA7BE /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				954A10E22CA7E2D9005D5E75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				955139EC2CB0E94F003DB4E3 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 95A890BF2C5DA06D00959F79 /* Products */;
 			projectDirPath = "";
@@ -582,19 +536,11 @@
 				95A890BD2C5DA06D00959F79 /* CoupleWallet */,
 				95A890D32C5DA06F00959F79 /* CoupleWalletTests */,
 				95A890DD2C5DA06F00959F79 /* CoupleWalletUITests */,
-				954A11062CA7EB50005D5E75 /* PayBalanceWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		954A11052CA7EB50005D5E75 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		95A890BC2C5DA06D00959F79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,13 +568,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		954A11032CA7EB50005D5E75 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		95A890BA2C5DA06D00959F79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -639,6 +578,7 @@
 				95A891832C5F5CDF00959F79 /* AnyTransition+.swift in Sources */,
 				95A890F62C5DA2E600959F79 /* SignInScreenView.swift in Sources */,
 				953CC26E2C958CE60026C5E9 /* CustomError.swift in Sources */,
+				955139F12CB112C7003DB4E3 /* BannerViewController.swift in Sources */,
 				95A8917F2C5F56B400959F79 /* SettingScreenView.swift in Sources */,
 				959B1B322C6B1B8600942913 /* EditPayCoordinator.swift in Sources */,
 				959B1B262C69D66400942913 /* UserSettingViewModel.swift in Sources */,
@@ -657,6 +597,7 @@
 				959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */,
 				959B1B282C69D66F00942913 /* UserSettingCoordinator.swift in Sources */,
 				95F6D7092C71BB950051E00B /* PriceFormatter.swift in Sources */,
+				955139F32CB112E3003DB4E3 /* BannerSwiftUIView.swift in Sources */,
 				95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */,
 				9527C8812C68451F008DE420 /* PayCardCoordinator.swift in Sources */,
 				959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */,
@@ -665,6 +606,7 @@
 				9527C8832C6851E6008DE420 /* PayListViewModel.swift in Sources */,
 				959B1B3E2C7077B000942913 /* SettingCoordinator.swift in Sources */,
 				9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */,
+				955139F52CB11379003DB4E3 /* BannerContainerView.swift in Sources */,
 				959B1B352C6B1FBD00942913 /* PayListCoordinator.swift in Sources */,
 				95A890F42C5DA26200959F79 /* Transitioner.swift in Sources */,
 				95A890C42C5DA06D00959F79 /* SceneDelegate.swift in Sources */,
@@ -699,11 +641,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		954A11132CA7EB50005D5E75 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 954A11062CA7EB50005D5E75 /* PayBalanceWidgetExtension */;
-			targetProxy = 954A11122CA7EB50005D5E75 /* PBXContainerItemProxy */;
-		};
 		95A890D62C5DA06F00959F79 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 95A890BD2C5DA06D00959F79 /* CoupleWallet */;
@@ -728,67 +665,11 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		954A11172CA7EB51005D5E75 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PayBalanceWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PayBalanceWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PayBalanceWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mkondo.CoupleWallet.PayBalanceWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		954A11182CA7EB51005D5E75 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PayBalanceWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PayBalanceWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PayBalanceWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mkondo.CoupleWallet.PayBalanceWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		95A890E62C5DA06F00959F79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ADMOB_APP_ID = "ca-app-pub-8780139395251725~6580924721";
+				ADMOB_SETTING_VIEW_BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/2435281174";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -853,6 +734,8 @@
 		95A890E72C5DA06F00959F79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ADMOB_APP_ID = "ca-app-pub-8780139395251725~6580924710";
+				ADMOB_SETTING_VIEW_BANNER_AD_UNIT_ID = "ca-app-pub-8780139395251725/1458855311";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -1040,15 +923,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		954A11162CA7EB51005D5E75 /* Build configuration list for PBXNativeTarget "PayBalanceWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				954A11172CA7EB51005D5E75 /* Debug */,
-				954A11182CA7EB51005D5E75 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		95A890B92C5DA06D00959F79 /* Build configuration list for PBXProject "CoupleWallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1096,6 +970,14 @@
 				minimumVersion = 11.2.0;
 			};
 		};
+		955139EC2CB0E94F003DB4E3 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.10.0;
+			};
+		};
 		95E0FBF32C8C126B003EA7BE /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
@@ -1127,15 +1009,20 @@
 			package = 954A10E22CA7E2D9005D5E75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		954A111B2CA7EFB2005D5E75 /* FirebaseAuth */ = {
+		954A11332CB0E0F4005D5E75 /* FirebaseAuthCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 954A10E22CA7E2D9005D5E75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
+			productName = "FirebaseAuthCombine-Community";
 		};
-		954A111D2CA7EFB2005D5E75 /* FirebaseFirestore */ = {
+		954A11352CB0E0F4005D5E75 /* FirebaseFunctions */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 954A10E22CA7E2D9005D5E75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
+			productName = FirebaseFunctions;
+		};
+		955139ED2CB0E94F003DB4E3 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 955139EC2CB0E94F003DB4E3 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 		95E0FBF42C8C126B003EA7BE /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;

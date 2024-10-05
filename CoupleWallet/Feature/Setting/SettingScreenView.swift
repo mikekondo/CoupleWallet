@@ -63,7 +63,8 @@ struct SettingScreenView<VM: SettingViewModel>: View {
                                 .stroke(Color.black, lineWidth: 2)
                         )
                 }
-            }
+            }            
+            BannerContainerView()
         }
         .padding(24)        
         .alert(alertType: $vm.alertType)

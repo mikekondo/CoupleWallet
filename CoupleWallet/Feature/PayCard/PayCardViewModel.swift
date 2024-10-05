@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import FirebaseAuth
 
 @MainActor protocol PayCardViewModel: ObservableObject {
     // ui logic
@@ -18,8 +19,7 @@ import SwiftUI
     func didTapAddButton()
     func didTapPayCell(id: String)
     func didTapDeleteButton(id: String) async
-    func didTapPartnerLinkageButton()
-
+    func didTapPartnerLinkageButton()    
     // internal
     func viewDidLoad() async
     func pullToReflesh() async
@@ -106,7 +106,9 @@ extension PayCardViewModelImpl {
     }
 
     func didTapAddButton() {
-        transitionDelegate?.transitionToAdd(addPayHandler: {        
+        let unitid = Bundle.main.object(forInfoDictionaryKey: "ADMOBBannerUNITID") as? String
+        print(unitid)
+        transitionDelegate?.transitionToAdd(addPayHandler: {
             await self.fetch()
         })
     }

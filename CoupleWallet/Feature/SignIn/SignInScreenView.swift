@@ -16,7 +16,7 @@ struct SignInScreenView<VM: SignInViewModel>: View {
                     .padding(.vertical, 12)
                     .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 12))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 8)
+                        RoundedRectangle(cornerRadius: 12)
                             .stroke(Color.black.opacity(0.2), lineWidth: 1)
                     )
             }

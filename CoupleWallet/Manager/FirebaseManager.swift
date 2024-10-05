@@ -182,6 +182,12 @@ enum LinkPartnerError: Error {
 extension FirebaseManager {
     func signIn() async throws {
         _ = try await Auth.auth().signInAnonymously()
+        // 非共有キーチェーン設定
+        do {
+            try Auth.auth().useUserAccessGroup(nil)
+        } catch {
+            
+        }
     }
 
     func getAuthUid() -> String? {

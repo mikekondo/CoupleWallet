@@ -3,7 +3,7 @@ import SwiftUI
 @MainActor struct PayCardScreenView<VM: PayCardViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
-        VStack(spacing: 28) {
+        VStack(spacing: 28) {            
             cardView
                 .padding(.horizontal, 16)
             if vm.shouldShowPartnerLinkageView {
@@ -81,7 +81,7 @@ extension PayCardScreenView {
                 }
             }
         }
-        .padding(8)
+        .padding(16)
         .frame(maxWidth: .infinity)
         .overlay {
             RoundedRectangle(cornerRadius: 12)
