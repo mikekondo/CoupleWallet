@@ -45,6 +45,8 @@ import SwiftUI
                     )
                 }
             }
+            AddMobBannerContentView()
+                .frame(width: 320, height: 50)
         }
         .padding(.horizontal, 16)
         .alert("パートナーが発行した連携コードを入力", isPresented: $vm.shouldShowShareCodeAlert) {

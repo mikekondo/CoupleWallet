@@ -29,6 +29,7 @@ import SwiftUI
                     await vm.pullToReflesh()
                 }
             }
+            AddMobBannerContentView()
         }
         .background(rootView)
         .overlay(alignment: .bottomTrailing) {

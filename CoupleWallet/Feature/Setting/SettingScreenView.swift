@@ -64,7 +64,7 @@ struct SettingScreenView<VM: SettingViewModel>: View {
                         )
                 }
             }            
-            BannerContainerView()
+            AddMobBannerContentView()
         }
         .padding(24)        
         .alert(alertType: $vm.alertType)

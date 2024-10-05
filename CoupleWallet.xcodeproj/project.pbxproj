@@ -21,9 +21,7 @@
 		954A11342CB0E0F4005D5E75 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 954A11332CB0E0F4005D5E75 /* FirebaseAuthCombine-Community */; };
 		954A11362CB0E0F4005D5E75 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 954A11352CB0E0F4005D5E75 /* FirebaseFunctions */; };
 		955139EE2CB0E94F003DB4E3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 955139ED2CB0E94F003DB4E3 /* GoogleMobileAds */; };
-		955139F12CB112C7003DB4E3 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F02CB112C2003DB4E3 /* BannerViewController.swift */; };
-		955139F32CB112E3003DB4E3 /* BannerSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F22CB112DF003DB4E3 /* BannerSwiftUIView.swift */; };
-		955139F52CB11379003DB4E3 /* BannerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F42CB11374003DB4E3 /* BannerContainerView.swift */; };
+		955139F52CB11379003DB4E3 /* BannerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955139F42CB11374003DB4E3 /* BannerContentView.swift */; };
 		959B1B1B2C69995700942913 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1A2C69995700942913 /* Int+.swift */; };
 		959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1D2C69D44700942913 /* DataStorable.swift */; };
 		959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B1B1F2C69D4D000942913 /* UserDefauls+.swift */; };
@@ -109,9 +107,7 @@
 		953CC26D2C958CE60026C5E9 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		953DBDE12C951935007F8F80 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		953DBDE32C951936007F8F80 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		955139F02CB112C2003DB4E3 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
-		955139F22CB112DF003DB4E3 /* BannerSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSwiftUIView.swift; sourceTree = "<group>"; };
-		955139F42CB11374003DB4E3 /* BannerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerContainerView.swift; sourceTree = "<group>"; };
+		955139F42CB11374003DB4E3 /* BannerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerContentView.swift; sourceTree = "<group>"; };
 		959B1B1A2C69995700942913 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		959B1B1D2C69D44700942913 /* DataStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorable.swift; sourceTree = "<group>"; };
 		959B1B1F2C69D4D000942913 /* UserDefauls+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefauls+.swift"; sourceTree = "<group>"; };
@@ -223,9 +219,7 @@
 		955139EF2CB112BD003DB4E3 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
-				955139F42CB11374003DB4E3 /* BannerContainerView.swift */,
-				955139F22CB112DF003DB4E3 /* BannerSwiftUIView.swift */,
-				955139F02CB112C2003DB4E3 /* BannerViewController.swift */,
+				955139F42CB11374003DB4E3 /* BannerContentView.swift */,
 			);
 			path = Banner;
 			sourceTree = "<group>";
@@ -578,7 +572,6 @@
 				95A891832C5F5CDF00959F79 /* AnyTransition+.swift in Sources */,
 				95A890F62C5DA2E600959F79 /* SignInScreenView.swift in Sources */,
 				953CC26E2C958CE60026C5E9 /* CustomError.swift in Sources */,
-				955139F12CB112C7003DB4E3 /* BannerViewController.swift in Sources */,
 				95A8917F2C5F56B400959F79 /* SettingScreenView.swift in Sources */,
 				959B1B322C6B1B8600942913 /* EditPayCoordinator.swift in Sources */,
 				959B1B262C69D66400942913 /* UserSettingViewModel.swift in Sources */,
@@ -597,7 +590,6 @@
 				959B1B202C69D4D000942913 /* UserDefauls+.swift in Sources */,
 				959B1B282C69D66F00942913 /* UserSettingCoordinator.swift in Sources */,
 				95F6D7092C71BB950051E00B /* PriceFormatter.swift in Sources */,
-				955139F32CB112E3003DB4E3 /* BannerSwiftUIView.swift in Sources */,
 				95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */,
 				9527C8812C68451F008DE420 /* PayCardCoordinator.swift in Sources */,
 				959B1B1E2C69D44700942913 /* DataStorable.swift in Sources */,
@@ -606,7 +598,7 @@
 				9527C8832C6851E6008DE420 /* PayListViewModel.swift in Sources */,
 				959B1B3E2C7077B000942913 /* SettingCoordinator.swift in Sources */,
 				9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */,
-				955139F52CB11379003DB4E3 /* BannerContainerView.swift in Sources */,
+				955139F52CB11379003DB4E3 /* BannerContentView.swift in Sources */,
 				959B1B352C6B1FBD00942913 /* PayListCoordinator.swift in Sources */,
 				95A890F42C5DA26200959F79 /* Transitioner.swift in Sources */,
 				95A890C42C5DA06D00959F79 /* SceneDelegate.swift in Sources */,
