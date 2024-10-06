@@ -12,6 +12,7 @@ import Foundation
     func didTapAdd() async
     func didTapMyName()
     func didTapPartnerName()
+    func didTapCloseButton()
 }
 
 protocol AddPayTransitionDelegate: AnyObject {
@@ -84,5 +85,9 @@ final class AddPayViewModelImpl: AddPayViewModel {
 
     func didTapPartnerName() {
         isPayByMe = false
+    }
+
+    func didTapCloseButton() {
+        transitionDelegate?.dismiss(completion: nil)
     }
 }

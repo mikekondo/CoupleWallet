@@ -27,7 +27,7 @@ final class SettingViewModelImpl: SettingViewModel {
     }
 
     func didTapDisplayShareCode() {
-        alertType = .init(title: "共有コードをパートナーに入力してもらってください", message: displayShareCodeMessageText)
+        alertType = .init(title: "パートナーにアプリをインストールしてもらい共有コードを入力してもらってください", message: displayShareCodeMessageText)
     }
 
     private var displayShareCodeMessageText: String {

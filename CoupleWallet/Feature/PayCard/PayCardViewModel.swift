@@ -19,10 +19,14 @@ import FirebaseAuth
     func didTapAddButton()
     func didTapPayCell(id: String)
     func didTapDeleteButton(id: String) async
-    func didTapPartnerLinkageButton()    
+    func didTapPartnerLinkageButton()
+
     // internal
     func viewDidLoad() async
     func pullToReflesh() async
+
+    // transitionSheet
+    var shouldShowAddSheet: Bool { get set }
 }
 
 protocol PayCardTransitionDelegate: AnyObject {
@@ -53,6 +57,7 @@ final class PayCardViewModelImpl: PayCardViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false
     @Published var alertType: AlertType?
+    @Published var shouldShowAddSheet: Bool = false
     weak var transitionDelegate: PayCardTransitionDelegate?
     let firebaseManager = FirebaseManager.shared
     var dataStore = UserDefaults.standard
@@ -106,8 +111,6 @@ extension PayCardViewModelImpl {
     }
 
     func didTapAddButton() {
-        let unitid = Bundle.main.object(forInfoDictionaryKey: "ADMOBBannerUNITID") as? String
-        print(unitid)
         transitionDelegate?.transitionToAdd(addPayHandler: {
             await self.fetch()
         })
@@ -139,7 +142,7 @@ extension PayCardViewModelImpl {
     }
 
     func didTapPartnerLinkageButton() {
-        alertType = .init(title: "共有コードをパートナーに入力してもらってください", message: displayShareCodeMessageText)
+        alertType = .init(title: "パートナーにアプリをインストールしてもらい共有コードを入力してもらってください", message: displayShareCodeMessageText)
     }
 
     private var displayShareCodeMessageText: String {
@@ -165,8 +168,8 @@ extension PayCardViewModelImpl {
 
     var payBalanceCardViewData: PayBalanceCardViewData? {
         if case .overPayment(let payerName, let receiverName, let difference) = payBalanceType {
-            let nameText = payerName + "→" + receiverName
-            let priceText = PriceFormatter.string(forPrice: difference, sign: .tail)
+            let nameText = payerName + "が" + receiverName + "に"
+            let priceText = PriceFormatter.string(forPrice: difference, sign: .tail) + "払う"
             return .init(nameText: nameText, priceText: priceText)
         } else {
             return nil

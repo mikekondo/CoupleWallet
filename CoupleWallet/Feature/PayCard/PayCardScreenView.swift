@@ -6,6 +6,8 @@ import SwiftUI
         VStack(spacing: 28) {            
             cardView
                 .padding(.horizontal, 16)
+            addPayView
+                .padding(.horizontal, 16)
             if vm.shouldShowPartnerLinkageView {
                 partnerLinkageView
                     .padding(.horizontal, 16)
@@ -14,6 +16,7 @@ import SwiftUI
                 switch vm.payListViewType {
                 case .content:
                     payListView
+                        .padding(.horizontal, 16)
                 case .zeroMatch, .error:
                     EmptyView()
                 }
@@ -32,11 +35,6 @@ import SwiftUI
             AddMobBannerContentView()
         }
         .background(rootView)
-        .overlay(alignment: .bottomTrailing) {
-            addView
-                .padding(.trailing, 16)
-                .padding(.bottom, 8)
-        }
         .loading(isPresented: $vm.shouldShowLoading)
         .alert(alertType: $vm.alertType)        
     }
@@ -52,6 +50,20 @@ extension PayCardScreenView {
             errorView
         case .zeroMatch:
             zeroMatchView
+        }
+    }
+
+    private var addPayView: some View {
+        Button {
+            vm.didTapAddButton()
+        } label: {
+            Text("立替記録を追加する")
+                .font(.headline.bold())
+                .foregroundColor(.white)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .background(Color.gray.gradient, in: RoundedRectangle(cornerRadius: 12))
+                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
         }
     }
     // パートナー連携訴求モジュール
@@ -124,13 +136,11 @@ extension PayCardScreenView {
                             .foregroundStyle(Color.black.gradient)
                             .animation(.default, value: viewData.priceText)
                         Button {
-                            Task { @MainActor in
+                            Task {
                                 await vm.didTapUpdatePayBalanceButton()
                             }
                         } label: {
                             Image(systemName: "arrow.clockwise")
-                                .resizable()
-                                .frame(width: 20, height: 20)
                                 .font(.title3.bold())
                                 .foregroundStyle(Color.gray)
                         }
@@ -221,13 +231,8 @@ extension PayCardScreenView {
     }
 
     private var payListView: some View {
-        VStack(spacing: 8) {
-            Text("立替リスト")
-                .font(.title3.bold())
-                .foregroundStyle(Color.black)
-                .padding(.leading, 4)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            LazyVStack(alignment: .leading, spacing: 16) {
+        LazyVStack(pinnedViews: .sectionHeaders) {
+            Section {
                 ForEach(vm.payViewDataList) { viewData in
                     payCell(viewData: viewData)
                         .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
@@ -236,9 +241,14 @@ extension PayCardScreenView {
                             vm.didTapPayCell(id: viewData.id)
                         }
                 }
+            } header: {
+                Text("〇〇月の立替リスト")
+                    .font(.title3.bold())
+                    .foregroundStyle(Color.black)
+                    .padding(.leading, 4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-        .padding(.horizontal, 16)
     }
 
     private func payCell(viewData: PayViewData) -> some View {
