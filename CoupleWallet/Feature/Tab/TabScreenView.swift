@@ -16,7 +16,7 @@ import SwiftUI
         VStack {
             TabView(selection: $vm.selection) {
                 PayCardScreenView(vm: payCardVM)
-                    .tag(TabType.home)
+                    .tag(TabType.card)
                     .background {
                         if !isTabBarHidden {
                             HideTabBar {
@@ -25,9 +25,8 @@ import SwiftUI
                             }
                         }
                     }
-                //            PayListScreenView(vm: payListVM)
-                //                .tag(TabType.search)
-                //                .toolbar(.hidden, for: .tabBar)
+                PayListScreenView(vm: payListVM)
+                    .tag(TabType.list)
                 SettingScreenView(vm: settingVM)
                     .tag(TabType.settings)                    
             }

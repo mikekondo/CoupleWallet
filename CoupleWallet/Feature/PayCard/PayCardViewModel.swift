@@ -7,8 +7,6 @@ import FirebaseAuth
     var shouldShowPayView: Bool { get set }
     var payBalanceCardViewType: PayBalanceCardViewType { get }
     var payBalanceCardViewData: PayBalanceCardViewData? { get }
-    var payListViewType: PayListViewType { get }
-    var payViewDataList: [PayViewData] { get }
     var shouldShowLoading: Bool { get set }
     var shouldShowPartnerLinkageView: Bool { get }
     var alertType: AlertType? { get set }
@@ -16,17 +14,15 @@ import FirebaseAuth
     // tap logic
     func didTapUpdatePayBalanceButton() async
     func didTapCardView()
-    func didTapAddButton()
-    func didTapPayCell(id: String)
+    func didTapAddButton()    
     func didTapDeleteButton(id: String) async
     func didTapPartnerLinkageButton()
 
-    // internal
+    // life cycle
     func viewDidLoad() async
-    func pullToReflesh() async
 
-    // transitionSheet
-    var shouldShowAddSheet: Bool { get set }
+    // internal
+    func pullToReflesh() async
 }
 
 protocol PayCardTransitionDelegate: AnyObject {
@@ -40,12 +36,6 @@ enum PayBalanceCardViewType {
     case noData
 }
 
-enum PayListViewType {
-    case zeroMatch
-    case content
-    case error
-}
-
 struct PayBalanceCardViewData {
     let nameText: String
     let priceText: String
@@ -54,10 +44,8 @@ struct PayBalanceCardViewData {
 final class PayCardViewModelImpl: PayCardViewModel {
     @Published var shouldShowPayView: Bool = true
     @Published var payBalanceType: PayBalanceType = .noData
-    @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false
     @Published var alertType: AlertType?
-    @Published var shouldShowAddSheet: Bool = false
     weak var transitionDelegate: PayCardTransitionDelegate?
     let firebaseManager = FirebaseManager.shared
     var dataStore = UserDefaults.standard
@@ -78,7 +66,6 @@ extension PayCardViewModelImpl {
 
     private func fetch() async {
         await fetchPayBalanceType()
-        await fetchPayList()
     }
 
     private func fetchPayBalanceType() async {
@@ -86,19 +73,6 @@ extension PayCardViewModelImpl {
             payBalanceType = try await firebaseManager.getPayBalanceType()
         } catch {
             // TODO: エラーハンドリング
-        }
-    }
-
-    private func fetchPayList() async {
-        do {
-            let payList = try await firebaseManager.fetchPayList()
-            if payList.isEmpty {
-                payListResponseType = .noData
-            } else {
-                payListResponseType = .success(payList)
-            }
-        } catch {
-            payListResponseType = .error
         }
     }
 }
@@ -118,17 +92,6 @@ extension PayCardViewModelImpl {
 
     func didTapUpdatePayBalanceButton() async {
         await fetchPayBalanceType()
-    }
-
-    func didTapPayCell(id: String) {
-        if case .success(let payList) = payListResponseType {
-            guard let payData = payList.first(where: { $0.id == id}) else {
-                return
-            }
-            transitionDelegate?.transitionToEditPay(payData: payData)  { [weak self] in
-                await self?.fetch()
-            }
-        }
     }
 
     func didTapDeleteButton(id: String) async {
@@ -176,17 +139,6 @@ extension PayCardViewModelImpl {
         }
     }
 
-    // payList view
-    var payViewDataList: [PayViewData] {
-        if case .success(let payList) = payListResponseType {
-            return payList.map { payData in
-                getPayViewData(payData: payData)
-            }
-        } else {
-            return []
-        }
-    }
-
     func getPayViewData(payData: PayData) -> PayViewData{
         let title = payData.title == "" ? "未入力" : payData.title
         return .init(
@@ -196,17 +148,6 @@ extension PayCardViewModelImpl {
             dateText: payData.date.formatted(),
             priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)
         )
-    }
-
-    var payListViewType: PayListViewType {
-        switch payListResponseType {
-        case .success:
-            return .content
-        case .error:
-            return .error
-        case .noData:
-            return .zeroMatch
-        }
     }
 
     // NOTE: パートナー連携訴求モジュールの表示条件

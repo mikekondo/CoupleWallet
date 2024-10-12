@@ -12,6 +12,7 @@ import Foundation
     // ui logic
     var payListResponseType: PayListResponseType { get set }
     var payViewDataList: [PayViewData] { get }
+    var payListViewType: PayListViewType { get }
     var shouldShowLoading: Bool { get set }
 }
 
@@ -19,6 +20,12 @@ enum PayListResponseType {
     case success([PayData])
     case error
     case noData
+}
+
+enum PayListViewType {
+    case content
+    case zeromatch
+    case error
 }
 
 protocol PayListTransitionDelegate: AnyObject {
@@ -96,6 +103,17 @@ extension PayListViewModelImpl {
             }
         } else {
             return []
+        }
+    }
+
+    var payListViewType: PayListViewType {
+        switch payListResponseType {
+        case .success:
+            return .content
+        case .error:
+            return .error
+        case .noData:
+            return .zeromatch
         }
     }
 

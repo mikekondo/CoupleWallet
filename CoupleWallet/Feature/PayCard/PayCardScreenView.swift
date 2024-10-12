@@ -3,56 +3,39 @@ import SwiftUI
 @MainActor struct PayCardScreenView<VM: PayCardViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
-        VStack(spacing: 28) {            
-            cardView
-                .padding(.horizontal, 16)
-            addPayView
-                .padding(.horizontal, 16)
-            if vm.shouldShowPartnerLinkageView {
-                partnerLinkageView
-                    .padding(.horizontal, 16)
-            }
+        VStack(spacing: 0) {
             ScrollView {
-                switch vm.payListViewType {
-                case .content:
-                    payListView
+                VStack(spacing: 28) {
+                    cardView
                         .padding(.horizontal, 16)
-                case .zeroMatch, .error:
-                    EmptyView()
+                    addPayView
+                        .padding(.horizontal, 16)
+                    if vm.shouldShowPartnerLinkageView {
+                        partnerLinkageView
+                            .padding(.horizontal, 16)
+                    }
                 }
             }
-            .background(Color.white)
-            .onViewDidLoad {
-                Task {
-                    await vm.viewDidLoad()
-                }
-            }
-            .refreshable {
-                Task {
-                    await vm.pullToReflesh()
-                }
-            }
+            Spacer()
             AddMobBannerContentView()
         }
-        .background(rootView)
+        .background(Color.white)
+        .onViewDidLoad {
+            Task {
+                await vm.viewDidLoad()
+            }
+        }
+        .refreshable {
+            Task {
+                await vm.pullToReflesh()
+            }
+        }
         .loading(isPresented: $vm.shouldShowLoading)
-        .alert(alertType: $vm.alertType)        
+        .alert(alertType: $vm.alertType)
     }
 }
 
 extension PayCardScreenView {
-    @ViewBuilder
-    private var rootView: some View {
-        switch vm.payListViewType {
-        case .content:
-            EmptyView()
-        case .error:
-            errorView
-        case .zeroMatch:
-            zeroMatchView
-        }
-    }
-
     private var addPayView: some View {
         Button {
             vm.didTapAddButton()
@@ -228,66 +211,6 @@ extension PayCardScreenView {
                 .frame(width: 50, height: 50)
         }
         .foregroundStyle(Color.black.gradient)
-    }
-
-    private var payListView: some View {
-        LazyVStack(pinnedViews: .sectionHeaders) {
-            Section {
-                ForEach(vm.payViewDataList) { viewData in
-                    payCell(viewData: viewData)
-                        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
-                        .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
-                        .onTapGesture {
-                            vm.didTapPayCell(id: viewData.id)
-                        }
-                }
-            } header: {
-                Text("〇〇月の立替リスト")
-                    .font(.title3.bold())
-                    .foregroundStyle(Color.black)
-                    .padding(.leading, 4)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-    }
-
-    private func payCell(viewData: PayViewData) -> some View {
-        HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(viewData.title)
-                    .font(.title3.weight(.bold))
-                    .foregroundStyle(Color.black)
-                Text(viewData.byName)
-                    .font(.callout)
-                    .foregroundStyle(Color.gray)
-                Text(viewData.dateText)
-                    .font(.caption2)
-                    .foregroundStyle(Color.gray.opacity(0.7))
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            HStack(spacing: 16) {
-                Text(viewData.priceText)
-                    .font(.title2.weight(.semibold))
-                    .foregroundStyle(Color.black)
-                Menu {
-                    Button {
-                        Task {
-                            await vm.didTapDeleteButton(id: viewData.id)
-                        }
-                    } label: {
-                        Label("削除", systemImage: "trash")
-                            .font(.title3.bold())
-                            .foregroundStyle(Color.red)
-                    }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .foregroundStyle(Color.gray)
-                }
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
     }
 
     private var zeroMatchView: some View {

@@ -3,6 +3,71 @@ import SwiftUI
 struct PayListScreenView<VM: PayListViewModel>: View {
     @StateObject var vm: VM
     var body: some View {
+        rootView
+            .refreshable {
+                Task { @MainActor in
+                    await vm.pullToReflesh()
+                }
+            }
+            .onViewDidLoad() {
+                Task { @MainActor in
+                    await vm.onViewDidLoad()
+                }
+            }
+            .loading(isPresented: $vm.shouldShowLoading)
+            .navigationTitle("立替リスト")
+    }
+}
+
+extension PayListScreenView {
+    @ViewBuilder
+    private var rootView: some View {
+        switch vm.payListViewType {
+        case .content:
+            contentView
+        case .error:
+            errorView
+        case .zeromatch:
+            zeroMatchView
+        }
+    }
+
+    private var zeroMatchView: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "tray.and.arrow.down")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(.black)
+            Text("立替記録がありません")
+                .font(.title3.bold())
+                .foregroundStyle(.black)
+        }
+        .background(Color.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var errorView: some View {
+        VStack(spacing: 16) {
+            Text("データの読み込み中にエラーが発生しました")
+                .font(.callout.bold())
+                .foregroundStyle(.black)
+            Button(action: {
+                Task {
+                    await vm.pullToReflesh()
+                }
+            }) {
+                Text("再試行")
+                    .font(.title3.bold())
+                    .padding(16)
+                    .foregroundStyle(.white)
+                    .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 8))
+            }
+        }
+        .background(Color.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var contentView: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(vm.payViewDataList) { viewData in
@@ -18,22 +83,9 @@ struct PayListScreenView<VM: PayListViewModel>: View {
                 }
             }
         }
-        .refreshable {
-            Task { @MainActor in
-                await vm.pullToReflesh()
-            }
-        }
-        .onViewDidLoad() {
-            Task { @MainActor in
-                await vm.onViewDidLoad()
-            }
-        }
-        .loading(isPresented: $vm.shouldShowLoading)
     }
-}
 
-extension PayListScreenView {
-    func payCell(viewData: PayViewData) -> some View {
+    private func payCell(viewData: PayViewData) -> some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(viewData.title)
@@ -67,11 +119,12 @@ extension PayListScreenView {
                         .foregroundStyle(Color.gray)
                         .padding()
                 }
-                .background(Color.white)
-                .cornerRadius(8)
             }
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+        .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
     }
 }
 

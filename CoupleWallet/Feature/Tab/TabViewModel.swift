@@ -6,7 +6,7 @@ import Foundation
 }
 
 final class TabViewModelImpl: TabViewModel {
-    @Published var selection: TabType = .home
+    @Published var selection: TabType = .card
     @Published var isTabBarHidden: Bool = false
 }
 
