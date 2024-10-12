@@ -115,15 +115,21 @@ extension FirebaseManager {
             .getDocuments()
             .documents
 
+        // NOTE: 立替の記録がなければ.nodataを返す
+        if payDocuments.isEmpty {
+            return .noData
+        }
+
         var myTotalPayPrice: Int = 0
         var partnerTotalPayPrice: Int = 0
 
+        // TODO: パートナー未連携時の対応を入れる
         payDocuments.forEach { document in
             guard let price = document.get("price") as? Int,
                   let byName = document.get("byName") as? String else { return }
             if byName == dataStore.userName {
                 myTotalPayPrice += price
-            } else if byName == dataStore.partnerName {
+            } else {
                 partnerTotalPayPrice += price
             }
         }

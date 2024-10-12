@@ -14,7 +14,7 @@ import FirebaseAuth
     // tap logic
     func didTapUpdatePayBalanceButton() async
     func didTapCardView()
-    func didTapAddButton()    
+    func didTapAddButton()
     func didTapDeleteButton(id: String) async
     func didTapPartnerLinkageButton()
 
@@ -130,11 +130,15 @@ extension PayCardViewModelImpl {
     }
 
     var payBalanceCardViewData: PayBalanceCardViewData? {
-        if case .overPayment(let payerName, let receiverName, let difference) = payBalanceType {
+        // TODO: 立替金額が0円時のUIの工夫をしたい
+        switch payBalanceType {
+        case .overPayment(let payerName, let receiverName, let difference):
             let nameText = payerName + "が" + receiverName + "に"
             let priceText = PriceFormatter.string(forPrice: difference, sign: .tail) + "払う"
             return .init(nameText: nameText, priceText: priceText)
-        } else {
+        case .equal:
+            return .init(nameText: "立替金額は", priceText: "0円です")
+        case .noData:
             return nil
         }
     }

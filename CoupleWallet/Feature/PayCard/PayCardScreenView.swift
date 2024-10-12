@@ -84,15 +84,22 @@ extension PayCardScreenView {
                 .stroke(Color.gray.opacity(0.3), lineWidth: 2)
         }
     }
+
+    @ViewBuilder
     private var cardView: some View {
-        VStack(spacing: 0) {
-            if vm.shouldShowPayView {
-                payView
-                    .transition(.reverseFlip)
-            } else {
-                totalView
-                    .transition(.flip)
-            }
+        switch vm.payBalanceCardViewType {
+        case .content, .equal:
+            VStack(spacing: 0) {
+                if vm.shouldShowPayView {
+                    payView
+                        .transition(.reverseFlip)
+                } else {
+                    totalView
+                        .transition(.flip)
+                }
+            }       
+        case .noData:
+            EmptyView()
         }
     }
 

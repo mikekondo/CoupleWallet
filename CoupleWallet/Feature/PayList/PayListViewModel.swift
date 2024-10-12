@@ -108,7 +108,10 @@ extension PayListViewModelImpl {
 
     var payListViewType: PayListViewType {
         switch payListResponseType {
-        case .success:
+        case .success(let payList):
+            if payList.isEmpty {
+                return .zeromatch
+            }
             return .content
         case .error:
             return .error
