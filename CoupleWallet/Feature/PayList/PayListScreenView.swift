@@ -15,20 +15,23 @@ struct PayListScreenView<VM: PayListViewModel>: View {
                 }
             }
             .loading(isPresented: $vm.shouldShowLoading)
-            .navigationTitle("立替リスト")
     }
 }
 
 extension PayListScreenView {
     @ViewBuilder
     private var rootView: some View {
-        switch vm.payListViewType {
-        case .content:
-            contentView
-        case .error:
-            errorView
-        case .zeromatch:
-            zeroMatchView
+        VStack(spacing: 0) {
+            switch vm.payListViewType {
+            case .content:
+                contentView
+            case .error:
+                errorView
+            case .zeromatch:
+                zeroMatchView
+            }
+            Spacer()
+            AddMobBannerContentView()
         }
     }
 

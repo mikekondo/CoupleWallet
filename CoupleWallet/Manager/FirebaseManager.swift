@@ -123,7 +123,6 @@ extension FirebaseManager {
         var myTotalPayPrice: Int = 0
         var partnerTotalPayPrice: Int = 0
 
-        // TODO: パートナー未連携時の対応を入れる
         payDocuments.forEach { document in
             guard let price = document.get("price") as? Int,
                   let byName = document.get("byName") as? String else { return }
