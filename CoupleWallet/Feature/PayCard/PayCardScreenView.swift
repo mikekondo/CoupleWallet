@@ -97,7 +97,7 @@ extension PayCardScreenView {
                     totalView
                         .transition(.flip)
                 }
-            }       
+            }
         case .noData:
             EmptyView()
         }
@@ -170,11 +170,11 @@ extension PayCardScreenView {
                 .background(Color.black.gradient)
                 .clipShape(RoundedCorner(radius: 12, corners: [.topLeft, .topRight]))
             VStack(alignment: .leading, spacing: 16) {
-                Text("8月の合計金額")
+                Text(vm.totalPayCardViewData.currentMonthText)
                     .font(.title2.bold())
                     .foregroundStyle(.black)
                 HStack(spacing: 16) {
-                    Text("1,000円")
+                    Text(vm.totalPayCardViewData.priceText)
                         .font(.title.bold())
                         .foregroundStyle(.black)
                     Button {

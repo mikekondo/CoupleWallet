@@ -7,6 +7,7 @@ import FirebaseAuth
     var shouldShowPayView: Bool { get set }
     var payBalanceCardViewType: PayBalanceCardViewType { get }
     var payBalanceCardViewData: PayBalanceCardViewData? { get }
+    var totalPayCardViewData: TotalPayCardViewData { get }
     var shouldShowLoading: Bool { get set }
     var shouldShowPartnerLinkageView: Bool { get }
     var alertType: AlertType? { get set }
@@ -41,11 +42,17 @@ struct PayBalanceCardViewData {
     let priceText: String
 }
 
+struct TotalPayCardViewData {
+    let priceText: String
+    let currentMonthText: String
+}
+
 final class PayCardViewModelImpl: PayCardViewModel {
     @Published var shouldShowPayView: Bool = true
     @Published var payBalanceType: PayBalanceType = .noData
     @Published var shouldShowLoading: Bool = false
     @Published var alertType: AlertType?
+    @Published var totalPayForCurrentPrice: Int = 0
     weak var transitionDelegate: PayCardTransitionDelegate?
     let firebaseManager = FirebaseManager.shared
     var dataStore = UserDefaults.standard
@@ -66,6 +73,15 @@ extension PayCardViewModelImpl {
 
     private func fetch() async {
         await fetchPayBalanceType()
+        await fetchTotalPayForCurrentMonth()
+    }
+
+    private func fetchTotalPayForCurrentMonth() async {
+        do {
+            totalPayForCurrentPrice = try await firebaseManager.fetchTotalPayForCurrentMonth()
+        } catch {
+            // TODO: エラーハンドリング
+        }
     }
 
     private func fetchPayBalanceType() async {
@@ -134,8 +150,8 @@ extension PayCardViewModelImpl {
         switch payBalanceType {
         case .overPayment(let payerName, let receiverName, let difference):
             let nameText = payerName + "が" + receiverName + "に"
-            let priceText = PriceFormatter.string(forPrice: difference, sign: .tail) + "払う"
-            return .init(nameText: nameText, priceText: priceText)
+            let priceText = PriceFormatter.string(forPrice: difference, sign: .tail)
+            return .init(nameText: nameText, priceText: priceText + "払う")
         case .equal:
             return .init(nameText: "立替金額は", priceText: "0円です")
         case .noData:
@@ -159,6 +175,16 @@ extension PayCardViewModelImpl {
     // - 財布作成者であること
     var shouldShowPartnerLinkageView: Bool {
         !dataStore.isPartnerLink && dataStore.shareCode != nil
+    }
+
+    var totalPayCardViewData: TotalPayCardViewData {
+        // 現在月を取得
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.dateFormat = "MMMM"
+        let currentMonthText = dateFormatter.string(from: Date())
+
+        return .init(priceText: PriceFormatter.string(forPrice: totalPayForCurrentPrice, sign: .tail), currentMonthText: currentMonthText + "の合計金額")
     }
 }
 

@@ -28,11 +28,10 @@ import SwiftUI
                 PayListScreenView(vm: payListVM)
                     .tag(TabType.list)
                 SettingScreenView(vm: settingVM)
-                    .tag(TabType.settings)                    
+                    .tag(TabType.settings)
             }
             CustomTabBar(tabType: $vm.selection)
         }
-        .navigationBarBackButtonHidden()
     }
 }
 

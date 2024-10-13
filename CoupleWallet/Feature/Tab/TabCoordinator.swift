@@ -29,17 +29,27 @@ import UIKit
             settingCoordinator = .init(transitioner: transitioner)
             let settingVM = SettingViewModelImpl()
 
-            let vc = UIHostingController(
-                rootView: TabScreenView(
-                    vm: vm,
-                    payCardVM: payCardVM,
-                    payListVM: payListVM,
-                    settingVM: settingVM
-                )
-            )
-            vc.navigationItem.hidesBackButton = true
+            let vc = TabHostingController(rootView: TabScreenView(vm: vm, payCardVM: payCardVM, payListVM: payListVM, settingVM: settingVM))
             transitioner.push(viewController: vc, animated: true)
         }
     }
 }
 
+class TabHostingController<Content: View>: UIHostingController<Content> {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        Task { @MainActor in
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        Task { @MainActor in
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+    }
+
+}

@@ -90,6 +90,42 @@ extension FirebaseManager {
         return payDataList
     }
 
+    func fetchTotalPayForCurrentMonth() async throws -> Int {
+        guard let shareCode = dataStore.shareCode else { return 0 }
+        // 端末の現在の年と月を取得
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let year = calendar.component(.year, from: currentDate)
+        let month = calendar.component(.month, from: currentDate)
+
+        // 現在の月の開始日と終了日を計算
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = 1
+        guard let startDate = calendar.date(from: components) else { return 0 }
+
+        components.month = month + 1
+        components.day = 0
+        guard let endDate = calendar.date(from: components) else { return 0 }
+
+        let payDocuments = try await db
+               .collection(.users)
+               .document(shareCode)
+               .collection(.pay)
+               .whereField("createdAt", isGreaterThanOrEqualTo: Timestamp(date: startDate))
+               .whereField("createdAt", isLessThanOrEqualTo: Timestamp(date: endDate))
+               .getDocuments()
+               .documents
+
+        var totalPay = 0
+        payDocuments.forEach { document in
+            guard let price = document.get("price") as? Int else { return }
+            totalPay += price
+        }
+        return totalPay
+    }
+
     func deletePay(id: String) async throws {
         guard let shareCode = dataStore.shareCode else { return }
         try await db

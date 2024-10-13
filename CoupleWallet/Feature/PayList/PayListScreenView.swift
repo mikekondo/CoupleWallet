@@ -22,6 +22,7 @@ extension PayListScreenView {
     @ViewBuilder
     private var rootView: some View {
         VStack(spacing: 0) {
+            customNavigationBar
             switch vm.payListViewType {
             case .content:
                 contentView
@@ -33,6 +34,14 @@ extension PayListScreenView {
             Spacer()
             AddMobBannerContentView()
         }
+    }
+
+    private var customNavigationBar: some View {
+        Text("立替リスト")
+            .font(.title3.bold())
+            .foregroundStyle(Color.black)
+            .frame(maxWidth: .infinity)
+            .padding()
     }
 
     private var zeroMatchView: some View {
