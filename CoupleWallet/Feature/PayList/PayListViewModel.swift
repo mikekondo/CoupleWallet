@@ -14,6 +14,9 @@ import Foundation
     var payViewDataList: [PayViewData] { get }
     var payListViewType: PayListViewType { get }
     var shouldShowLoading: Bool { get set }
+    var filterDateText: String { get set }
+    var recentSixMonthsDateTextList: [String] { get }
+    func getFilterDateViewData(date: Date) -> FilterDateViewData
 }
 
 enum PayListResponseType {
@@ -40,9 +43,14 @@ struct PayViewData: Identifiable, Equatable {
     let priceText: String
 }
 
+struct FilterDateViewData {
+    let dateText: String
+}
+
 final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
-    @Published var shouldShowLoading: Bool = false
+    @Published var shouldShowLoading: Bool = false    
+    @Published var filterDateText: String = ""
     let firebaseManager = FirebaseManager.shared
     weak var transitionDelegate: PayListTransitionDelegate?
 }
@@ -129,6 +137,31 @@ extension PayListViewModelImpl {
             priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)
         )
     }
+
+    /// 直近6ヶ月の月を算出
+    var recentSixMonthsDateTextList: [String] {
+        // 現在のカレンダーを取得
+        let calendar = Calendar.current
+
+        // 現在の日付を取得
+        let currentDate = Date()
+
+        // 直近6ヶ月分のDateを格納する配列
+        var lastSixMonths: [String] = []
+
+        // 現在の月から6ヶ月分のDateを逆順に取得
+        for i in 0..<6 {
+            if let date = calendar.date(byAdding: .month, value: -i, to: currentDate) {
+                lastSixMonths.append(getFilterDateViewData(date: date).dateText)
+            }
+        }
+        return lastSixMonths
+    }
+
+    func getFilterDateViewData(date: Date) -> FilterDateViewData {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.dateFormat = "yyyy年MM月"
+        return .init(dateText:  dateFormatter.string(from: date))
+    }
 }
-
-

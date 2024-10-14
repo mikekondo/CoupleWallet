@@ -1,7 +1,9 @@
 import SwiftUI
+import Algorithms
 
 struct PayListScreenView<VM: PayListViewModel>: View {
     @StateObject var vm: VM
+
     var body: some View {
         rootView
             .refreshable {
@@ -23,6 +25,7 @@ extension PayListScreenView {
     private var rootView: some View {
         VStack(spacing: 0) {
             customNavigationBar
+            filterDateView
             switch vm.payListViewType {
             case .content:
                 contentView
@@ -37,11 +40,24 @@ extension PayListScreenView {
     }
 
     private var customNavigationBar: some View {
-        Text("立替リスト")
-            .font(.title3.bold())
-            .foregroundStyle(Color.black)
-            .frame(maxWidth: .infinity)
-            .padding()
+        HStack(spacing: 0) {
+            Text("立替リスト")
+                .font(.title3.bold())
+                .foregroundStyle(Color.black)
+                .frame(maxWidth: .infinity)
+                .padding()
+        }
+    }
+
+    private var filterDateView: some View {
+        Picker("", selection: $vm.filterDateText) {
+            ForEach(vm.recentSixMonthsDateTextList, id: \.self) { text in
+                Text(text)
+                    .tag(text)
+            }
+            .pickerStyle(.menu)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var zeroMatchView: some View {
