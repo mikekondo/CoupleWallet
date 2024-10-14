@@ -5,7 +5,7 @@ struct AddMobBannerContentView: View {
     var body: some View {
         AdMobBannerView()
             .frame(maxWidth: .infinity)
-            .frame(height: 70)
+            .frame(height: 54)
     }
 }
 

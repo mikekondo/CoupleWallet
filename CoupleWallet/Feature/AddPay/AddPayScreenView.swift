@@ -56,7 +56,8 @@ extension AddPayScreenView {
             nameView
             titleView
             priceView
-        }        
+            dateView
+        }
         .background(Color.white)
     }
 
@@ -113,6 +114,20 @@ extension AddPayScreenView {
             TextField("金額を入力してください", text: $vm.payPrice)
                 .keyboardType(.numberPad)
                 .textFieldStyle(PlainTextFieldStyle())
+                .padding(12)
+                .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 8))
+        }
+    }
+
+    var dateView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("日付")
+                .font(.title3.bold())
+                .foregroundStyle(Color.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            DatePicker("日付を選択してください", selection: $vm.payDate, displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .environment(\.locale, Locale(identifier: "ja_JP"))
                 .padding(12)
                 .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 8))
         }

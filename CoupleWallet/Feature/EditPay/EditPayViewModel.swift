@@ -4,6 +4,7 @@ import Foundation
     // view logic
     var payTitle: String { get set }
     var payPrice: String { get set }
+    var payDate: Date { get set }
     var shouldShowLoading: Bool { get set }
     var isPayByMe: Bool { get set }
     var alertType: AlertType? { get set }
@@ -23,6 +24,7 @@ protocol EditPayTransitionDelegate: AnyObject {
 final class EditPayViewModelImpl: EditPayViewModel {
     @Published var payTitle: String
     @Published var payPrice: String
+    @Published var payDate: Date
     @Published var shouldShowLoading: Bool = false
     @Published var isPayByMe: Bool = true
     @Published var alertType: AlertType?
@@ -39,6 +41,7 @@ final class EditPayViewModelImpl: EditPayViewModel {
         self.editHandler = editHandler
         payTitle = payData.title
         payPrice = String(payData.price)
+        payDate = payData.date
         setupPayNameButton()
     }
 
@@ -59,7 +62,7 @@ extension EditPayViewModelImpl {
             title: payTitle,
             byName: payData.byName,
             price: Int(payPrice) ?? 0,
-            date: payData.date
+            date: payDate
         )
         do {
             try await firebaseManager.updatePay(payData: payData)

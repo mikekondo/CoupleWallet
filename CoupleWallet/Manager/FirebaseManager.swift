@@ -40,7 +40,7 @@ extension FirebaseManager {
             "title": payData.title,
             "byName": payData.byName,
             "price": payData.price,
-            "createdAt": Date()
+            "createdAt": payData.date
         ]
         try await db
             .collection(.users)

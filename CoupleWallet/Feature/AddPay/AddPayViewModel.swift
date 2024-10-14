@@ -3,6 +3,7 @@ import Foundation
 @MainActor protocol AddPayViewModel: ObservableObject {
     var payTitle: String { get set }
     var payPrice: String { get set }
+    var payDate: Date { get set }
     var shouldShowLoading: Bool { get set }
     var isPayByMe: Bool { get set }
     var alertType: AlertType? { get set }
@@ -22,6 +23,7 @@ protocol AddPayTransitionDelegate: AnyObject {
 final class AddPayViewModelImpl: AddPayViewModel {
     @Published var payTitle: String = ""
     @Published var payPrice: String = ""
+    @Published var payDate: Date = Date()
     @Published var shouldShowLoading: Bool = false
     @Published var alertType: AlertType?
     @Published var isPayByMe: Bool = true
@@ -45,7 +47,7 @@ final class AddPayViewModelImpl: AddPayViewModel {
             title: payTitle,
             byName: byName,
             price: Int(payPrice) ?? 0,
-            date: Date()
+            date: payDate
         )
         do {
             try await firebase.savePay(payData: payData)
