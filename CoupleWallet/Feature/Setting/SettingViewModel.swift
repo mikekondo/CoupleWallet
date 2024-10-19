@@ -8,10 +8,15 @@ import Foundation
     var partnerName: String { get }
 }
 
+protocol SettingTransitionDelegate: AnyObject {
+    func transitionToSignIn()
+}
+
 final class SettingViewModelImpl: SettingViewModel {
     @Published var alertType: AlertType?
     let firebaseManager = FirebaseManager.shared
     let dataStore = UserDefaults.standard
+    weak var transitionDelegate: SettingTransitionDelegate?
 
     func didTapDeleteAccount() async {
         alertType = .init(title: "アカウント削除", message: "アカウントを削除してもよろしいですか？", buttons: [
@@ -19,6 +24,7 @@ final class SettingViewModelImpl: SettingViewModel {
             .init(title: "OK", action: {
                 do {
                     try await self.firebaseManager.deleteAccount()
+                    self.transitionDelegate?.transitionToSignIn()
                 } catch {
                     // TODO: エラーハンドリング
                     print(error.localizedDescription)

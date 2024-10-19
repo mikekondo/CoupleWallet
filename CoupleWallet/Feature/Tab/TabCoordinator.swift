@@ -28,6 +28,7 @@ import UIKit
             /// Setting
             settingCoordinator = .init(transitioner: transitioner)
             let settingVM = SettingViewModelImpl()
+            settingVM.transitionDelegate = settingCoordinator
 
             let vc = TabHostingController(rootView: TabScreenView(vm: vm, payCardVM: payCardVM, payListVM: payListVM, settingVM: settingVM))
             transitioner.push(viewController: vc, animated: true)

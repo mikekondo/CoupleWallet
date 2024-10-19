@@ -12,12 +12,12 @@ import SwiftUI
         let vm = SignInViewModelImpl()
         vm.transitionDelegate = self
         let vc = UIHostingController(rootView: SignInScreenView(vm: vm))
-        transitioner.push(viewController: vc, animated: true)
+        transitioner.push(viewController: vc, animated: false)
     }
 }
 
 extension SignInCoordinator: SignInTransitionDelegate {    
-    @MainActor func transitionToUserSetting() {
+    func transitionToUserSetting() {
         userSettingCoordinator = .init(transitioner: transitioner)
         userSettingCoordinator?.start()
     }
