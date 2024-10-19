@@ -113,7 +113,7 @@ extension PayListViewModelImpl {
 extension PayListViewModelImpl {
     var payViewDataList: [PayViewData] {
         if case .success(let payList) = payListResponseType {
-            return payList.map { payData in
+            return payList.compactMap { payData in
                 getPayViewData(payData: payData)
             }
         } else {
@@ -135,9 +135,10 @@ extension PayListViewModelImpl {
         }
     }
 
-    func getPayViewData(payData: PayData) -> PayViewData{
-        .init(
-            id: payData.id,
+    func getPayViewData(payData: PayData) -> PayViewData? {
+        guard let id = payData.id else { return nil}
+        return .init(
+            id: id,
             title: payData.title,
             byName: payData.byName + "が立替え",
             dateText: payData.date.formatted(),

@@ -23,7 +23,7 @@ extension FirebaseManager {
         ]
 
         try await walletRef
-            .setData(data, merge: true) // 既存のデータはなさそうだけど、一応mergeフラグをtrueにする
+            .setData(data)
 
         // パートナー連携されたら、パートナー名をアプリ保存する
         walletRef.addSnapshotListener { [weak self] walletSnapshot, error in
@@ -33,43 +33,30 @@ extension FirebaseManager {
         }
     }
 
-    func savePay(payData: PayData) async throws {
+    func savePay(payData: PayData) throws {
         guard let shareCode = dataStore.shareCode else { return }
-        let data: [String: Any] = [
-            "id": payData.id,
-            "title": payData.title,
-            "byName": payData.byName,
-            "price": payData.price,
-            "createdAt": payData.date
-        ]
-        try await db
+        try db
             .collection(.users)
             .document(shareCode)
             .collection(.pay)
-            .document(payData.id)
-            .setData(data)
+            .addDocument(from: payData)
     }
 
-    func updatePay(payData: PayData) async throws {
+    func updatePay(payData: PayData) throws {
         guard let shareCode = dataStore.shareCode else { return }
-        let data: [String: Any] = [
-            "id": payData.id,
-            "title": payData.title,
-            "byName": payData.byName,
-            "price": payData.price,
-            "createdAt": Date()
-        ]
-        try await db
+        guard let id = payData.id else { return }
+        try db
             .collection(.users)
             .document(shareCode)
             .collection(.pay)
-            .document(payData.id)
-            .updateData(data)
+            .document(id)
+            .setData(from: payData)
     }
+
 
     func fetchPayList(date: Date) async throws -> [PayData] {
         guard let shareCode = dataStore.shareCode else { return [] }
-        // 端末の現在の年と月を取得
+        // 指定した年と月を取得
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
@@ -89,22 +76,16 @@ extension FirebaseManager {
             .collection(.users)
             .document(shareCode)
             .collection(.pay)
-            .whereField("createdAt", isGreaterThanOrEqualTo: Timestamp(date: startDate))
-            .whereField("createdAt", isLessThanOrEqualTo: Timestamp(date: endDate))
-            .order(by: "createdAt", descending: true)
+            .whereField("date", isGreaterThanOrEqualTo: Timestamp(date: startDate))
+            .whereField("date", isLessThanOrEqualTo: Timestamp(date: endDate))
+            .order(by: "date", descending: true)
             .getDocuments()
             .documents
 
-        var payDataList: [PayData] = []
-
-        payDocuments.forEach { document in
-            guard let id = document.get("id") as? String,
-                  let byName = document.get("byName") as? String,
-                  let price = document.get("price") as? Int,
-                  let title = document.get("title") as? String,
-                  let date = document.get("createdAt") as? Timestamp else { return }
-            payDataList.append(.init(id: id, title: title, byName: byName, price: price, date: date.dateValue()))
+        let payDataList = payDocuments.compactMap {
+            return try? $0.data(as: PayData.self)
         }
+
         return payDataList
     }
 
@@ -131,16 +112,15 @@ extension FirebaseManager {
                .collection(.users)
                .document(shareCode)
                .collection(.pay)
-               .whereField("createdAt", isGreaterThanOrEqualTo: Timestamp(date: startDate))
-               .whereField("createdAt", isLessThanOrEqualTo: Timestamp(date: endDate))
+               .whereField("date", isGreaterThanOrEqualTo: Timestamp(date: startDate))
+               .whereField("date", isLessThanOrEqualTo: Timestamp(date: endDate))
                .getDocuments()
                .documents
 
-        var totalPay = 0
-        payDocuments.forEach { document in
-            guard let price = document.get("price") as? Int else { return }
-            totalPay += price
-        }
+        let totalPay = payDocuments.compactMap {
+            return try? $0.data(as: PayData.self).price
+        }.reduce(0, +)
+
         return totalPay
     }
 

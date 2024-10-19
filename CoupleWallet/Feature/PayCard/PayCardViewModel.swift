@@ -159,17 +159,6 @@ extension PayCardViewModelImpl {
         }
     }
 
-    func getPayViewData(payData: PayData) -> PayViewData{
-        let title = payData.title == "" ? "未入力" : payData.title
-        return .init(
-            id: payData.id,
-            title: title,
-            byName: payData.byName + "が立替え",
-            dateText: payData.date.formatted(),
-            priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)
-        )
-    }
-
     // NOTE: パートナー連携訴求モジュールの表示条件
     // - 連携済みでないこと
     // - 財布作成者であること
