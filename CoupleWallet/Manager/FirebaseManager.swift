@@ -203,6 +203,7 @@ extension FirebaseManager {
             "partnerConnector": dataStore.userName,
             "isPartnerLink": true
         ]
+
         try await walletRef
             .setData(data, merge: true)
 

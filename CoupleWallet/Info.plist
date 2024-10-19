@@ -30,5 +30,7 @@
 			<string>cstr6suwn9.skadnetwork</string>
 		</dict>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+    <string>広告を最適化するために使用します。なお、本アプリが個人情報にアクセスすることはありません</string>
 </dict>
 </plist>

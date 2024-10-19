@@ -1,4 +1,6 @@
 import SwiftUI
+import AppTrackingTransparency
+import GoogleMobileAds
 
 struct SignInScreenView<VM: SignInViewModel>: View {
     @StateObject var vm: VM
@@ -34,5 +36,20 @@ struct SignInScreenView<VM: SignInViewModel>: View {
         }
         .padding(.horizontal, 16)
         .alert(alertType: $vm.alertType)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                    // ユーザーがトラッキングを許可した場合
+                case .authorized:                 
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                case .denied, .restricted, .notDetermined:
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                    // オプションで、広告をパーソナライズしない設定を行う
+                    GADMobileAds.sharedInstance().requestConfiguration.maxAdContentRating = GADMaxAdContentRating.general
+                @unknown default:
+                    break
+                }
+            }
+        }
     }
 }
