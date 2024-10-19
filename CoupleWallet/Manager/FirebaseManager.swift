@@ -67,12 +67,30 @@ extension FirebaseManager {
             .updateData(data)
     }
 
-    func fetchPayList() async throws -> [PayData] {
+    func fetchPayList(date: Date) async throws -> [PayData] {
         guard let shareCode = dataStore.shareCode else { return [] }
+        // 端末の現在の年と月を取得
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+
+        // 現在の月の開始日と終了日を計算
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = 1
+        guard let startDate = calendar.date(from: components) else { return [] }
+
+        components.month = month + 1
+        components.day = 0
+        guard let endDate = calendar.date(from: components) else { return [] }
+
         let payDocuments = try await db
             .collection(.users)
             .document(shareCode)
             .collection(.pay)
+            .whereField("createdAt", isGreaterThanOrEqualTo: Timestamp(date: startDate))
+            .whereField("createdAt", isLessThanOrEqualTo: Timestamp(date: endDate))
             .order(by: "createdAt", descending: true)
             .getDocuments()
             .documents

@@ -16,7 +16,6 @@ import Foundation
     var shouldShowLoading: Bool { get set }
     var filterDateText: String { get set }
     var recentSixMonthsDateTextList: [String] { get }
-    func getFilterDateViewData(date: Date) -> FilterDateViewData
 }
 
 enum PayListResponseType {
@@ -53,6 +52,10 @@ final class PayListViewModelImpl: PayListViewModel {
     @Published var filterDateText: String = ""
     let firebaseManager = FirebaseManager.shared
     weak var transitionDelegate: PayListTransitionDelegate?
+
+    init() {
+        filterDateText = convertDateToYearMonthString(date: Date())
+    }
 }
 
 // MARK: Internal logic
@@ -70,13 +73,15 @@ extension PayListViewModelImpl {
         shouldShowLoading = true
         defer { shouldShowLoading = false }
         do {
-            let payList = try await firebaseManager.fetchPayList()
+            guard let filterDate = convertYearMonthStringToDate(dateString: filterDateText) else { return }
+            let payList = try await firebaseManager.fetchPayList(date: filterDate)
             payListResponseType = .success(payList)
         } catch {
             payListResponseType = .error
         }
     }
 }
+
 // MARK: Tap logic
 
 extension PayListViewModelImpl {
@@ -152,16 +157,23 @@ extension PayListViewModelImpl {
         // 現在の月から6ヶ月分のDateを逆順に取得
         for i in 0..<6 {
             if let date = calendar.date(byAdding: .month, value: -i, to: currentDate) {
-                lastSixMonths.append(getFilterDateViewData(date: date).dateText)
+                lastSixMonths.append(convertDateToYearMonthString(date: date))
             }
         }
         return lastSixMonths
     }
 
-    func getFilterDateViewData(date: Date) -> FilterDateViewData {
+    private func convertDateToYearMonthString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateFormat = "yyyy年MM月"
-        return .init(dateText:  dateFormatter.string(from: date))
+        return dateFormatter.string(from: date)
+    }
+
+    private func convertYearMonthStringToDate(dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.dateFormat = "yyyy年MM月"
+        return dateFormatter.date(from: dateString)
     }
 }
