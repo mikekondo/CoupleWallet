@@ -3,10 +3,10 @@ import SwiftUI
 struct LoadingView: View {
     var body: some View {
         ProgressView()
-            .scaleEffect(x: 2, y: 2, anchor: .center)
-            .padding(24)
-            .background(Color.black, in: RoundedRectangle(cornerRadius: 8))
-            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+            .progressViewStyle(.circular)
+            .padding()
+            .tint(Color.white)
+            .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 8))
             .opacity(0.6)
     }
 }

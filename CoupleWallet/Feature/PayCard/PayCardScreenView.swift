@@ -19,6 +19,7 @@ import SwiftUI
             Spacer()
             AddMobBannerContentView()
         }
+        .navigationTitle("立替カード")
         .background(Color.white)
         .onViewDidLoad {
             Task {

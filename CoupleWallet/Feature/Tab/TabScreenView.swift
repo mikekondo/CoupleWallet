@@ -15,20 +15,26 @@ import SwiftUI
     var body: some View {
         VStack {
             TabView(selection: $vm.selection) {
-                PayCardScreenView(vm: payCardVM)
-                    .tag(TabType.card)
-                    .background {
-                        if !isTabBarHidden {
-                            HideTabBar {
-                                print("Hidden")
-                                isTabBarHidden = true
-                            }
+                NavigationStack {
+                    PayCardScreenView(vm: payCardVM)
+                }
+                .tag(TabType.card)
+                .background {
+                    if !isTabBarHidden {
+                        HideTabBar {
+                            print("Hidden")
+                            isTabBarHidden = true
                         }
                     }
-                PayListScreenView(vm: payListVM)
-                    .tag(TabType.list)
-                SettingScreenView(vm: settingVM)
-                    .tag(TabType.settings)
+                }
+                NavigationStack {
+                    PayListScreenView(vm: payListVM)                        
+                }
+                .tag(TabType.list)
+                NavigationStack {
+                    SettingScreenView(vm: settingVM)
+                }
+                .tag(TabType.settings)
             }
             CustomTabBar(tabType: $vm.selection)
         }

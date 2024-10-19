@@ -51,5 +51,4 @@ class TabHostingController<Content: View>: UIHostingController<Content> {
             navigationController?.setNavigationBarHidden(true, animated: false)
         }
     }
-
 }

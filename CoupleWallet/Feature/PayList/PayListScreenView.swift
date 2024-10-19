@@ -6,6 +6,7 @@ struct PayListScreenView<VM: PayListViewModel>: View {
 
     var body: some View {
         rootView
+            .navigationTitle("立替リスト")
             .refreshable {
                 Task { @MainActor in
                     await vm.pullToReflesh()
@@ -24,7 +25,6 @@ extension PayListScreenView {
     @ViewBuilder
     private var rootView: some View {
         VStack(spacing: 0) {
-            customNavigationBar
             filterDateView
             switch vm.payListViewType {
             case .content:
@@ -39,30 +39,27 @@ extension PayListScreenView {
         }
     }
 
-    private var customNavigationBar: some View {
-        HStack(spacing: 0) {
-            Text("立替リスト")
-                .font(.title3.bold())
-                .foregroundStyle(Color.black)
-                .frame(maxWidth: .infinity)
-                .padding()
-        }
-    }
-
     private var filterDateView: some View {
-        Picker("", selection: $vm.filterDateText) {
-            ForEach(vm.recentSixMonthsDateTextList, id: \.self) { text in
-                Text(text)
-                    .tag(text)
-            }
-            .pickerStyle(.menu)
-            .onChange(of: vm.filterDateText) { _, _ in
-                Task {
-                    await vm.updatePayList()
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(vm.filterDateViewDataList.indexed(), id: \.index) { index, viewData in
+                    Text(viewData.dateText)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .font(.callout.bold())
+                        .foregroundStyle(viewData.dateTextColor)
+                        .background(viewData.dateTextBackgroundColor, in: RoundedRectangle(cornerRadius: 12))
+                        .onTapGesture {
+                            Task {
+                                await vm.didTapFilterDateButton(index: index)
+                            }
+                        }
                 }
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white)
     }
 
     private var zeroMatchView: some View {

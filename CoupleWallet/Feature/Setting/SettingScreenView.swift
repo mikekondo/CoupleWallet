@@ -66,7 +66,8 @@ struct SettingScreenView<VM: SettingViewModel>: View {
             }            
             AddMobBannerContentView()
         }
-        .padding(24)        
+        .navigationTitle("設定")
+        .padding(24)
         .alert(alertType: $vm.alertType)
     }
 }

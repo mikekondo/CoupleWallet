@@ -1,12 +1,13 @@
 import Foundation
+import SwiftUI
 
 @MainActor protocol PayListViewModel: ObservableObject {
     func onViewDidLoad() async
     func pullToReflesh() async
-    func updatePayList() async
 
     // tap logic
     func didTapDeleteButton(id: String) async
+    func didTapFilterDateButton(index: Int) async
     func didTapPayCell(id: String)
 
     // ui logic
@@ -14,8 +15,7 @@ import Foundation
     var payViewDataList: [PayViewData] { get }
     var payListViewType: PayListViewType { get }
     var shouldShowLoading: Bool { get set }
-    var filterDateText: String { get set }
-    var recentSixMonthsDateTextList: [String] { get }
+    var filterDateViewDataList: [FilterDateViewData] { get }
 }
 
 enum PayListResponseType {
@@ -34,6 +34,12 @@ protocol PayListTransitionDelegate: AnyObject {
     func transitionToEditPay(payData: PayData, editHandler: @escaping () async -> Void)
 }
 
+struct FilterDateViewData {
+    let dateText: String
+    let dateTextColor: Color
+    let dateTextBackgroundColor: AnyGradient
+}
+
 struct PayViewData: Identifiable, Equatable {
     let id: String
     let title: String
@@ -45,13 +51,9 @@ struct PayViewData: Identifiable, Equatable {
 final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false    
-    @Published var filterDateText: String = ""
+    @Published var filterDate: Date = Date()
     let firebaseManager = FirebaseManager.shared
     weak var transitionDelegate: PayListTransitionDelegate?
-
-    init() {
-        filterDateText = convertDateToYearMonthString(date: Date())
-    }
 }
 
 // MARK: Internal logic
@@ -65,7 +67,8 @@ extension PayListViewModelImpl {
         await fetchPayList()
     }
 
-    func updatePayList() async {
+    func didTapFilterDateButton(index: Int) async {
+        filterDate = recentSixMonthsDateList[index]
         await fetchPayList()
     }
 
@@ -73,7 +76,6 @@ extension PayListViewModelImpl {
         shouldShowLoading = true
         defer { shouldShowLoading = false }
         do {
-            guard let filterDate = convertYearMonthStringToDate(dateString: filterDateText) else { return }
             let payList = try await firebaseManager.fetchPayList(date: filterDate)
             payListResponseType = .success(payList)
         } catch {
@@ -143,8 +145,29 @@ extension PayListViewModelImpl {
         )
     }
 
-    /// 直近6ヶ月の月を算出
-    var recentSixMonthsDateTextList: [String] {
+    var filterDateViewDataList: [FilterDateViewData] {
+        recentSixMonthsDateList.map {
+            let calendar = Calendar.current
+            let filterYear = calendar.component(.year, from: filterDate)
+            let filterMonth = calendar.component(.month, from: filterDate)
+            let listYear = calendar.component(.year, from: $0)
+            let listMonth = calendar.component(.month, from: $0)
+
+            let isSameYearAndMonth = filterYear == listYear && filterMonth == listMonth
+
+            let dateText = convertDateToYearMonthString(date: $0)
+            let dateTextColor = isSameYearAndMonth ? Color.white : Color.black
+            let dateTextBackgroundColor = isSameYearAndMonth ? Color.black.gradient : Color.gray.opacity(0.2).gradient
+
+            return .init(
+                dateText: dateText,
+                dateTextColor: dateTextColor,
+                dateTextBackgroundColor: dateTextBackgroundColor
+            )
+        }
+    }
+
+    private  var recentSixMonthsDateList: [Date] {
         // 現在のカレンダーを取得
         let calendar = Calendar.current
 
@@ -152,15 +175,15 @@ extension PayListViewModelImpl {
         let currentDate = Date()
 
         // 直近6ヶ月分のDateを格納する配列
-        var lastSixMonths: [String] = []
+        var recentSixMonthsDateList: [Date] = []
 
         // 現在の月から6ヶ月分のDateを逆順に取得
         for i in 0..<6 {
             if let date = calendar.date(byAdding: .month, value: -i, to: currentDate) {
-                lastSixMonths.append(convertDateToYearMonthString(date: date))
+                recentSixMonthsDateList.append(date)
             }
         }
-        return lastSixMonths
+        return recentSixMonthsDateList
     }
 
     private func convertDateToYearMonthString(date: Date) -> String {
@@ -168,12 +191,5 @@ extension PayListViewModelImpl {
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateFormat = "yyyy年MM月"
         return dateFormatter.string(from: date)
-    }
-
-    private func convertYearMonthStringToDate(dateString: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ja_JP")
-        dateFormatter.dateFormat = "yyyy年MM月"
-        return dateFormatter.date(from: dateString)
     }
 }
