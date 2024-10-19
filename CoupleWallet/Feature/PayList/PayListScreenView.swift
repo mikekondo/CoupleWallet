@@ -56,6 +56,11 @@ extension PayListScreenView {
                     .tag(text)
             }
             .pickerStyle(.menu)
+            .onChange(of: vm.filterDateText) { _, _ in
+                Task {
+                    await vm.updatePayList()
+                }
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

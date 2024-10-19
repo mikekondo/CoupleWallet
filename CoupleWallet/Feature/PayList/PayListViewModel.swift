@@ -1,9 +1,9 @@
 import Foundation
 
 @MainActor protocol PayListViewModel: ObservableObject {
-    // internal
     func onViewDidLoad() async
     func pullToReflesh() async
+    func updatePayList() async
 
     // tap logic
     func didTapDeleteButton(id: String) async
@@ -42,10 +42,6 @@ struct PayViewData: Identifiable, Equatable {
     let priceText: String
 }
 
-struct FilterDateViewData {
-    let dateText: String
-}
-
 final class PayListViewModelImpl: PayListViewModel {
     @Published var payListResponseType: PayListResponseType = .noData
     @Published var shouldShowLoading: Bool = false    
@@ -68,7 +64,11 @@ extension PayListViewModelImpl {
     func pullToReflesh() async {
         await fetchPayList()
     }
-    
+
+    func updatePayList() async {
+        await fetchPayList()
+    }
+
     private func fetchPayList() async {
         shouldShowLoading = true
         defer { shouldShowLoading = false }
