@@ -50,9 +50,10 @@ final class AddPayViewModelImpl: AddPayViewModel {
             date: payDate
         )
         do {
-            try await firebase.savePay(payData: payData)
+            try firebase.savePay(payData: payData)
+            HapticFeedbackManager.shared.play(.impact(.medium))
             transitionDelegate?.dismiss {
-                Task {
+                Task { @MainActor in
                     await self.addPayHandler()
                 }
             }

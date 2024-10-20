@@ -10,6 +10,7 @@ struct CustomTabBar: View {
             ForEach(TabType.allCases, id: \.rawValue) { tab in
                 Button {
                     tabType = tab
+                    HapticFeedbackManager.shared.play(.impact(.heavy))
                 } label: {
                     HStack(spacing: 8) {
                         Image(systemName: tab.rawValue)

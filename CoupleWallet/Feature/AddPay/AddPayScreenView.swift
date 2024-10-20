@@ -1,9 +1,15 @@
 import SwiftUI
 
 struct AddPayScreenView<VM: AddPayViewModel>: View {
+    enum FocusedField {
+        case price, title
+    }
+
     @StateObject var vm: VM
+    @FocusState private var focusedField: FocusedField?
+
     var body: some View {
-        addView
+        contentView
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .loading(isPresented: $vm.shouldShowLoading)
@@ -12,20 +18,10 @@ struct AddPayScreenView<VM: AddPayViewModel>: View {
                 headerView
             }
             .safeAreaInset(edge: .bottom) {
-                Button {
-                    Task {
-                        await vm.didTapAdd()
-                    }
-                } label: {
-                    Text("追加する")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 12))
-                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                }
-                .padding(16)
+                addButtonView
+            }
+            .onAppear {
+                focusedField = .price
             }
     }
 }
@@ -37,32 +33,49 @@ extension AddPayScreenView {
                 vm.didTapCloseButton()
             } label: {
                 Image(systemName: "xmark")
-                    .font(.title2.bold())
+                    .font(.title3.bold())
                     .foregroundStyle(Color.black.gradient)
             }
             Text("立替記録を追加")
-                .font(.title2.bold())
+                .font(.title3.bold())
                 .foregroundStyle(Color.black.gradient)
                 .frame(maxWidth: .infinity)
             // 「立替記録を追加」を中央にするため、空のViewを配置
             Color.clear
                 .frame(width: 24, height: 24)
         }
+        .padding(12)
+    }
+
+    var addButtonView: some View {
+        Button {
+            Task {
+                await vm.didTapAdd()
+            }
+        } label: {
+            Text("追加する")
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 12))
+                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+        }
         .padding(16)
     }
 
-    var addView: some View {
-        VStack(spacing: 32) {
+    var contentView: some View {
+        VStack(spacing: 16) {
             nameView
-            titleView
             priceView
+            titleView
             dateView
         }
         .background(Color.white)
     }
 
     var nameView: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             Text("支払った人")
                 .font(.title3.bold())
                 .foregroundStyle(Color.black)
@@ -93,20 +106,22 @@ extension AddPayScreenView {
     }
 
     var titleView: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("タイトル")
                 .font(.title3.bold())
                 .foregroundStyle(Color.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
             TextField("タイトルを入力してください（任意）", text: $vm.payTitle)
                 .textFieldStyle(PlainTextFieldStyle())
+                .focused($focusedField, equals: .title)
+                .submitLabel(.done)
                 .padding(12)
                 .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
     var priceView: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("金額")
                 .font(.title3.bold())
                 .foregroundStyle(Color.black)
@@ -114,13 +129,15 @@ extension AddPayScreenView {
             TextField("金額を入力してください", text: $vm.payPrice)
                 .keyboardType(.numberPad)
                 .textFieldStyle(PlainTextFieldStyle())
+                .focused($focusedField, equals: .price)
+                .submitLabel(.done)
                 .padding(12)
                 .background(Color(white: 0.95), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
     var dateView: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("日付")
                 .font(.title3.bold())
                 .foregroundStyle(Color.black)

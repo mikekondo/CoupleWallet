@@ -68,6 +68,7 @@ extension PayListViewModelImpl {
     }
 
     func didTapFilterDateButton(index: Int) async {
+        HapticFeedbackManager.shared.play(.impact(.light))
         filterDate = recentSixMonthsDateList[index]
         await fetchPayList()
     }

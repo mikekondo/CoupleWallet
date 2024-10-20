@@ -97,10 +97,12 @@ extension PayCardViewModelImpl {
 
 extension PayCardViewModelImpl {
     func didTapCardView() {
+        HapticFeedbackManager.shared.play(.impact(.heavy))
         shouldShowPayView.toggle()
     }
 
     func didTapAddButton() {
+        HapticFeedbackManager.shared.play(.impact(.medium))
         transitionDelegate?.transitionToAdd(addPayHandler: {
             await self.fetch()
         })

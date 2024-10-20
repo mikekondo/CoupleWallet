@@ -56,8 +56,7 @@ extension PayListScreenView {
                         }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+            .padding(16)
         }
         .background(Color.white)
     }
@@ -104,7 +103,7 @@ extension PayListScreenView {
                     Button {
                         vm.didTapPayCell(id: viewData.id)
                     } label: {
-                        payCell(viewData: viewData)
+                        payCellView(viewData: viewData)
                     }
                     .background(Color.white)
                     .cornerRadius(12)
@@ -115,7 +114,7 @@ extension PayListScreenView {
         }
     }
 
-    private func payCell(viewData: PayViewData) -> some View {
+    private func payCellView(viewData: PayViewData) -> some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(viewData.title)
@@ -153,7 +152,7 @@ extension PayListScreenView {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+        .background(Color.white.gradient, in: RoundedRectangle(cornerRadius: 12))
         .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
     }
 }

@@ -63,6 +63,7 @@
 		95E0FBF22C8C0B48003EA7BE /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0FBF12C8C0B48003EA7BE /* CustomTabBar.swift */; };
 		95E0FBF52C8C126B003EA7BE /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 95E0FBF42C8C126B003EA7BE /* Algorithms */; };
 		95E0FBF72C8C156E003EA7BE /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0FBF62C8C156E003EA7BE /* TabType.swift */; };
+		95ED7F6D2CC480CD006D4078 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED7F6C2CC480CC006D4078 /* HapticFeedbackManager.swift */; };
 		95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7062C7185EA0051E00B /* PayBalanceData.swift */; };
 		95F6D7092C71BB950051E00B /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7082C71BB950051E00B /* PriceFormatter.swift */; };
 /* End PBXBuildFile section */
@@ -152,6 +153,7 @@
 		95A8918A2C66D9AA00959F79 /* AddPayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPayCoordinator.swift; sourceTree = "<group>"; };
 		95E0FBF12C8C0B48003EA7BE /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		95E0FBF62C8C156E003EA7BE /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
+		95ED7F6C2CC480CC006D4078 /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		95F6D7062C7185EA0051E00B /* PayBalanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceData.swift; sourceTree = "<group>"; };
 		95F6D7082C71BB950051E00B /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +204,7 @@
 		9527C8892C687667008DE420 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				95ED7F6C2CC480CC006D4078 /* HapticFeedbackManager.swift */,
 				9527C88A2C68767D008DE420 /* FirebaseManager.swift */,
 			);
 			path = Manager;
@@ -584,6 +587,7 @@
 				9527C8862C68522E008DE420 /* PayData.swift in Sources */,
 				959B1B302C6B1B7B00942913 /* EditPayViewModel.swift in Sources */,
 				959B1B1B2C69995700942913 /* Int+.swift in Sources */,
+				95ED7F6D2CC480CD006D4078 /* HapticFeedbackManager.swift in Sources */,
 				95A891862C5F5FB300959F79 /* TabCoordinator.swift in Sources */,
 				95A891742C5F549800959F79 /* TabScreenView.swift in Sources */,
 				95A8917D2C5F56AA00959F79 /* PayListScreenView.swift in Sources */,

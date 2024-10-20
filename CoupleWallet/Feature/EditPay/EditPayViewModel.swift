@@ -15,6 +15,7 @@ import Foundation
     func didTapEditButton() async
     func didTapMyName()
     func didTapPartnerName()
+    func didTapCloseButton()
 }
 
 protocol EditPayTransitionDelegate: AnyObject {
@@ -65,7 +66,8 @@ extension EditPayViewModelImpl {
             date: payDate
         )
         do {
-            try await firebaseManager.updatePay(payData: payData)
+            try firebaseManager.updatePay(payData: payData)
+            HapticFeedbackManager.shared.play(.impact(.medium))
             Task { @MainActor in
                 await editHandler()
             }
@@ -105,5 +107,9 @@ extension EditPayViewModelImpl {
 
     func didTapPartnerName() {
         isPayByMe = false
+    }
+
+    func didTapCloseButton() {
+        transitionDelegate?.dismiss()
     }
 }
