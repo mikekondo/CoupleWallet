@@ -68,6 +68,7 @@ extension EditPayViewModelImpl {
         do {
             try firebaseManager.updatePay(payData: payData)
             HapticFeedbackManager.shared.play(.impact(.medium))
+            NotificationCenter.default.post(name: .editPayNotification, object: nil)
             Task { @MainActor in
                 await editHandler()
             }

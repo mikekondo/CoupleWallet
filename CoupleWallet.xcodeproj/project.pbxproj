@@ -64,6 +64,7 @@
 		95E0FBF52C8C126B003EA7BE /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 95E0FBF42C8C126B003EA7BE /* Algorithms */; };
 		95E0FBF72C8C156E003EA7BE /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0FBF62C8C156E003EA7BE /* TabType.swift */; };
 		95ED7F6D2CC480CD006D4078 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED7F6C2CC480CC006D4078 /* HapticFeedbackManager.swift */; };
+		95ED7F6F2CC4CFE0006D4078 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED7F6E2CC4CFD5006D4078 /* NotificationName.swift */; };
 		95F6D7072C7185EA0051E00B /* PayBalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7062C7185EA0051E00B /* PayBalanceData.swift */; };
 		95F6D7092C71BB950051E00B /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6D7082C71BB950051E00B /* PriceFormatter.swift */; };
 /* End PBXBuildFile section */
@@ -154,6 +155,7 @@
 		95E0FBF12C8C0B48003EA7BE /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		95E0FBF62C8C156E003EA7BE /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
 		95ED7F6C2CC480CC006D4078 /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
+		95ED7F6E2CC4CFD5006D4078 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		95F6D7062C7185EA0051E00B /* PayBalanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBalanceData.swift; sourceTree = "<group>"; };
 		95F6D7082C71BB950051E00B /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +232,7 @@
 		959B1B1C2C69D42700942913 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				95ED7F6E2CC4CFD5006D4078 /* NotificationName.swift */,
 				959B1B1A2C69995700942913 /* Int+.swift */,
 				9527C88D2C6877DC008DE420 /* String+.swift */,
 				959B1B1F2C69D4D000942913 /* UserDefauls+.swift */,
@@ -602,6 +605,7 @@
 				9527C8832C6851E6008DE420 /* PayListViewModel.swift in Sources */,
 				959B1B3E2C7077B000942913 /* SettingCoordinator.swift in Sources */,
 				9527C8882C686C56008DE420 /* AddPayViewModel.swift in Sources */,
+				95ED7F6F2CC4CFE0006D4078 /* NotificationName.swift in Sources */,
 				955139F52CB11379003DB4E3 /* BannerContentView.swift in Sources */,
 				959B1B352C6B1FBD00942913 /* PayListCoordinator.swift in Sources */,
 				95A890F42C5DA26200959F79 /* Transitioner.swift in Sources */,

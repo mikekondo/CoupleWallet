@@ -63,8 +63,8 @@ final class PayCardViewModelImpl: PayCardViewModel {
 extension PayCardViewModelImpl {
     func viewDidLoad() async {
         shouldShowLoading = true
+        defer { shouldShowLoading = false }
         await fetch()
-        shouldShowLoading = false
     }
 
     func pullToReflesh() async {
@@ -80,7 +80,7 @@ extension PayCardViewModelImpl {
         do {
             totalPayForCurrentPrice = try await firebaseManager.fetchTotalPayForCurrentMonth()
         } catch {
-            // TODO: エラーハンドリング
+            alertType = .init(message: "更新に失敗しました")
         }
     }
 
@@ -88,7 +88,7 @@ extension PayCardViewModelImpl {
         do {
             payBalanceType = try await firebaseManager.getPayBalanceType()
         } catch {
-            // TODO: エラーハンドリング
+            alertType = .init(message: "更新に失敗しました")
         }
     }
 }
@@ -109,7 +109,7 @@ extension PayCardViewModelImpl {
     }
 
     func didTapUpdatePayBalanceButton() async {
-        await fetchPayBalanceType()
+        await fetchTotalPayForCurrentMonth()
     }
 
     func didTapDeleteButton(id: String) async {
@@ -123,7 +123,7 @@ extension PayCardViewModelImpl {
     }
 
     func didTapPartnerLinkageButton() {
-        alertType = .init(title: "パートナーにアプリをインストールしてもらい共有コードを入力してもらってください", message: displayShareCodeMessageText)
+        alertType = .init(title: "パートナーに\nアプリをインストールしてもらい\n共有コードを入力してもらってください", message: displayShareCodeMessageText)
     }
 
     private var displayShareCodeMessageText: String {

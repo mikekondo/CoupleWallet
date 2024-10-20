@@ -61,6 +61,7 @@ final class PayListViewModelImpl: PayListViewModel {
 extension PayListViewModelImpl {
     func onViewDidLoad() async {
         await fetchPayList()
+        addPayNotification()
     }
 
     func pullToReflesh() async {
@@ -81,6 +82,30 @@ extension PayListViewModelImpl {
             payListResponseType = .success(payList)
         } catch {
             payListResponseType = .error
+        }
+    }
+
+    private func addPayNotification() {
+        NotificationCenter.default.addObserver(
+            forName: .addPayNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                await self?.fetchPayList()
+            }
+        }
+    }
+
+    private func editPayNotification() {
+        NotificationCenter.default.addObserver(
+            forName: .editPayNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                await self?.fetchPayList()
+            }
         }
     }
 }
@@ -138,9 +163,10 @@ extension PayListViewModelImpl {
 
     func getPayViewData(payData: PayData) -> PayViewData? {
         guard let id = payData.id else { return nil}
+        let title = payData.title.isEmpty ? "未入力" : payData.title
         return .init(
             id: id,
-            title: payData.title,
+            title: title,
             byName: payData.byName + "が立替え",
             dateText: payData.date.formatted(),
             priceText: PriceFormatter.string(forPrice: payData.price, sign: .tail)

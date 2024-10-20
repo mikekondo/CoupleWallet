@@ -122,7 +122,7 @@ extension PayCardScreenView {
                     Text(viewData.nameText)
                         .font(.title2.bold())
                         .foregroundStyle(.black)
-                    HStack(spacing: 16) {
+                    HStack(spacing: 8) {
                         Text(viewData.priceText)
                             .font(.title.bold())
                             .foregroundStyle(Color.black.gradient)
@@ -133,7 +133,7 @@ extension PayCardScreenView {
                             }
                         } label: {
                             Image(systemName: "arrow.clockwise")
-                                .font(.title3.bold())
+                                .font(.headline.bold())
                                 .foregroundStyle(Color.gray)
                         }
                     }
@@ -175,7 +175,7 @@ extension PayCardScreenView {
                 Text(vm.totalPayCardViewData.currentMonthText)
                     .font(.title2.bold())
                     .foregroundStyle(.black)
-                HStack(spacing: 16) {
+                HStack(spacing: 8) {
                     Text(vm.totalPayCardViewData.priceText)
                         .font(.title.bold())
                         .foregroundStyle(.black)
@@ -185,7 +185,7 @@ extension PayCardScreenView {
                         }
                     } label: {
                         Image(systemName: "arrow.clockwise")
-                            .font(.body.bold())
+                            .font(.headline.bold())
                             .foregroundStyle(Color.gray)
                     }
                 }

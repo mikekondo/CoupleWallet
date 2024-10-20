@@ -152,8 +152,11 @@ extension PayListScreenView {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(Color.white.gradient, in: RoundedRectangle(cornerRadius: 12))
-        .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
+        )
     }
 }
 
