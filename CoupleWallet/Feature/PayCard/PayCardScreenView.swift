@@ -2,6 +2,7 @@ import SwiftUI
 
 @MainActor struct PayCardScreenView<VM: PayCardViewModel>: View {
     @StateObject var vm: VM
+
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {

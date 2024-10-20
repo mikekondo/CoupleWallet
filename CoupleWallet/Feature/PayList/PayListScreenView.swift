@@ -46,7 +46,7 @@ extension PayListScreenView {
                     Text(viewData.dateText)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .font(.callout.bold())
+                        .font(.callout)
                         .foregroundStyle(viewData.dateTextColor)
                         .background(viewData.dateTextBackgroundColor, in: RoundedRectangle(cornerRadius: 12))
                         .onTapGesture {
