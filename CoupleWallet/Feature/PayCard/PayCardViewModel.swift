@@ -136,7 +136,7 @@ extension PayCardViewModelImpl {
 
 extension PayCardViewModelImpl {
     // card view
-    var payBalanceCardViewType: PayBalanceCardViewType {
+    var payBalanceCardViewType: PayBalanceCardViewType {      
         switch payBalanceType {
         case .overPayment:
             return .content

@@ -9,6 +9,7 @@ import SwiftUI
                 VStack(spacing: 28) {
                     cardView
                         .padding(.horizontal, 16)
+                        .redacted(reason: vm.shouldShowLoading ? .placeholder : [])
                     addPayView
                         .padding(.horizontal, 16)
                     if vm.shouldShowPartnerLinkageView {
@@ -47,7 +48,7 @@ extension PayCardScreenView {
                 .foregroundColor(.white)
                 .frame(height: 50)
                 .frame(maxWidth: .infinity)
-                .background(Color.gray.gradient, in: RoundedRectangle(cornerRadius: 12))
+                .background(Color.black.gradient, in: RoundedRectangle(cornerRadius: 12))
                 .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
         }
     }
@@ -101,7 +102,7 @@ extension PayCardScreenView {
                 }
             }
         case .noData:
-            EmptyView()
+            addIncentiveView
         }
     }
 
@@ -255,6 +256,26 @@ extension PayCardScreenView {
         }
         .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var addIncentiveView: some View {
+        VStack(spacing: 16) {
+            Text("まだ立替記録がありません")
+                .font(.title3.bold())
+                .foregroundStyle(.black)
+            Text("初めての立替記録を追加してみましょう！カップルでのお金の管理がもっと楽になります。")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 16)
+        }
+        .padding(24)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white)
+                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
+        )
     }
 }
 

@@ -111,6 +111,7 @@ extension PayListScreenView {
                     .padding(.horizontal, 16)
                 }
             }
+            .redacted(reason: vm.shouldShowLoading ? .placeholder : [])
         }
     }
 
